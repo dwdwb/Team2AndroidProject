@@ -31,12 +31,12 @@ public class LoginFragment extends Fragment {
 
 
 
-        initBtnLogin();
+        initBtnMain();
         return binding.getRoot();
     }
 
-    private void  initBtnLogin() {
-        binding.btnLogin.setOnClickListener(v -> {
+    private void  initBtnMain() {
+        binding.btnMain.setOnClickListener(v -> {
             navController.popBackStack();
 
         });

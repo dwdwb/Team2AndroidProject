@@ -10,8 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.myapplication.databinding.FragmentJoinBinding;
-import com.example.myapplication.databinding.FragmentLoginBinding;
 import com.example.myapplication.databinding.FragmentOrderBinding;
 
 
@@ -29,13 +27,21 @@ public class OrderFragment extends Fragment {
         //NavController 얻기
         navController = NavHostFragment.findNavController(this);
 
-        initBtnOrder();
+        initBtnOrderHistory();
+        initBtnOrderShipping();
         return binding.getRoot();
     }
 
-    private void  initBtnOrder() {
-        binding.btnOrder.setOnClickListener(v -> {
-            navController.popBackStack();
+    private void initBtnOrderShipping() {
+        binding.btnOrderShipping.setOnClickListener(v -> {
+            navController.navigate(R.id.action_order_to_orderShipping);
+
+        });
+    }
+
+    private void  initBtnOrderHistory() {
+        binding.btnOrderHistory.setOnClickListener(v -> {
+            navController.navigate(R.id.action_order_to_orderHistory);
 
         });
 

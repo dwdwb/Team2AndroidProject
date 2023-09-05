@@ -83,10 +83,10 @@
         android:label="주문"
         tools:layout="@layout/fragment_order" >
         <action
-            android:id="@+id/action_order_to_shipping"
-            app:destination="@id/shipping" />
+            android:id="@+id/action_order_to_orderHistory"
+            app:destination="@id/orderHistory" />
         <action
-            android:id="@+id/action_order_to_orderShipping2"
+            android:id="@+id/action_order_to_orderShipping"
             app:destination="@id/orderShipping" />
     </fragment>
     <fragment
