@@ -46,6 +46,12 @@
         <action
             android:id="@+id/action_list_to_detail"
             app:destination="@id/detail" />
+        <action
+            android:id="@+id/action_list_to_search"
+            app:destination="@id/search" />
+        <action
+            android:id="@+id/action_list_to_cart"
+            app:destination="@id/cart" />
     </fragment>
     <fragment
         android:id="@+id/detail"
@@ -109,6 +115,12 @@
         <action
             android:id="@+id/action_myPage_to_inquiry"
             app:destination="@id/inquiry" />
+        <action
+            android:id="@+id/action_myPage_to_cart"
+            app:destination="@id/cart" />
+        <action
+            android:id="@+id/action_myPage_to_search"
+            app:destination="@id/search" />
     </fragment>
     <fragment
         android:id="@+id/shopperEdit"
@@ -137,6 +149,12 @@
         <action
             android:id="@+id/action_orderHistory_to_writeReview"
             app:destination="@id/writeReview" />
+        <action
+            android:id="@+id/action_orderHistory_to_cart"
+            app:destination="@id/cart" />
+        <action
+            android:id="@+id/action_orderHistory_to_search"
+            app:destination="@id/search" />
     </fragment>
     <fragment
         android:id="@+id/review"
@@ -146,6 +164,12 @@
         <action
             android:id="@+id/action_review_to_editReview"
             app:destination="@id/editReview" />
+        <action
+            android:id="@+id/action_review_to_cart"
+            app:destination="@id/cart" />
+        <action
+            android:id="@+id/action_review_to_search"
+            app:destination="@id/search" />
     </fragment>
     <fragment
         android:id="@+id/inquiry"
@@ -156,7 +180,14 @@
         android:id="@+id/wish"
         android:name="com.example.myapplication.WishFragment"
         android:label="찜"
-        tools:layout="@layout/fragment_wish" />
+        tools:layout="@layout/fragment_wish" >
+        <action
+            android:id="@+id/action_wish_to_cart"
+            app:destination="@id/cart" />
+        <action
+            android:id="@+id/action_wish_to_search"
+            app:destination="@id/search" />
+    </fragment>
     <fragment
         android:id="@+id/addShipping"
         android:name="com.example.myapplication.AddShippingFragment"
