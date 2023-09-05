@@ -135,12 +135,25 @@
         <action
             android:id="@+id/action_shipping_to_addShipping"
             app:destination="@id/addShipping" />
+        <action
+            android:id="@+id/action_shipping_to_search"
+            app:destination="@id/search" />
+        <action
+            android:id="@+id/action_shipping_to_cart"
+            app:destination="@id/cart" />
     </fragment>
     <fragment
         android:id="@+id/coupon"
         android:name="com.example.myapplication.CouponFragment"
         android:label="쿠폰"
-        tools:layout="@layout/fragment_coupon" />
+        tools:layout="@layout/fragment_coupon" >
+        <action
+            android:id="@+id/action_coupon_to_search"
+            app:destination="@id/search" />
+        <action
+            android:id="@+id/action_coupon_to_cart"
+            app:destination="@id/cart" />
+    </fragment>
     <fragment
         android:id="@+id/orderHistory"
         android:name="com.example.myapplication.OrderHistoryFragment"
@@ -175,7 +188,14 @@
         android:id="@+id/inquiry"
         android:name="com.example.myapplication.InquiryFragment"
         android:label="문의내역"
-        tools:layout="@layout/fragment_inquiry" />
+        tools:layout="@layout/fragment_inquiry" >
+        <action
+            android:id="@+id/action_inquiry_to_search"
+            app:destination="@id/search" />
+        <action
+            android:id="@+id/action_inquiry_to_cart"
+            app:destination="@id/cart" />
+    </fragment>
     <fragment
         android:id="@+id/wish"
         android:name="com.example.myapplication.WishFragment"
@@ -223,7 +243,7 @@
         tools:layout="@layout/fragment_join" />
     <fragment
         android:id="@+id/writeInquiry"
-        android:name="com.example.myapplication.WriteInquiry"
+        android:name="com.example.myapplication.WriteInquiryFragment"
         android:label="fragment_write_inquiry"
         tools:layout="@layout/fragment_write_inquiry" />
     <fragment
