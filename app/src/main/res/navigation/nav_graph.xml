@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/main">
+
+    <fragment
+        android:id="@+id/main"
+        android:name="com.example.myapplication.MainFragment"
+        android:label="메인"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_main_to_detail"
+            app:destination="@id/detail" />
+        <action
+            android:id="@+id/action_main_to_search"
+            app:destination="@id/search" />
+        <action
+            android:id="@+id/action_main_to_list"
+            app:destination="@id/list" />
+        <action
+            android:id="@+id/action_main_to_cart"
+            app:destination="@id/cart" />
+        <action
+            android:id="@+id/action_main_to_login"
+            app:destination="@id/login" />
+        <action
+            android:id="@+id/action_main_to_myPage"
+            app:destination="@id/myPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/search"
+        android:name="com.example.myapplication.SearchFragment"
+        android:label="검색"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_search_to_list"
+            app:destination="@id/list" />
+    </fragment>
+    <fragment
+        android:id="@+id/list"
+        android:name="com.example.myapplication.ListFragment"
+        android:label="상품목록"
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_list_to_detail"
+            app:destination="@id/detail" />
+    </fragment>
+    <fragment
+        android:id="@+id/detail"
+        android:name="com.example.myapplication.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <action
+            android:id="@+id/action_detail_to_cart"
+            app:destination="@id/cart" />
+        <action
+            android:id="@+id/action_detail_to_orderFragment"
+            app:destination="@id/order" />
+        <action
+            android:id="@+id/action_detail_to_writeInquiry"
+            app:destination="@id/writeInquiry" />
+    </fragment>
+    <fragment
+        android:id="@+id/cart"
+        android:name="com.example.myapplication.CartFragment"
+        android:label="장바구니"
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_cart_to_orderFragment"
+            app:destination="@id/order" />
+    </fragment>
+    <fragment
+        android:id="@+id/order"
+        android:name="com.example.myapplication.OrderFragment"
+        android:label="주문"
+        tools:layout="@layout/fragment_order" >
+        <action
+            android:id="@+id/action_orderFragment_to_shipping"
+            app:destination="@id/shipping" />
+        <action
+            android:id="@+id/action_order_to_orderShipping"
+            app:destination="@id/orderShipping" />
+    </fragment>
+    <fragment
+        android:id="@+id/myPage"
+        android:name="com.example.myapplication.MyPageFragment"
+        android:label="마이페이지"
+        tools:layout="@layout/fragment_my_page" >
+        <action
+            android:id="@+id/action_myPage_to_shipping"
+            app:destination="@id/shipping" />
+        <action
+            android:id="@+id/action_myPage_to_coupon"
+            app:destination="@id/coupon" />
+        <action
+            android:id="@+id/action_myPage_to_orderHistory"
+            app:destination="@id/orderHistory" />
+        <action
+            android:id="@+id/action_myPage_to_shopperEdit"
+            app:destination="@id/shopperEdit" />
+        <action
+            android:id="@+id/action_myPage_to_review"
+            app:destination="@id/review" />
+        <action
+            android:id="@+id/action_myPage_to_wish"
+            app:destination="@id/wish" />
+        <action
+            android:id="@+id/action_myPage_to_inquiry"
+            app:destination="@id/inquiry" />
+    </fragment>
+    <fragment
+        android:id="@+id/shopperEdit"
+        android:name="com.example.myapplication.ShopperEditFragment"
+        android:label="개인정보수정"
+        tools:layout="@layout/fragment_shopper_edit" />
+    <fragment
+        android:id="@+id/shipping"
+        android:name="com.example.myapplication.ShippingFragment"
+        android:label="배송지관리"
+        tools:layout="@layout/fragment_shipping" >
+        <action
+            android:id="@+id/action_shipping_to_addShipping"
+            app:destination="@id/addShipping" />
+    </fragment>
+    <fragment
+        android:id="@+id/coupon"
+        android:name="com.example.myapplication.CouponFragment"
+        android:label="쿠폰"
+        tools:layout="@layout/fragment_coupon" />
+    <fragment
+        android:id="@+id/orderHistory"
+        android:name="com.example.myapplication.OrderHistoryFragment"
+        android:label="주문내역"
+        tools:layout="@layout/fragment_order_history" >
+        <action
+            android:id="@+id/action_orderHistory_to_writeReview"
+            app:destination="@id/writeReview" />
+    </fragment>
+    <fragment
+        android:id="@+id/review"
+        android:name="com.example.myapplication.ReviewFragment"
+        android:label="리뷰관리"
+        tools:layout="@layout/fragment_review" >
+        <action
+            android:id="@+id/action_review_to_editReview"
+            app:destination="@id/editReview" />
+    </fragment>
+    <fragment
+        android:id="@+id/inquiry"
+        android:name="com.example.myapplication.InquiryFragment"
+        android:label="문의내역"
+        tools:layout="@layout/fragment_inquiry" />
+    <fragment
+        android:id="@+id/wish"
+        android:name="com.example.myapplication.WishFragment"
+        android:label="찜"
+        tools:layout="@layout/fragment_wish" />
+    <fragment
+        android:id="@+id/addShipping"
+        android:name="com.example.myapplication.AddShippingFragment"
+        android:label="배송지 추가"
+        tools:layout="@layout/fragment_add_shipping" />
+    <fragment
+        android:id="@+id/writeReview"
+        android:name="com.example.myapplication.WriteReviewFragment"
+        android:label="리뷰 작성"
+        tools:layout="@layout/fragment_write_review" >
+        <action
+            android:id="@+id/action_writeReview_to_review"
+            app:destination="@id/review" />
+    </fragment>
+    <fragment
+        android:id="@+id/editReview"
+        android:name="com.example.myapplication.EditReviewFragment"
+        android:label="리뷰 수정"
+        tools:layout="@layout/fragment_edit_review" />
+    <fragment
+        android:id="@+id/login"
+        android:name="com.example.myapplication.LoginFragment"
+        android:label="로그인"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_login_to_join"
+            app:destination="@id/join" />
+    </fragment>
+    <fragment
+        android:id="@+id/join"
+        android:name="com.example.myapplication.JoinFragment"
+        android:label="회원가입"
+        tools:layout="@layout/fragment_join" />
+    <fragment
+        android:id="@+id/writeInquiry"
+        android:name="com.example.myapplication.WriteInquiry"
+        android:label="fragment_write_inquiry"
+        tools:layout="@layout/fragment_write_inquiry" />
+    <fragment
+        android:id="@+id/orderShipping"
+        android:name="com.example.myapplication.OrderShippingFragment"
+        android:label="배송지관리"
+        tools:layout="@layout/fragment_order_shipping" >
+        <action
+            android:id="@+id/action_orderShipping_to_addShipping"
+            app:destination="@id/addShipping" />
+    </fragment>
+</navigation>
