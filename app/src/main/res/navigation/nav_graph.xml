@@ -104,9 +104,6 @@
             android:id="@+id/action_myPage_to_orderHistory"
             app:destination="@id/orderHistory" />
         <action
-            android:id="@+id/action_myPage_to_shopperEdit"
-            app:destination="@id/shopperEdit" />
-        <action
             android:id="@+id/action_myPage_to_review"
             app:destination="@id/review" />
         <action
@@ -122,11 +119,6 @@
             android:id="@+id/action_myPage_to_search"
             app:destination="@id/search" />
     </fragment>
-    <fragment
-        android:id="@+id/shopperEdit"
-        android:name="com.example.myapplication.ShopperEditFragment"
-        android:label="개인정보수정"
-        tools:layout="@layout/fragment_shopper_edit" />
     <fragment
         android:id="@+id/shipping"
         android:name="com.example.myapplication.ShippingFragment"
