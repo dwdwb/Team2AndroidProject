@@ -56,8 +56,8 @@
     <fragment
         android:id="@+id/detail"
         android:name="com.example.myapplication.ui.DetailFragment"
-        android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" >
+        android:label="상품상세"
+        tools:layout="@layout/fragment_detail">
         <action
             android:id="@+id/action_detail_to_cart"
             app:destination="@id/cart" />
