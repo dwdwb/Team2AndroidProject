@@ -27,7 +27,6 @@ public class MyPageFragment extends Fragment {
         initBtnWish();
         initBtnCoupon();
         initBtnInquiry();
-        initBtnShopperEdit();
         initBtnReview();
         initBtnShpping();
         initBtnSearch();
@@ -58,12 +57,6 @@ public class MyPageFragment extends Fragment {
     private void initBtnInquiry() {
         binding.btnInquiry.setOnClickListener(v -> {
             navController.navigate(R.id.action_myPage_to_inquiry);
-        });
-    }
-
-    private void initBtnShopperEdit() {
-        binding.btnShopperEdit.setOnClickListener(v -> {
-            navController.navigate(R.id.action_myPage_to_shopperEdit);
         });
     }
 

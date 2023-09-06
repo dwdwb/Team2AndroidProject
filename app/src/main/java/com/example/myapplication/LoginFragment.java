@@ -36,7 +36,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void  initBtnMain() {
-        binding.btnMain.setOnClickListener(v -> {
+        binding.btnLogin.setOnClickListener(v -> {
             navController.popBackStack();
 
         });
