@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.ui;
 
 import android.os.Bundle;
 
@@ -10,30 +10,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.myapplication.databinding.FragmentMainBinding;
-import com.example.myapplication.databinding.FragmentSearchBinding;
+import com.example.myapplication.R;
+import com.example.myapplication.databinding.FragmentListBinding;
+import com.example.myapplication.databinding.FragmentWriteReviewBinding;
 
-public class SearchFragment extends Fragment {
-    private static final String TAG = "SearchFragment";
-    private FragmentSearchBinding binding;
+public class WriteReviewFragment extends Fragment {
+    private static final String TAG = "WriteReviewFragment";
+    private FragmentWriteReviewBinding binding;
     private NavController navController;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentSearchBinding.inflate(inflater);
-
+        binding = FragmentWriteReviewBinding.inflate(inflater);
         //NavController 얻기
         navController = NavHostFragment.findNavController(this);
 
-        initBtnList();
+        initBtnReview();
         initBtnBack();
 
         return binding.getRoot();
     }
 
-    private void initBtnList() {
-        binding.btnList.setOnClickListener(v -> {
-            navController.navigate(R.id.action_search_to_list);
+    private void initBtnReview() {
+        binding.btnReview.setOnClickListener(v -> {
+            navController.navigate(R.id.action_writeReview_to_review);
         });
     }
 
@@ -42,5 +41,4 @@ public class SearchFragment extends Fragment {
             navController.popBackStack();
         });
     }
-
 }

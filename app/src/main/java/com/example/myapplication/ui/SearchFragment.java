@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.ui;
 
 import android.os.Bundle;
 
@@ -10,29 +10,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.myapplication.databinding.FragmentEditReviewBinding;
-import com.example.myapplication.databinding.FragmentWriteReviewBinding;
+import com.example.myapplication.R;
+import com.example.myapplication.databinding.FragmentMainBinding;
+import com.example.myapplication.databinding.FragmentSearchBinding;
 
-public class EditReviewFragment extends Fragment {
-    private static final String TAG = "EditReviewFragment";
-    private FragmentEditReviewBinding binding;
+public class SearchFragment extends Fragment {
+    private static final String TAG = "SearchFragment";
+    private FragmentSearchBinding binding;
     private NavController navController;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentEditReviewBinding.inflate(inflater);
+        binding = FragmentSearchBinding.inflate(inflater);
+
         //NavController 얻기
         navController = NavHostFragment.findNavController(this);
 
-        initBtnReview();
+        initBtnList();
         initBtnBack();
 
         return binding.getRoot();
     }
 
-    private void initBtnReview() {
-        binding.btnReview.setOnClickListener(v -> {
-            navController.popBackStack();
+    private void initBtnList() {
+        binding.btnList.setOnClickListener(v -> {
+            navController.navigate(R.id.action_search_to_list);
         });
     }
 
@@ -41,4 +43,5 @@ public class EditReviewFragment extends Fragment {
             navController.popBackStack();
         });
     }
+
 }

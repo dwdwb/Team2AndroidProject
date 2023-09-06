@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.ui;
 
 import android.os.Bundle;
 
@@ -10,28 +10,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.myapplication.databinding.FragmentCartBinding;
-import com.example.myapplication.databinding.FragmentDetailBinding;
+import com.example.myapplication.databinding.FragmentWriteInquiryBinding;
 
-public class CartFragment extends Fragment {
-    private static final String TAG = "CartFragment";
-    private FragmentCartBinding binding;
+public class WriteInquiryFragment extends Fragment {
+    private static final String TAG = "WriteInquiryFragment";
+    private FragmentWriteInquiryBinding binding;
     private NavController navController;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentCartBinding.inflate(inflater);
+        binding = FragmentWriteInquiryBinding.inflate(inflater);
 
         navController = NavHostFragment.findNavController(this);
 
-        initBtnOrder();
+        initBtnDetail();
         initBtnBack();
 
         return binding.getRoot();
     }
 
-    private void initBtnOrder() {
-        binding.btnOrder.setOnClickListener(v -> {
-            navController.navigate(R.id.action_cart_to_order);
+    private void initBtnDetail() {
+        binding.btnDetail.setOnClickListener(v -> {
+            navController.popBackStack();
         });
     }
 

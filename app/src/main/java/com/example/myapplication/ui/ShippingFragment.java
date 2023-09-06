@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.ui;
 
 import android.os.Bundle;
 
@@ -10,22 +10,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.myapplication.databinding.FragmentDetailBinding;
+import com.example.myapplication.R;
+import com.example.myapplication.databinding.FragmentOrderHistoryBinding;
+import com.example.myapplication.databinding.FragmentShippingBinding;
 
-public class DetailFragment extends Fragment {
-    private static final String TAG = "DetailFragment";
-    private FragmentDetailBinding binding;
+public class ShippingFragment extends Fragment {
+    private static final String TAG = "ShippingFragment";
+    private FragmentShippingBinding binding;
     private NavController navController;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentDetailBinding.inflate(inflater);
+        binding = FragmentShippingBinding.inflate(inflater);
 
         navController = NavHostFragment.findNavController(this);
 
-        initBtnAddCart();
-        initBtnOrder();
-        initBtnWriteInquiry();
+        initBtnAddShipping();
+        initBtnMyPage();
+        initBtnSearch();
         initBtnMain();
         initBtnCart();
         initBtnBack();
@@ -33,21 +34,21 @@ public class DetailFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private void initBtnAddCart() {
-        binding.btnAddCart.setOnClickListener(v -> {
-            navController.navigate(R.id.action_detail_to_cart);
+    private void initBtnAddShipping() {
+        binding.btnAddShipping.setOnClickListener(v -> {
+            navController.navigate(R.id.action_shipping_to_addShipping);
         });
     }
 
-    private void initBtnOrder() {
-        binding.btnOrder.setOnClickListener(v -> {
-            navController.navigate(R.id.action_detail_to_orderFragment);
+    private void initBtnMyPage() {
+        binding.btnMyPage.setOnClickListener(v -> {
+            navController.popBackStack();
         });
     }
 
-    private void initBtnWriteInquiry() {
-        binding.btnWriteInquiry.setOnClickListener(v -> {
-            navController.navigate(R.id.action_detail_to_writeInquiry);
+    private void initBtnSearch() {
+        binding.btnSearch.setOnClickListener(v -> {
+            navController.navigate(R.id.action_shipping_to_search);
         });
     }
 
@@ -59,7 +60,7 @@ public class DetailFragment extends Fragment {
 
     private void initBtnCart() {
         binding.btnCart.setOnClickListener(v -> {
-            navController.navigate(R.id.action_detail_to_cart);
+            navController.navigate(R.id.action_shipping_to_cart);
         });
     }
 

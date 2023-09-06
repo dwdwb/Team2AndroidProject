@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/main"
-        android:name="com.example.myapplication.MainFragment"
+        android:name="com.example.myapplication.ui.MainFragment"
         android:label="메인"
         tools:layout="@layout/fragment_main" >
         <action
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/search"
-        android:name="com.example.myapplication.SearchFragment"
+        android:name="com.example.myapplication.ui.SearchFragment"
         android:label="검색"
         tools:layout="@layout/fragment_search" >
         <action
@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/list"
-        android:name="com.example.myapplication.ListFragment"
+        android:name="com.example.myapplication.ui.ListFragment"
         android:label="상품목록"
         tools:layout="@layout/fragment_list" >
         <action
@@ -55,7 +55,7 @@
     </fragment>
     <fragment
         android:id="@+id/detail"
-        android:name="com.example.myapplication.DetailFragment"
+        android:name="com.example.myapplication.ui.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
         <action
@@ -70,7 +70,7 @@
     </fragment>
     <fragment
         android:id="@+id/cart"
-        android:name="com.example.myapplication.CartFragment"
+        android:name="com.example.myapplication.ui.CartFragment"
         android:label="장바구니"
         tools:layout="@layout/fragment_cart" >
         <action
@@ -79,7 +79,7 @@
     </fragment>
     <fragment
         android:id="@+id/order"
-        android:name="com.example.myapplication.OrderFragment"
+        android:name="com.example.myapplication.ui.OrderFragment"
         android:label="주문"
         tools:layout="@layout/fragment_order" >
         <action
@@ -91,7 +91,7 @@
     </fragment>
     <fragment
         android:id="@+id/myPage"
-        android:name="com.example.myapplication.MyPageFragment"
+        android:name="com.example.myapplication.ui.MyPageFragment"
         android:label="마이페이지"
         tools:layout="@layout/fragment_my_page" >
         <action
@@ -121,7 +121,7 @@
     </fragment>
     <fragment
         android:id="@+id/shipping"
-        android:name="com.example.myapplication.ShippingFragment"
+        android:name="com.example.myapplication.ui.ShippingFragment"
         android:label="배송지관리"
         tools:layout="@layout/fragment_shipping" >
         <action
@@ -136,7 +136,7 @@
     </fragment>
     <fragment
         android:id="@+id/coupon"
-        android:name="com.example.myapplication.CouponFragment"
+        android:name="com.example.myapplication.ui.CouponFragment"
         android:label="쿠폰"
         tools:layout="@layout/fragment_coupon" >
         <action
@@ -148,7 +148,7 @@
     </fragment>
     <fragment
         android:id="@+id/orderHistory"
-        android:name="com.example.myapplication.OrderHistoryFragment"
+        android:name="com.example.myapplication.ui.OrderHistoryFragment"
         android:label="주문내역"
         tools:layout="@layout/fragment_order_history" >
         <action
@@ -163,7 +163,7 @@
     </fragment>
     <fragment
         android:id="@+id/review"
-        android:name="com.example.myapplication.ReviewFragment"
+        android:name="com.example.myapplication.ui.ReviewFragment"
         android:label="리뷰관리"
         tools:layout="@layout/fragment_review" >
         <action
@@ -178,7 +178,7 @@
     </fragment>
     <fragment
         android:id="@+id/inquiry"
-        android:name="com.example.myapplication.InquiryFragment"
+        android:name="com.example.myapplication.ui.InquiryFragment"
         android:label="문의내역"
         tools:layout="@layout/fragment_inquiry" >
         <action
@@ -190,7 +190,7 @@
     </fragment>
     <fragment
         android:id="@+id/wish"
-        android:name="com.example.myapplication.WishFragment"
+        android:name="com.example.myapplication.ui.WishFragment"
         android:label="찜"
         tools:layout="@layout/fragment_wish" >
         <action
@@ -202,12 +202,12 @@
     </fragment>
     <fragment
         android:id="@+id/addShipping"
-        android:name="com.example.myapplication.AddShippingFragment"
+        android:name="com.example.myapplication.ui.AddShippingFragment"
         android:label="배송지 추가"
         tools:layout="@layout/fragment_add_shipping" />
     <fragment
         android:id="@+id/writeReview"
-        android:name="com.example.myapplication.WriteReviewFragment"
+        android:name="com.example.myapplication.ui.WriteReviewFragment"
         android:label="리뷰 작성"
         tools:layout="@layout/fragment_write_review" >
         <action
@@ -216,12 +216,12 @@
     </fragment>
     <fragment
         android:id="@+id/editReview"
-        android:name="com.example.myapplication.EditReviewFragment"
+        android:name="com.example.myapplication.ui.EditReviewFragment"
         android:label="리뷰 수정"
         tools:layout="@layout/fragment_edit_review" />
     <fragment
         android:id="@+id/login"
-        android:name="com.example.myapplication.LoginFragment"
+        android:name="com.example.myapplication.ui.LoginFragment"
         android:label="로그인"
         tools:layout="@layout/fragment_login" >
         <action
@@ -230,17 +230,17 @@
     </fragment>
     <fragment
         android:id="@+id/join"
-        android:name="com.example.myapplication.JoinFragment"
+        android:name="com.example.myapplication.ui.JoinFragment"
         android:label="회원가입"
         tools:layout="@layout/fragment_join" />
     <fragment
         android:id="@+id/writeInquiry"
-        android:name="com.example.myapplication.WriteInquiryFragment"
+        android:name="com.example.myapplication.ui.WriteInquiryFragment"
         android:label="fragment_write_inquiry"
         tools:layout="@layout/fragment_write_inquiry" />
     <fragment
         android:id="@+id/orderShipping"
-        android:name="com.example.myapplication.OrderShippingFragment"
+        android:name="com.example.myapplication.ui.OrderShippingFragment"
         android:label="배송지관리"
         tools:layout="@layout/fragment_order_shipping" >
         <action

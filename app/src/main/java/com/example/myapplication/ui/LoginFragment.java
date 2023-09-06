@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.ui;
 
 import android.os.Bundle;
 
@@ -10,33 +10,36 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.myapplication.databinding.FragmentOrderBinding;
-import com.example.myapplication.databinding.FragmentOrderShippingBinding;
+import com.example.myapplication.databinding.FragmentLoginBinding;
 
 
-public class OrderShippingFragment extends Fragment {
+public class LoginFragment extends Fragment {
 
-    private FragmentOrderShippingBinding binding;
+    private FragmentLoginBinding binding;
+
     private NavController navController;
+
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        binding = FragmentLoginBinding.inflate(inflater);
 
-        binding = FragmentOrderShippingBinding.inflate(inflater);
         //NavController 얻기
         navController = NavHostFragment.findNavController(this);
 
-        initBtnShippingAdd();
+
+
+        initBtnMain();
         return binding.getRoot();
     }
 
-    private void initBtnShippingAdd() {
-        binding.btnShippingAdd.setOnClickListener(v -> {
-            navController.navigate(R.id.action_orderShipping_to_addShipping);
+    private void  initBtnMain() {
+        binding.btnLogin.setOnClickListener(v -> {
+            navController.popBackStack();
 
         });
-    }
 
+    }
 }

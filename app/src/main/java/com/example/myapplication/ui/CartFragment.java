@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.ui;
 
 import android.os.Bundle;
 
@@ -10,28 +10,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.myapplication.databinding.FragmentListBinding;
-import com.example.myapplication.databinding.FragmentWriteReviewBinding;
+import com.example.myapplication.R;
+import com.example.myapplication.databinding.FragmentCartBinding;
+import com.example.myapplication.databinding.FragmentDetailBinding;
 
-public class WriteReviewFragment extends Fragment {
-    private static final String TAG = "WriteReviewFragment";
-    private FragmentWriteReviewBinding binding;
+public class CartFragment extends Fragment {
+    private static final String TAG = "CartFragment";
+    private FragmentCartBinding binding;
     private NavController navController;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentWriteReviewBinding.inflate(inflater);
-        //NavController 얻기
+        binding = FragmentCartBinding.inflate(inflater);
+
         navController = NavHostFragment.findNavController(this);
 
-        initBtnReview();
+        initBtnOrder();
         initBtnBack();
 
         return binding.getRoot();
     }
 
-    private void initBtnReview() {
-        binding.btnReview.setOnClickListener(v -> {
-            navController.navigate(R.id.action_writeReview_to_review);
+    private void initBtnOrder() {
+        binding.btnOrder.setOnClickListener(v -> {
+            navController.navigate(R.id.action_cart_to_order);
         });
     }
 

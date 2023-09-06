@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.ui;
 
 import android.os.Bundle;
 
@@ -10,26 +10,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.myapplication.databinding.FragmentWriteInquiryBinding;
+import com.example.myapplication.databinding.FragmentEditReviewBinding;
+import com.example.myapplication.databinding.FragmentWriteReviewBinding;
 
-public class WriteInquiryFragment extends Fragment {
-    private static final String TAG = "WriteInquiryFragment";
-    private FragmentWriteInquiryBinding binding;
+public class EditReviewFragment extends Fragment {
+    private static final String TAG = "EditReviewFragment";
+    private FragmentEditReviewBinding binding;
     private NavController navController;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentWriteInquiryBinding.inflate(inflater);
-
+        binding = FragmentEditReviewBinding.inflate(inflater);
+        //NavController 얻기
         navController = NavHostFragment.findNavController(this);
 
-        initBtnDetail();
+        initBtnReview();
         initBtnBack();
 
         return binding.getRoot();
     }
 
-    private void initBtnDetail() {
-        binding.btnDetail.setOnClickListener(v -> {
+    private void initBtnReview() {
+        binding.btnReview.setOnClickListener(v -> {
             navController.popBackStack();
         });
     }

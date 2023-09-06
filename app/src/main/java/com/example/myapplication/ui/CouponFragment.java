@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.ui;
 
 import android.os.Bundle;
 
@@ -10,58 +10,56 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.myapplication.databinding.FragmentListBinding;
-import com.example.myapplication.databinding.FragmentReviewBinding;
+import com.example.myapplication.R;
+import com.example.myapplication.databinding.FragmentCouponBinding;
+import com.example.myapplication.databinding.FragmentShippingBinding;
 
-public class ReviewFragment extends Fragment {
-    private static final String TAG = "ReviewFragment";
-    private FragmentReviewBinding binding;
+public class CouponFragment extends Fragment {
+    private static final String TAG = "CouponFragment";
+    private FragmentCouponBinding binding;
     private NavController navController;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentReviewBinding.inflate(inflater);
-        //NavController 얻기
+        binding = FragmentCouponBinding.inflate(inflater);
+
         navController = NavHostFragment.findNavController(this);
 
-        initBtnEditReview();
         initBtnMain();
         initBtnSearch();
         initBtnCart();
         initBtnMyPage();
+        initBtnBack();
 
         return binding.getRoot();
     }
 
-    private void initBtnEditReview() {
-        binding.btnEditReview.setOnClickListener(v -> {
-            navController.navigate(R.id.action_review_to_editReview);
-        });
-    }
-
     private void initBtnMain() {
         binding.btnMain.setOnClickListener(v -> {
-            //대상으로 이동, 백스택의 위쪽 대상으로 모두 제거
             navController.popBackStack(R.id.main, false);
         });
     }
 
     private void initBtnSearch() {
         binding.btnSearch.setOnClickListener(v -> {
-            navController.navigate(R.id.action_review_to_search);
+            navController.navigate(R.id.action_coupon_to_search);
         });
     }
 
     private void initBtnCart() {
         binding.btnCart.setOnClickListener(v -> {
-            navController.navigate(R.id.action_review_to_cart);
+            navController.navigate(R.id.action_coupon_to_cart);
         });
     }
 
     private void initBtnMyPage() {
         binding.btnMyPage.setOnClickListener(v -> {
-            //대상으로 이동, 백스택의 위쪽 대상으로 모두 제거
-            navController.popBackStack(R.id.myPage, false);
+            navController.popBackStack();
+        });
+    }
+
+    private void initBtnBack() {
+        binding.btnBack.setOnClickListener(v -> {
+            navController.popBackStack();
         });
     }
 }
