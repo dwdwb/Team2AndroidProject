@@ -48,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
         //CollapsingToolbarLayout을 사용할 경우
         /*NavigationUI.setupWithNavController(binding.collapsingToolbarLayout, binding.toolbar,navController, appBarConfiguration);*/
 
+        /*
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false); // 백 버튼 활성화
+        getSupportActionBar().setDisplayShowHomeEnabled(true); // 홈 아이콘 표시
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_24dp);*/
     }
 
     private void initDestinationChangedListener() {
@@ -56,8 +60,10 @@ public class MainActivity extends AppCompatActivity {
             public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
                 //이동한 대상에 따른 처리
                 if(navDestination.getId() == R.id.detail) {
-                    getSupportActionBar().hide();
+                    getSupportActionBar().show();
                 } else if (navDestination.getId() == R.id.main) {
+                    getSupportActionBar().hide();
+                } else if (navDestination.getId() == R.id.cart) {
                     getSupportActionBar().show();
                 }
             }

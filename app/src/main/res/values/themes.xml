@@ -2,6 +2,8 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.MyApplication" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
+        <!--버튼 색-->
+        <item name="colorPrimary">#A0DE5F</item>
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 

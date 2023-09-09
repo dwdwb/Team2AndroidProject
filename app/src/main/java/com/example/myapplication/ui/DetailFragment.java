@@ -35,12 +35,10 @@ public class DetailFragment extends Fragment {
         //NavController 얻기
         navController = NavHostFragment.findNavController(this);
 
-        initBtnAddCart();
+        /*initBtnAddCart();
         initBtnOrder();
         initBtnWriteInquiry();
-        initBtnMain();
-        initBtnCart();
-        initBtnBack();
+        initBtnBack();*/
 
         //메뉴 초기화
         initMenu();
@@ -51,15 +49,7 @@ public class DetailFragment extends Fragment {
         return binding.getRoot();
     }
 
-    //하단바 숨기기
-    public void hideBottomNavigation(Boolean bool) {
-        BottomNavigationView bottomNavigation = getActivity().findViewById(R.id.bottomNavigationView);
-        if (bool == true)
-            bottomNavigation.setVisibility(View.GONE);
-        else
-            bottomNavigation.setVisibility(View.VISIBLE);
-    }
-
+    //메뉴 초기화
     private void initMenu() {
         MenuProvider menuProvider = new MenuProvider() {
             @Override
@@ -83,7 +73,16 @@ public class DetailFragment extends Fragment {
         getActivity().addMenuProvider(menuProvider, getViewLifecycleOwner(), Lifecycle.State.RESUMED);
     }
 
-    private void initBtnAddCart() {
+    //하단바 설정
+    public void hideBottomNavigation(Boolean bool) {
+        BottomNavigationView bottomNavigation = getActivity().findViewById(R.id.bottomNavigationView);
+        if (bool == true)
+            bottomNavigation.setVisibility(View.GONE);
+        else
+            bottomNavigation.setVisibility(View.VISIBLE);
+    }
+
+    /*private void initBtnAddCart() {
         binding.btnAddCart.setOnClickListener(v -> {
             navController.navigate(R.id.action_detail_to_cart);
         });
@@ -101,23 +100,11 @@ public class DetailFragment extends Fragment {
         });
     }
 
-    private void initBtnMain() {
-        binding.btnMain.setOnClickListener(v -> {
-            navController.popBackStack(R.id.main, false);
-        });
-    }
-
-    private void initBtnCart() {
-        binding.btnCart.setOnClickListener(v -> {
-            navController.navigate(R.id.action_detail_to_cart);
-        });
-    }
-
     private void initBtnBack() {
         binding.btnBack.setOnClickListener(v -> {
             navController.popBackStack();
         });
-    }
+    }*/
 
     @Override
     public void onDestroy() {
