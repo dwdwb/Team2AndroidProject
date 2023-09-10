@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -7,31 +8,61 @@
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="CheckBox" />
+        android:layout_weight="1" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:src="@tools:sample/avatars" />
+        android:layout_weight="1"/>
 
-    <TableLayout
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-        <TableRow
+        <TextView
+            android:id="@+id/textView14"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:text="간편 수박, 한입 수박" />
 
-        <TableRow
+        <TextView
+            android:id="@+id/textView20"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:text="24,600원" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </TableLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- 감소 버튼 -->
+
+            <!-- 수량 표시 TextView -->
+            <TextView
+                android:id="@+id/quantityTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textSize="18sp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp" />
+
+            <!-- 증가 버튼 -->
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/imageButton4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="#ffffff"
+        app:srcCompat="@drawable/ic_x_24dp" />
+
 </LinearLayout>

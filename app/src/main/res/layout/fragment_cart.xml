@@ -86,7 +86,6 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:background="none"
                     android:textSize="12sp"
                     android:text="선택 삭제"
                     android:textStyle="bold"
@@ -139,7 +138,7 @@
                     android:background="@drawable/shape_cart_rectangle" />
             </LinearLayout>
 
-            
+
         </LinearLayout>
 
         <!--===== 하단 버튼 =====-->
