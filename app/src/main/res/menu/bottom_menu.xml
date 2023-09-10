@@ -3,23 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/btn_main"
+        android:id="@+id/main"
+        android:enabled="true"
         android:icon="@drawable/ic_main_24dp"
+        android:title="Home"
         app:showAsAction="always"
-        android:title="Home" />
+        />
     <item
-        android:id="@+id/btn_search"
+        android:id="@+id/search"
+        android:enabled="true"
         android:icon="@drawable/ic_search_24dp"
+        android:title="Search"
         app:showAsAction="always"
-        android:title="Search" />
+        />
     <item
-        android:id="@+id/btn_cart"
+        android:id="@+id/cart"
+        android:enabled="true"
         android:icon="@drawable/ic_cart_24dp"
+        android:title="Cart"
         app:showAsAction="always"
-        android:title="Cart" />
+        />
     <item
-        android:id="@+id/btn_my_page"
+        android:id="@+id/myPage"
+        android:enabled="true"
         android:icon="@drawable/ic_shopper_24dp"
+        android:title="MyPage"
         app:showAsAction="always"
-        android:title="MyPage" />
+        />
 </menu>

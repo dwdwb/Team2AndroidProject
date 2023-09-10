@@ -48,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
         //CollapsingToolbarLayout을 사용할 경우
         /*NavigationUI.setupWithNavController(binding.collapsingToolbarLayout, binding.toolbar,navController, appBarConfiguration);*/
 
+        //하단 탐색 뷰와 navController 연동
+        //조건: 아이템 id = 대상 id
+        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
+
         /*
         getSupportActionBar().setDisplayHomeAsUpEnabled(false); // 백 버튼 활성화
         getSupportActionBar().setDisplayShowHomeEnabled(true); // 홈 아이콘 표시
