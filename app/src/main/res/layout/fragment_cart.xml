@@ -44,7 +44,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         android:text="전체 선택"/>
 
                     <Space
@@ -54,7 +54,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         android:text="("/>
 
                     <TextView
@@ -66,31 +66,32 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         android:text="/"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         android:text="3"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         android:text=")"/>
                 </LinearLayout>
 
                 <!--===== 선택 삭제 =====-->
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:textSize="12sp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
                     android:text="선택 삭제"
-                    android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:layout_weight="1"/>
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <View
@@ -119,7 +120,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:text="보유 쿠폰"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:paddingVertical="5dp"
                     android:layout_marginHorizontal="20dp"/>
 
@@ -138,6 +139,118 @@
                     android:background="@drawable/shape_cart_rectangle" />
             </LinearLayout>
 
+            <!--===== 가주문내역 =====-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginVertical="10dp">
+
+                <!--===== 총 상품 금액 =====-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="30dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="총 상품 금액"
+                        android:textSize="14sp"/>
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="25,300원"
+                        android:textSize="14sp"/>
+                </LinearLayout>
+
+                <!--===== 총 배송비 =====-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="30dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="총 배송비"
+                        android:textSize="14sp"/>
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3,000원"
+                        android:textSize="14sp"/>
+                </LinearLayout>
+
+                <!--===== 총 할인 금액 =====-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="30dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="총 할인 금액"
+                        android:textSize="14sp"/>
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-2,300원"
+                        android:textSize="14sp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/shape_cart_rectangle" />
+
+            <!--===== 총 주문 금액 =====-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="30dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="총 주문 금액"
+                    android:textSize="15sp"
+                    android:textStyle="bold"/>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="25,300원"
+                    android:textSize="15sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
 
         </LinearLayout>
 

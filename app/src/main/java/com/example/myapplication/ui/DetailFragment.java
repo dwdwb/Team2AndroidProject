@@ -39,6 +39,7 @@ public class DetailFragment extends Fragment {
         initBtnOrder();
         initBtnWriteInquiry();
         initBtnBack();*/
+        initBtnOrder();
 
         //메뉴 초기화
         initMenu();
@@ -80,6 +81,14 @@ public class DetailFragment extends Fragment {
             bottomNavigation.setVisibility(View.GONE);
         else
             bottomNavigation.setVisibility(View.VISIBLE);
+    }
+
+    private void initBtnOrder() {
+        binding.btnOrder.setOnClickListener(v -> {
+            DetailBottomSheetDialogFragment bottomSheet = new DetailBottomSheetDialogFragment();
+            bottomSheet.show(getActivity().getSupportFragmentManager(), bottomSheet.getTag());
+            /*bottomSheet.show(getSupportFragmentManager(), bottomSheet.getTag());*/
+        });
     }
 
     /*private void initBtnAddCart() {
