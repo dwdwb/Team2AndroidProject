@@ -9,6 +9,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioGroup;
 
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.FragmentOrderBinding;
@@ -20,6 +21,7 @@ public class OrderFragment extends Fragment {
 
     private NavController navController;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -30,7 +32,17 @@ public class OrderFragment extends Fragment {
 
         initBtnOrderHistory();
         initBtnOrderShipping();
+
+        initRadioGroup();
         return binding.getRoot();
+    }
+
+    private void initRadioGroup() {
+        binding.radioGroup.addView(binding.radioButtonA);
+        binding.radioGroup.addView(binding.radioButtonB);
+        binding.radioGroup.addView(binding.radioButtonC);
+        binding.radioGroup.addView(binding.radioButtonD);
+
     }
 
     private void initBtnOrderShipping() {
