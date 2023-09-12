@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.example.myapplication.R;
 import com.example.myapplication.databinding.FragmentViewPagerMainPageBinding;
 
 public class ViewPagerMainPageFragment extends Fragment {
@@ -26,6 +28,15 @@ public class ViewPagerMainPageFragment extends Fragment {
     }
 
     private void initUIByPageNo(int pageNo) {
-        //binding.txtContent.setText(pageNo + " 페이지 내용");
+        if (pageNo == 1) {
+            binding.image.setImageResource(R.drawable.mainfruit1);
+            binding.image.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        } else if (pageNo==2) {
+            binding.image.setImageResource(R.drawable.mainfruit2);
+            binding.image.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        } else {
+            binding.image.setImageResource(R.drawable.mainfruit3);
+            binding.image.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        }
     }
 }

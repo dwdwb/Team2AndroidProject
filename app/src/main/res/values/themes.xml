@@ -5,6 +5,7 @@
         <!--버튼 색-->
         <item name="colorPrimary">#A0DE5F</item>
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
 
     <style name="Theme.MyApplication" parent="Base.Theme.MyApplication" />

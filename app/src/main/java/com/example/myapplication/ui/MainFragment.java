@@ -38,6 +38,7 @@ public class MainFragment extends Fragment {
         navController = NavHostFragment.findNavController(this);
 
         initPagerView();
+        initCategoryBtn();
 
         return binding.getRoot();
     }
@@ -154,6 +155,40 @@ public class MainFragment extends Fragment {
     public void onResume() {
         super.onResume();
         sliderHandler.postDelayed(sliderRunnable, 5000);
+    }
+
+    public void initCategoryBtn() {
+        binding.uglyCtgryBtn.setOnClickListener(v -> {
+            navController.navigate(R.id.action_main_to_list);
+        });
+
+        binding.watermelonCtgryBtn.setOnClickListener(v -> {
+            navController.navigate(R.id.action_main_to_list);
+        });
+
+        binding.kWatermelonCtgryBtn.setOnClickListener(v -> {
+            navController.navigate(R.id.action_main_to_list);
+        });
+
+        binding.cherryCtgryBtn.setOnClickListener(v -> {
+            navController.navigate(R.id.action_main_to_list);
+        });
+
+        binding.avocadoCtgryBtn.setOnClickListener(v -> {
+            navController.navigate(R.id.action_main_to_list);
+        });
+
+        binding.mangoCtgryBtn.setOnClickListener(v -> {
+            navController.navigate(R.id.action_main_to_list);
+        });
+
+        binding.bananaCtgryBtn.setOnClickListener(v -> {
+            navController.navigate(R.id.action_main_to_list);
+        });
+
+        binding.orangeCtgryBtn.setOnClickListener(v -> {
+            navController.navigate(R.id.action_main_to_list);
+        });
     }
 
 }
