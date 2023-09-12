@@ -131,7 +131,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_shipping_add"
+        android:id="@+id/btn_order_shipping_add"
         android:layout_width="350dp"
         android:layout_height="50dp"
 

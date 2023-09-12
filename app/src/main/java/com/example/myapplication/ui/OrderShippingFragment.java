@@ -34,7 +34,7 @@ public class OrderShippingFragment extends Fragment {
     }
 
     private void initBtnShippingAdd() {
-        binding.btnShippingAdd.setOnClickListener(v -> {
+        binding.btnOrderShippingAdd.setOnClickListener(v -> {
             navController.navigate(R.id.action_orderShipping_to_addShipping);
 
         });
