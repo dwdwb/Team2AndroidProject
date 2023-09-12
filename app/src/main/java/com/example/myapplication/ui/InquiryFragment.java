@@ -40,7 +40,7 @@ public class InquiryFragment extends Fragment {
     }
 
     private void initBtnSearch() {
-        binding.btnSearch.setOnClickListener(v -> {
+        binding.btnList.setOnClickListener(v -> {
             navController.navigate(R.id.action_inquiry_to_search);
         });
     }

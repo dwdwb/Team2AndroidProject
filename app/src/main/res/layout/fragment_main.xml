@@ -70,7 +70,7 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/imageView4"
+                            android:id="@+id/btn_list"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             app:srcCompat="@drawable/fruit_ugly" />

@@ -32,7 +32,7 @@ public class SearchFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private void initBtnList() {
+   private void initBtnList() {
         binding.btnList.setOnClickListener(v -> {
             navController.navigate(R.id.action_search_to_list);
         });
