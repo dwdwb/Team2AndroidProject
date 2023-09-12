@@ -33,17 +33,10 @@ public class OrderFragment extends Fragment {
         initBtnOrderHistory();
         initBtnOrderShipping();
 
-        initRadioGroup();
         return binding.getRoot();
     }
 
-    private void initRadioGroup() {
-        binding.radioGroup.addView(binding.radioButtonA);
-        binding.radioGroup.addView(binding.radioButtonB);
-        binding.radioGroup.addView(binding.radioButtonC);
-        binding.radioGroup.addView(binding.radioButtonD);
 
-    }
 
     private void initBtnOrderShipping() {
         binding.btnOrderShipping.setOnClickListener(v -> {
