@@ -7,116 +7,28 @@
     android:layout_height="match_parent"
     tools:context=".ui.ShippingFragment">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="5dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:strokeWidth="0dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="5dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_shipping"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="vertical"
-            android:padding="10dp">
+            android:layout_height="wrap_content" >
 
+        </androidx.recyclerview.widget.RecyclerView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+        <Button
+            android:id="@+id/btn_order_shipping_add"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
 
-                <!-- Title, secondary and supporting text -->
-                <TextView
-                    android:id="@+id/btitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="left"
-                    android:text="김감자"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textStyle="bold" />
+            android:layout_marginStart="30dp"
 
-                <TextView
-                    android:id="@+id/mid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_weight="1"
-                    android:text="서울시 종로구 창경궁로 254"
-                    android:textAppearance="?attr/textAppearanceBody1"
-                    android:textColor="?android:attr/textColorSecondary" />
-
-                <TextView
-                    android:id="@+id/bcontent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:ellipsize="end"
-                    android:text="010-0000-0000"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
-
-                <TextView
-                    android:id="@+id/bdate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="0"
-                    android:text="직접 받고 부재 시 문 앞"
-                    android:textAppearance="?attr/textAppearanceBody1"
-                    android:textColor="?android:attr/textColorSecondary" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/buttonDel"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/custom_button_background"
-                    android:text="삭제"
-                    android:textColor="#FFFFFF" />
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <Button
-                    android:id="@+id/buttonSelect"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/custom_button_background"
-                    android:text="선택"
-                    android:textColor="#FFFFFF" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-    </com.google.android.material.card.MaterialCardView>
+            android:layout_marginEnd="10dp"
+            android:text="배송지 추가" />
+    </LinearLayout>
 
     <!-- TODO: Update blank fragment layout -->
 
