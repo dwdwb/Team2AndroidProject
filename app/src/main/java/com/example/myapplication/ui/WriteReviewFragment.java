@@ -30,7 +30,7 @@ public class WriteReviewFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private void initBtnReview() {
+   private void initBtnReview() {
         binding.btnReview.setOnClickListener(v -> {
             navController.navigate(R.id.action_writeReview_to_review);
         });
@@ -41,4 +41,5 @@ public class WriteReviewFragment extends Fragment {
             navController.popBackStack();
         });
     }
+
 }
