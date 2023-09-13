@@ -6,130 +6,106 @@
     android:layout_height="match_parent"
     tools:context=".ui.CartFragment" >
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="13dp"
-                android:background="@drawable/shape_cart_rectangle" />
-
-            <!--===== 상단(전체선택 및 선택 삭제) =====-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:textAlignment="center"
-                android:gravity="center">
-
-                <!--===== 전체선택 =====-->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="10"
-                    android:paddingLeft="10dp">
-
-                    <CheckBox
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginHorizontal="10dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:text="전체 선택"/>
-
-                    <Space
-                        android:layout_width="5dp"
-                        android:layout_height="match_parent"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:text="("/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="12sp"
-                        android:text="1"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:text="/"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:text="3"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:text=")"/>
-                </LinearLayout>
-
-                <!--===== 선택 삭제 =====-->
-                <androidx.appcompat.widget.AppCompatButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
-                    android:text="선택 삭제"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="13dp"
-                android:background="@drawable/shape_cart_rectangle" />
-
-            <!--===== 장바구니 상품 =====-->
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="13dp"
-                android:background="@drawable/shape_cart_rectangle" />
-
-            <!--===== 보유 쿠폰 =====-->
-            <LinearLayout
-                android:id="@+id/cart_coupon_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:text="보유 쿠폰"
-                    android:textSize="14sp"
-                    android:paddingVertical="5dp"
-                    android:layout_marginHorizontal="20dp"/>
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:layout_weight="1">
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="13dp"
                     android:background="@drawable/shape_cart_rectangle" />
 
+                <!--===== 상단(전체선택 및 선택 삭제) =====-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:textAlignment="center"
+                    android:gravity="center">
+
+                    <!--===== 전체선택 =====-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:paddingLeft="10dp">
+
+                        <CheckBox
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginHorizontal="10dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:text="전체 선택"/>
+
+                        <Space
+                            android:layout_width="5dp"
+                            android:layout_height="match_parent"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:text="("/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:text="1"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:text="/"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:text="3"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:text=")"/>
+                    </LinearLayout>
+
+                    <!--===== 선택 삭제 =====-->
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:text="선택 삭제"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="13dp"
+                    android:background="@drawable/shape_cart_rectangle" />
+
+                <!--===== 장바구니 상품 =====-->
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/cart_product_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -137,26 +113,136 @@
                     android:layout_width="match_parent"
                     android:layout_height="13dp"
                     android:background="@drawable/shape_cart_rectangle" />
-            </LinearLayout>
 
-            <!--===== 가주문내역 =====-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginVertical="10dp">
+                <!--===== 보유 쿠폰 =====-->
+                <LinearLayout
+                    android:id="@+id/cart_coupon_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                <!--===== 총 상품 금액 =====-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:text="보유 쿠폰"
+                        android:textSize="14sp"
+                        android:paddingVertical="5dp"
+                        android:layout_marginHorizontal="20dp"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@drawable/shape_cart_rectangle" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="13dp"
+                        android:background="@drawable/shape_cart_rectangle" />
+                </LinearLayout>
+
+                <!--===== 가주문내역 =====-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="30dp">
+                    android:orientation="vertical"
+                    android:layout_marginVertical="10dp">
+
+                    <!--===== 총 상품 금액 =====-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="30dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="총 상품 금액"
+                            android:textSize="14sp"/>
+
+                        <Space
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="25,300원"
+                            android:textSize="14sp"/>
+                    </LinearLayout>
+
+                    <!--===== 총 배송비 =====-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="30dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="총 배송비"
+                            android:textSize="14sp"/>
+
+                        <Space
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3,000원"
+                            android:textSize="14sp"/>
+                    </LinearLayout>
+
+                    <!--===== 총 할인 금액 =====-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="30dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="총 할인 금액"
+                            android:textSize="14sp"/>
+
+                        <Space
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-2,300원"
+                            android:textSize="14sp"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@drawable/shape_cart_rectangle" />
+
+                <!--===== 총 주문 금액 =====-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="30dp"
+                    android:layout_marginTop="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="총 상품 금액"
-                        android:textSize="14sp"/>
+                        android:text="총 주문 금액"
+                        android:textSize="15sp"
+                        android:textStyle="bold"/>
 
                     <Space
                         android:layout_width="wrap_content"
@@ -167,125 +253,46 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="25,300원"
-                        android:textSize="14sp"/>
-                </LinearLayout>
-
-                <!--===== 총 배송비 =====-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="30dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="총 배송비"
-                        android:textSize="14sp"/>
-
-                    <Space
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="3,000원"
-                        android:textSize="14sp"/>
-                </LinearLayout>
-
-                <!--===== 총 할인 금액 =====-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="30dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="총 할인 금액"
-                        android:textSize="14sp"/>
-
-                    <Space
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="-2,300원"
-                        android:textSize="14sp"/>
+                        android:textSize="15sp"
+                        android:textStyle="bold"/>
                 </LinearLayout>
 
             </LinearLayout>
 
+            <!--===== 하단 버튼 =====-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@drawable/shape_cart_rectangle" />
 
-            <!--===== 총 주문 금액 =====-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="30dp"
-                android:layout_marginTop="10dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="총 주문 금액"
-                    android:textSize="15sp"
+                    android:layout_height="match_parent"
+                    android:textAlignment="center"
+                    android:paddingHorizontal="13dp"
+                    android:gravity="center"
+                    android:text="총 25,800원"
+                    android:textSize="16dp"
                     android:textStyle="bold"/>
 
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                <Button
+                    android:id="@+id/btn_order"
+                    android:layout_width="0dp"
+                    android:layout_height="55dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="2"
+                    android:text="주문하기"
+                    android:textSize="16dp"
+                    app:cornerRadius="6dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="25,300원"
-                    android:textSize="15sp"
-                    android:textStyle="bold"/>
             </LinearLayout>
-
         </LinearLayout>
 
-        <!--===== 하단 버튼 =====-->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/shape_cart_rectangle" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textAlignment="center"
-                android:paddingHorizontal="13dp"
-                android:gravity="center"
-                android:text="총 25,800원"
-                android:textSize="16dp"
-                android:textStyle="bold"/>
-
-            <Button
-                android:id="@+id/btn_order"
-                android:layout_width="0dp"
-                android:layout_height="55dp"
-                android:layout_margin="10dp"
-                android:layout_weight="2"
-                android:text="주문하기"
-                android:textSize="16dp"
-                app:cornerRadius="6dp" />
-
-        </LinearLayout>
-    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

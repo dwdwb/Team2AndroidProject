@@ -44,4 +44,9 @@ public class ServiceProvider {
         AddressBookService addressBookService = getRetrofit(context).create(AddressBookService.class);
         return addressBookService;
     }
+
+    public static CartService getCartService(Context context) {
+        CartService cartService = getRetrofit(context).create(CartService.class);
+        return cartService;
+    }
 }

@@ -15,7 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginVertical="10dp">
 
             <CheckBox
                 android:id="@+id/checkBox2"
@@ -23,9 +24,9 @@
                 android:layout_height="wrap_content" />
 
             <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
+                android:id="@+id/cart_product_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 app:srcCompat="@drawable/image_product_sample" />
 
             <LinearLayout
@@ -36,7 +37,7 @@
                 android:layout_marginHorizontal="10dp">
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/cart_product_name_option"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="간편 수박, 한입 수박"
@@ -44,7 +45,7 @@
                     android:layout_marginBottom="10dp"/>
 
                 <TextView
-                    android:id="@+id/textView20"
+                    android:id="@+id/cart_product_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="24,600원"
@@ -69,7 +70,7 @@
 
                     <!-- 수량 표시 TextView -->
                     <TextView
-                        android:id="@+id/quantityTextView"
+                        android:id="@+id/cart_product_stock"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingStart="10dp"
