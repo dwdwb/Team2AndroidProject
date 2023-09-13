@@ -22,21 +22,6 @@ public class WriteInquiryFragment extends Fragment {
 
         navController = NavHostFragment.findNavController(this);
 
-        initBtnDetail();
-        initBtnBack();
-
         return binding.getRoot();
-    }
-
-    private void initBtnDetail() {
-        binding.btnDetail.setOnClickListener(v -> {
-            navController.popBackStack();
-        });
-    }
-
-    private void initBtnBack() {
-        binding.btnBack.setOnClickListener(v -> {
-            navController.popBackStack();
-        });
     }
 }

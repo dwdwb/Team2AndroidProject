@@ -10,6 +10,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,8 +21,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.myapplication.R;
+import com.example.myapplication.adapter.DetailPagerAdapter;
 import com.example.myapplication.databinding.FragmentDetailBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 public class DetailFragment extends Fragment {
     private static final String TAG = "DetailFragment";
@@ -46,6 +50,23 @@ public class DetailFragment extends Fragment {
 
         //하단바 숨기기
         hideBottomNavigation(true);
+
+        //뷰페이저
+        //initPagerView();
+
+        DetailPagerAdapter viewPager2Adapter
+                = new DetailPagerAdapter(getActivity().getSupportFragmentManager(), getLifecycle());
+        ViewPager2 viewPager2 = binding.pager;
+        viewPager2.setAdapter(viewPager2Adapter);
+
+        //=== TabLayout기능 추가 부분 ============================================
+        TabLayout tabLayout = binding.tabLayout;
+        new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                tab.setText("Tab " + (position + 1));
+            }
+        }).attach();
 
         return binding.getRoot();
     }
@@ -83,6 +104,7 @@ public class DetailFragment extends Fragment {
             bottomNavigation.setVisibility(View.VISIBLE);
     }
 
+    //바로주문
     private void initBtnOrder() {
         binding.btnOrder.setOnClickListener(v -> {
             DetailBottomSheetDialogFragment bottomSheet = new DetailBottomSheetDialogFragment();
@@ -90,6 +112,20 @@ public class DetailFragment extends Fragment {
             /*bottomSheet.show(getSupportFragmentManager(), bottomSheet.getTag());*/
         });
     }
+
+    //뷰페이저
+    /*private void initPagerView() {
+        DetailPagerAdapter productPagerAdapter = new DetailPagerAdapter(this);
+        binding.detailViewPager.setAdapter(productPagerAdapter);
+
+        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(
+                binding.detailTabLayout, binding.detailViewPager, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+            }
+        });
+        tabLayoutMediator.attach();
+    }*/
 
     /*private void initBtnAddCart() {
         binding.btnAddCart.setOnClickListener(v -> {
