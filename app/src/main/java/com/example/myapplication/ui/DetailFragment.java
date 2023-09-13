@@ -52,21 +52,7 @@ public class DetailFragment extends Fragment {
         hideBottomNavigation(true);
 
         //뷰페이저
-        //initPagerView();
-
-        DetailPagerAdapter viewPager2Adapter
-                = new DetailPagerAdapter(getActivity().getSupportFragmentManager(), getLifecycle());
-        ViewPager2 viewPager2 = binding.pager;
-        viewPager2.setAdapter(viewPager2Adapter);
-
-        //=== TabLayout기능 추가 부분 ============================================
-        TabLayout tabLayout = binding.tabLayout;
-        new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                tab.setText("Tab " + (position + 1));
-            }
-        }).attach();
+        initPagerView();
 
         return binding.getRoot();
     }
@@ -114,8 +100,8 @@ public class DetailFragment extends Fragment {
     }
 
     //뷰페이저
-    /*private void initPagerView() {
-        DetailPagerAdapter productPagerAdapter = new DetailPagerAdapter(this);
+    private void initPagerView() {
+        /*DetailPagerAdapter productPagerAdapter = new DetailPagerAdapter(this);
         binding.detailViewPager.setAdapter(productPagerAdapter);
 
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(
@@ -124,8 +110,33 @@ public class DetailFragment extends Fragment {
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
             }
         });
-        tabLayoutMediator.attach();
-    }*/
+        tabLayoutMediator.attach();*/
+
+        DetailPagerAdapter detailPagerAdapter = new DetailPagerAdapter(getActivity().getSupportFragmentManager(), getLifecycle());
+        binding.detailViewPager.setAdapter(detailPagerAdapter);
+
+        //=== TabLayout기능 추가 부분 ============================================
+        new TabLayoutMediator(binding.detailTabLayout, binding.detailViewPager, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                tab.setText("Tab " + (position + 1));
+
+                switch (position) {
+                    case 0:
+                        tab.setText("상품 상세");
+                        break;
+                    case 1:
+                        tab.setText("상품평");
+                        break;
+                    case 2:
+                        tab.setText("상품 문의");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }).attach();
+    }
 
     /*private void initBtnAddCart() {
         binding.btnAddCart.setOnClickListener(v -> {

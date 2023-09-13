@@ -35,7 +35,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingHorizontal="15dp">
+                    android:paddingHorizontal="15dp"
+                    android:layout_marginVertical="5dp">
 
                     <!--===== 상품 이름 =====-->
                     <TextView
@@ -146,12 +147,12 @@
                     android:orientation="vertical">
 
                     <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/tabLayout"
+                        android:id="@+id/detail_tab_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
                     <androidx.viewpager2.widget.ViewPager2
-                        android:id="@+id/pager"
+                        android:id="@+id/detail_view_pager"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1" />

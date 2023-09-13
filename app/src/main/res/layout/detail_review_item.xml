@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <!--===== 리뷰자명 =====-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="김감자"
+        android:textSize="15sp"
+        android:layout_marginBottom="5dp"/>
+
+    <!--===== 별점 및 날짜 =====-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginVertical="5dp">
+
+        <RatingBar
+            android:id="@+id/rating"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:progressTint="@android:color/holo_orange_dark"
+            android:rating="3"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2023.07.29"
+            android:textSize="14sp"
+            android:layout_marginLeft="5dp"/>
+    </LinearLayout>
+
+    <!--===== 리뷰내용 =====-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="맛은 좋은데 크기가 작아서 금방 없어져요"
+        android:textSize="14sp"
+        android:layout_marginVertical="5dp"/>
+
+    <!--===== 도움이 돼요 =====-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginVertical="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:textSize="14sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="명에게 도움됨"
+            android:textSize="14sp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="도움이 돼요"
+            android:textSize="14sp"
+            app:cornerRadius="2dp"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            app:strokeColor="#A0DE5F"
+            android:layout_marginLeft="5dp"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="13dp"
+        android:background="@drawable/shape_cart_rectangle" />
+
+</LinearLayout>

@@ -68,7 +68,8 @@
             android:text="장바구니 담기"
             android:textSize="16dp"
             app:cornerRadius="6dp"
-            style="@style/Widget.Material3.Button.OutlinedButton" />
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            app:strokeColor="#A0DE5F"/>
 
         <Button
             android:id="@+id/btn_order"
