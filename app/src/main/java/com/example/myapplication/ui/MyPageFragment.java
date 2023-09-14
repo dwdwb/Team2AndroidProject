@@ -3,6 +3,7 @@ package com.example.myapplication.ui;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.core.view.MenuProvider;
@@ -40,6 +41,8 @@ public class MyPageFragment extends Fragment {
         navController = NavHostFragment.findNavController(this);
 
         initRecyclerView();
+
+
 
         return binding.getRoot();
     }

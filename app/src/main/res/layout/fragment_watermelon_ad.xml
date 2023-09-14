@@ -8,7 +8,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#880000" />
+        android:background="#0a3711" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,14 +49,15 @@
                 android:id="@+id/imageView12"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                app:srcCompat="@drawable/maincherry1" />
+                app:srcCompat="@drawable/mainwatermelon1"
+                android:scaleType="centerCrop"/>
 
             <LinearLayout
                 android:layout_width="110dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="60dp"
-                android:background="#aa880000"
+                android:background="#aa0a3711"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
 
@@ -65,7 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="체리 특가!"
+                    android:text="수박 특가!"
                     android:textColor="@color/white"
                     android:textStyle="bold" />
 
@@ -74,7 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="상큼한 체리 특가 판매중"
+                    android:text="시원한 수박 특가 판매중"
                     android:textColor="@color/white"
                     android:textSize="8dp" />
 
@@ -92,7 +93,7 @@
                 android:layout_height="match_parent"
                 android:alpha="0.1"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/cherry_background" />
+                app:srcCompat="@drawable/watermelon_background" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -100,19 +101,19 @@
                 android:background="@android:color/transparent"
                 >
                 <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/view_pager_cherry"
+                    android:id="@+id/view_pager_watermelon"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"/>
 
                 <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tab_layout_cherry"
+                    android:id="@+id/tab_layout_watermelon"
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
                     android:layout_marginBottom="5dp"
                     android:layout_gravity="bottom"
                     android:background="@android:color/transparent"
-                    app:tabBackground="@drawable/view_pager_cherry_tab_selector"
+                    app:tabBackground="@drawable/view_pager_watermelon_tab_selector"
                     app:tabGravity="center"
                     app:tabIndicatorHeight="0dp" />
             </LinearLayout>

@@ -19,6 +19,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.adapter.ListAdapter;
 import com.example.myapplication.adapter.SpecialPriceAdapter;
@@ -56,8 +57,10 @@ public class MainFragment extends Fragment {
         initViewPagerMain();
         initCategoryBtn();
 
+
         return binding.getRoot();
     }
+
 
     private void initSpecialPrice() {
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
@@ -222,6 +225,7 @@ public class MainFragment extends Fragment {
     public void onResume() {
         super.onResume();
         sliderHandler.postDelayed(sliderRunnable, 5000);
+        ((MainActivity) requireActivity()).updateBottomNavigationView(R.id.main);
     }
 
     public void initCategoryBtn() {

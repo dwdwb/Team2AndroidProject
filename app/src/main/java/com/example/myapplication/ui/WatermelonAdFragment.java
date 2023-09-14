@@ -5,8 +5,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.Handler;
 import android.util.Log;
@@ -15,9 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.myapplication.R;
-import com.example.myapplication.adapter.ViewPagerCherryAdapter;
-import com.example.myapplication.databinding.FragmentCherryAdBinding;
-import com.example.myapplication.databinding.FragmentMainBinding;
+import com.example.myapplication.adapter.ViewPagerWatermelonAdapter;
+import com.example.myapplication.databinding.FragmentWatermelonAdBinding;
 import com.example.myapplication.dto.MobileProductForList;
 import com.example.myapplication.service.ListService;
 import com.example.myapplication.service.ServiceProvider;
@@ -30,17 +27,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CherryAdFragment extends Fragment {
-    private static final String TAG = "CherryAdFragment";
-    private FragmentCherryAdBinding binding;
+public class WatermelonAdFragment extends Fragment {
+    private static final String TAG = "WatermelonAdFragment";
+    private FragmentWatermelonAdBinding binding;
     //private NavController navController;
     private Handler sliderHandler = new Handler();
     private float startX;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.i(TAG, "실행");
-        binding = FragmentCherryAdBinding.inflate(inflater);
+        binding = FragmentWatermelonAdBinding.inflate(inflater);
 
         //NavController 얻기
         //navController = NavHostFragment.findNavController(new MainFragment());
@@ -49,24 +45,23 @@ public class CherryAdFragment extends Fragment {
 
         return binding.getRoot();
     }
-
     @SuppressLint("ClickableViewAccessibility")
     private void initViewPager() {
-        ViewPagerCherryAdapter viewPagerCherryAdapter = new ViewPagerCherryAdapter(this);
+        ViewPagerWatermelonAdapter viewPagerWatermelonAdapter = new ViewPagerWatermelonAdapter(this);
 
         ListService listService = ServiceProvider.getListService(getContext());
-        Call<List<MobileProductForList>> call = listService.getCheryAdList();
+        Call<List<MobileProductForList>> call = listService.getWatermelonAdList();
         call.enqueue(new Callback<List<MobileProductForList>>() {
             @Override
             public void onResponse(Call<List<MobileProductForList>> call, Response<List<MobileProductForList>> response) {
                 Log.i(TAG, "성공");
                 List<MobileProductForList> list = list = response.body();
-                viewPagerCherryAdapter.setList(list);
-                binding.viewPagerCherry.setAdapter(viewPagerCherryAdapter);
+                viewPagerWatermelonAdapter.setList(list);
+                binding.viewPagerWatermelon.setAdapter(viewPagerWatermelonAdapter);
                 Log.i(TAG, ""+list.size());
 
                 TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(
-                        binding.tabLayoutCherry, binding.viewPagerCherry, new TabLayoutMediator.TabConfigurationStrategy() {
+                        binding.tabLayoutWatermelon, binding.viewPagerWatermelon, new TabLayoutMediator.TabConfigurationStrategy() {
                     @Override
                     public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
 
@@ -81,7 +76,6 @@ public class CherryAdFragment extends Fragment {
                 t.printStackTrace();
             }
         });
-
-
     }
+
 }

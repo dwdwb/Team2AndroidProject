@@ -1,8 +1,10 @@
 package com.example.myapplication;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.fragment.NavHostFragment;
@@ -12,9 +14,12 @@ import androidx.navigation.ui.NavigationUI;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.myapplication.databinding.ActivityMainBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -34,10 +39,40 @@ public class MainActivity extends AppCompatActivity {
         //getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
 
+        initBottomNavigationBar();
         initAppBar();
+
 
         initDestinationChangedListener();
     }
+
+    public void updateBottomNavigationView(int itemId) {
+        binding.bottomNavigationView.setSelectedItemId(itemId);
+    }
+
+    private void initBottomNavigationBar() {
+        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.main) {
+                navController.popBackStack(R.id.main, false);
+                return true;
+            } else if (item.getItemId() == R.id.search) {
+                navController.popBackStack(R.id.main, false);
+                navController.navigate(R.id.action_main_to_search);
+                return true;
+            } else if (item.getItemId() == R.id.cart) {
+                navController.popBackStack(R.id.main, false);
+                navController.navigate(R.id.action_main_to_cart);
+                return true;
+            } else if (item.getItemId() == R.id.myPage) {
+                navController.popBackStack(R.id.main, false);
+                navController.navigate(R.id.action_main_to_myPage);
+                return true;
+            }
+            return false;
+        });
+    }
+
+
 
     private void initAppBar() {
         //Toolbar를 Appbar로 설정
@@ -56,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
         //하단 탐색 뷰와 navController 연동
         //조건: 아이템 id = 대상 id
-        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
+        //NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
 
         /*
         getSupportActionBar().setDisplayHomeAsUpEnabled(false); // 백 버튼 활성화
@@ -71,10 +106,8 @@ public class MainActivity extends AppCompatActivity {
                 //이동한 대상에 따른 처리
                 if(navDestination.getId() == R.id.detail) {
                     getSupportActionBar().show();
-                } else if (navDestination.getId() == R.id.main) {
+                } else  {
                     getSupportActionBar().hide();
-                } else if (navDestination.getId() == R.id.cart) {
-                    getSupportActionBar().show();
                 }
             }
         });

@@ -12,13 +12,13 @@
         android:orientation="horizontal"
         android:padding="7dp"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/ad_item_border">
+        android:background="@drawable/ad_watermelon_item_border">
 
         <ImageView
             android:id="@+id/product_image"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            app:srcCompat="@drawable/fruit_cherry" />
+            app:srcCompat="@drawable/fruit_watermelon" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
                 android:id="@+id/product_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="간편체리 한입체리"
+                android:text="간편수박 한입수박"
                 android:textSize="13sp"
                 android:textStyle="bold" />
 
@@ -64,18 +64,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="13,510원"
-                android:textColor="#880000"
+                android:textColor="#0a3711"
                 android:textSize="16sp"
                 android:textStyle="bold" />
-<!--            <RatingBar
-                android:id="@+id/rating_bar"
-                style="@style/Widget.AppCompat.RatingBar.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:numStars="5"
-                android:progressTint="@android:color/holo_orange_dark"
-                android:rating="3" />-->
+            <!--            <RatingBar
+                            android:id="@+id/rating_bar"
+                            style="@style/Widget.AppCompat.RatingBar.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:numStars="5"
+                            android:progressTint="@android:color/holo_orange_dark"
+                            android:rating="3" />-->
 
 
         </LinearLayout>

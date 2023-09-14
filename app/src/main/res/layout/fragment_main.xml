@@ -6,6 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainFragment">
 
+<!--    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center_horizontal"
+            android:background="#ffc2c3"
+            android:alpha="0.1"
+            />
+
+
+    </FrameLayout>-->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,7 +29,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#0dE3F4EA">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -357,6 +374,20 @@
                     <androidx.fragment.app.FragmentContainerView
                         android:id="@+id/ad_cherry"
                         android:name="com.example.myapplication.ui.CherryAdFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="3dp" />
+
+                    <androidx.fragment.app.FragmentContainerView
+                        android:id="@+id/ad_watermelon"
+                        android:name="com.example.myapplication.ui.WatermelonAdFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="3dp" />
+
+                    <androidx.fragment.app.FragmentContainerView
+                        android:id="@+id/ad_mango"
+                        android:name="com.example.myapplication.ui.MangoAdFragment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp" />
