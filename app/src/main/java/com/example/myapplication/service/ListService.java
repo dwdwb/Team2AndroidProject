@@ -15,6 +15,9 @@ public interface ListService {
     @GET("list/getMobileProductsForList")
     Call<List<MobileProductForList>> getMobileProductsForList();
 
+    @GET("list/getCherryAdList")
+    Call<List<MobileProductForList>> getCheryAdList();
+
     static void loadThumbnailImage(int board_no, ImageView imageView) {
         String url = NetworkInfo.BASE_URL + "list/getThumbnailImage?board_no=" + board_no;
         Glide.with(imageView.getContext()).load(url).into(imageView);

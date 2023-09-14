@@ -16,7 +16,7 @@
         android:paddingVertical="5dp">
 
         <LinearLayout
-            android:layout_width="390dp"
+            android:layout_width="370dp"
             android:layout_height="wrap_content"
             android:background="@drawable/review_card_border"
             android:orientation="vertical"
@@ -56,26 +56,11 @@
                     app:srcCompat="@drawable/image_product_sample" />
 
                 <TextView
-                    android:id="@+id/product_name"
+                    android:id="@+id/product_name_and_option"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="간편수박 한입수박"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=", "
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/product_option"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="200g 1개"
+                    android:text="간편수박 한입수박, 200g 1개"
                     android:textSize="15sp"
                     android:textStyle="bold" />
             </LinearLayout>

@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.viewpager2.widget.ViewPager2;
@@ -37,14 +39,27 @@ public class MainFragment extends Fragment {
         //NavController 얻기
         navController = NavHostFragment.findNavController(this);
 
-        initPagerView();
+        initAd();
+
+        initViewPagerMain();
         initCategoryBtn();
 
         return binding.getRoot();
     }
 
+    private void initAd() {
+        /*FragmentManager fragmentManager = getChildFragmentManager(); // 또는 getChildFragmentManager()를 사용할 수 있습니다.
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        CherryAdFragment cherryAdFragment = new CherryAdFragment();
+        if (cherryAdFragment != null) {
+            transaction.add(R.id.cherry_ad_container, cherryAdFragment);
+            transaction.commit();
+        }*/
+    }
+
     @SuppressLint("ClickableViewAccessibility")
-    private void initPagerView() {
+    private void initViewPagerMain() {
         ViewPagerMainPagerAdapter viewPagerMainPagerAdapter = new ViewPagerMainPagerAdapter(this);
         binding.viewPagerMain.setAdapter(viewPagerMainPagerAdapter);
 

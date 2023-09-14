@@ -339,7 +339,27 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <include layout="@layout/main_cherry_ad_item" />
+                <!--<FrameLayout
+                    android:id="@+id/cherry_ad_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.fragment.app.FragmentContainerView
+                        android:id="@+id/ad_cherry"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="3dp"
+                        android:name="com.example.myapplication.ui.CherryAdFragment"/>
+
+                </LinearLayout>
+
+                
+
 
             </LinearLayout>
 
