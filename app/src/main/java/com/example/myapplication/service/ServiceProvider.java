@@ -49,4 +49,9 @@ public class ServiceProvider {
         CartService cartService = getRetrofit(context).create(CartService.class);
         return cartService;
     }
+
+    public static ReviewService getReviewService(Context context) {
+        ReviewService reviewService = getRetrofit(context).create(ReviewService.class);
+        return reviewService;
+    }
 }

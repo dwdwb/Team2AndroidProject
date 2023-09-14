@@ -5,14 +5,29 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.myapplication.R;
+import com.example.myapplication.adapter.ReviewAdapter;
 import com.example.myapplication.databinding.FragmentListBinding;
 import com.example.myapplication.databinding.FragmentReviewBinding;
+import com.example.myapplication.dto.MobileProductForList;
+import com.example.myapplication.dto.ReviewListItem;
+import com.example.myapplication.service.ListService;
+import com.example.myapplication.service.ReviewService;
+import com.example.myapplication.service.ServiceProvider;
+
+import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ReviewFragment extends Fragment {
     private static final String TAG = "ReviewFragment";
@@ -25,44 +40,45 @@ public class ReviewFragment extends Fragment {
         //NavController 얻기
         navController = NavHostFragment.findNavController(this);
 
-        initBtnEditReview();
-        initBtnMain();
-        initBtnSearch();
-        initBtnCart();
-        initBtnMyPage();
+        initRecyclerView();
+
+        initBtnBack();
 
         return binding.getRoot();
     }
 
-    private void initBtnEditReview() {
-        binding.btnEditReview.setOnClickListener(v -> {
+    private void initRecyclerView() {
+        //RecyclerView에서 항목을 수직으로 배치하도록 설정
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
+                getContext(), LinearLayoutManager.VERTICAL, false
+        );
+        binding.recyclerView.setLayoutManager(linearLayoutManager);
+
+        //어댑터 생성
+        ReviewAdapter reviewAdapter = new ReviewAdapter();
+
+        //API 서버에서 JSON 목록 받기
+        ReviewService reviewService = ServiceProvider.getReviewService(getContext());
+        Call<List<ReviewListItem>> call = reviewService.getReviewList();
+        call.enqueue(new Callback<List<ReviewListItem>>() {
+            @Override
+            public void onResponse(Call<List<ReviewListItem>> call, Response<List<ReviewListItem>> response) {
+                List<ReviewListItem> list = response.body();
+                reviewAdapter.setList(list);
+                binding.recyclerView.setAdapter(reviewAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<ReviewListItem>> call, Throwable t) {
+                Log.i(TAG, "FAIL");
+                t.printStackTrace();
+            }
+        });
+    }
+
+    private void initBtnBack() {
+        binding.btnBack.setOnClickListener(v -> {
             navController.navigate(R.id.action_review_to_editReview);
-        });
-    }
-
-    private void initBtnMain() {
-        binding.btnMain.setOnClickListener(v -> {
-            //대상으로 이동, 백스택의 위쪽 대상으로 모두 제거
-            navController.popBackStack(R.id.main, false);
-        });
-    }
-
-    private void initBtnSearch() {
-        binding.btnSearch.setOnClickListener(v -> {
-            navController.navigate(R.id.action_review_to_search);
-        });
-    }
-
-    private void initBtnCart() {
-        binding.btnCart.setOnClickListener(v -> {
-            navController.navigate(R.id.action_review_to_cart);
-        });
-    }
-
-    private void initBtnMyPage() {
-        binding.btnMyPage.setOnClickListener(v -> {
-            //대상으로 이동, 백스택의 위쪽 대상으로 모두 제거
-            navController.popBackStack(R.id.myPage, false);
         });
     }
 }
