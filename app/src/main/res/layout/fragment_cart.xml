@@ -135,6 +135,7 @@
                         android:background="@drawable/shape_cart_rectangle" />
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/cart_coupon_recycler_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
@@ -258,6 +259,10 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="80dp"/>
 
             <!--===== 하단 버튼 =====-->
             <View

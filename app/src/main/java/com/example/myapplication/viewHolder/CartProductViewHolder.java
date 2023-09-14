@@ -44,7 +44,7 @@ public class CartProductViewHolder extends RecyclerView.ViewHolder {
     public void setData(CartProduct cartProduct) {
         product_no = cartProduct.getProduct_NO();
         CartService.loadCartProductImage(product_no, cart_product_image);
-        cart_product_name_option.setText(cartProduct.getProduct_NAME() + cartProduct.getProduct_OPTION());
+        cart_product_name_option.setText(cartProduct.getProduct_NAME() + ", " + cartProduct.getProduct_OPTION());
         cart_product_price.setText(String.valueOf(cartProduct.getDiscount_PRICE()));
         cart_product_stock.setText(String.valueOf(cartProduct.getCart_PRODUCT_STOCK()));
     }

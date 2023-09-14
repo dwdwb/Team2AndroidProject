@@ -4,6 +4,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.myapplication.dto.CartProduct;
+import com.example.myapplication.dto.Coupon;
 
 import java.util.List;
 
@@ -18,4 +19,7 @@ public interface CartService {
         String url = NetworkInfo.BASE_URL + "cart/getCartProductImage?pno=" + product_no;
         Glide.with(imageView.getContext()).load(url).into(imageView);
     }
+
+    @GET("cart/getCartCouponList")
+    Call<List<Coupon>> getCartCouponList();
 }

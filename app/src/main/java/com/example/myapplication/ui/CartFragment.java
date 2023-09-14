@@ -19,10 +19,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.myapplication.R;
+import com.example.myapplication.adapter.CartCouponAdapter;
 import com.example.myapplication.adapter.CartProductAdapter;
 import com.example.myapplication.databinding.FragmentCartBinding;
 import com.example.myapplication.databinding.FragmentDetailBinding;
 import com.example.myapplication.dto.CartProduct;
+import com.example.myapplication.dto.Coupon;
 import com.example.myapplication.service.CartService;
 import com.example.myapplication.service.ServiceProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -46,7 +48,8 @@ public class CartFragment extends Fragment {
         navController = NavHostFragment.findNavController(this);
 
         //RecyclerView 초기화
-        initRecyclerView();
+        initCartProductRecyclerView();
+        initCartCouponRecyclerView();
 
         initBtnOrder();
 
@@ -65,7 +68,8 @@ public class CartFragment extends Fragment {
             bottomNavigation.setVisibility(View.VISIBLE);
     }
 
-    private void initRecyclerView() {
+    //상품 불러오기
+    private void initCartProductRecyclerView() {
         //RecyclerView에서 항목을 수직으로 배치하도록 설정
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
                 getContext(), LinearLayoutManager.VERTICAL, false
@@ -105,6 +109,51 @@ public class CartFragment extends Fragment {
 
                 Bundle args = new Bundle();
                 args.putSerializable("cartProduct", cartProduct);
+                //navController.navigate(R.id.action_dest_list_to_dest_detail, args);
+            }
+        });
+    }
+
+    //쿠폰 불러오기
+    private void initCartCouponRecyclerView() {
+        //RecyclerView에서 항목을 수직으로 배치하도록 설정
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
+                getContext(), LinearLayoutManager.VERTICAL, false
+        );
+        binding.cartCouponRecyclerView.setLayoutManager(linearLayoutManager);
+
+        //어댑터 생성
+        CartCouponAdapter cartCouponAdapter = new CartCouponAdapter();
+
+        //API 서버에서 JSON 목록 받기
+        CartService cartService = ServiceProvider.getCartService(getContext());
+        Call<List<Coupon>> call = cartService.getCartCouponList();
+        call.enqueue(new Callback<List<Coupon>>() {
+            @Override
+            public void onResponse(Call<List<Coupon>> call, Response<List<Coupon>> response) {
+                //JSON -> List<Board> 변환
+                List<Coupon> list = response.body();
+                //어댑터 데이터 세팅
+                cartCouponAdapter.setCouponList(list);
+                //RecyclerView에 어댑터 세팅
+                binding.cartCouponRecyclerView.setAdapter(cartCouponAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<Coupon>> call, Throwable t) {
+                Log.i(TAG, "안됨......");
+            }
+        });
+
+        //항목을 클릭했을 때 콜백 객체를 등록
+        cartCouponAdapter.setOnItemClickListener(new CartCouponAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View itemView, int position) {
+                Log.i(TAG, position + "항목 클릭됨");
+                Coupon coupon = cartCouponAdapter.getItem(position);
+
+                Bundle args = new Bundle();
+                args.putSerializable("coupon", coupon);
                 //navController.navigate(R.id.action_dest_list_to_dest_detail, args);
             }
         });

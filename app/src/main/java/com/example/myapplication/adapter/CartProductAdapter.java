@@ -15,7 +15,7 @@ import com.example.myapplication.viewHolder.CartProductViewHolder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartProductAdapter extends RecyclerView.Adapter<CartProductViewHolder>{
+public class CartProductAdapter extends RecyclerView.Adapter<CartProductViewHolder> {
     private List<CartProduct> cartProductList = new ArrayList<>();
     private OnItemClickListener onItemClickListener;
     @NonNull
