@@ -16,7 +16,7 @@
         android:background="@color/white">
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/ordered_image"
             android:layout_width="225dp"
             android:layout_height="100dp"
             android:layout_weight="1"
@@ -30,7 +30,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView40"
+                android:id="@+id/ordered_product_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="간편 수박, 한입 수박"
@@ -38,7 +38,7 @@
                 android:layout_marginBottom="8dp"/>
 
             <TextView
-                android:id="@+id/textView43"
+                android:id="@+id/price"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="24,650원"

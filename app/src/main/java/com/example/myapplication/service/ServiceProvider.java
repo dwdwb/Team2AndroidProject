@@ -59,4 +59,9 @@ public class ServiceProvider {
         MyPageCouponService myPageCouponService = getRetrofit(context).create(MyPageCouponService.class);
         return myPageCouponService;
     }
+
+    public static MyPageOrderedService getMyPageOrderedService(Context context) {
+        MyPageOrderedService myPageOrderedService = getRetrofit(context).create(MyPageOrderedService.class);
+        return myPageOrderedService;
+    }
 }
