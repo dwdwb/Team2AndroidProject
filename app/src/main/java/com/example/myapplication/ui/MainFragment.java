@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
@@ -19,11 +20,23 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.myapplication.R;
+import com.example.myapplication.adapter.ListAdapter;
+import com.example.myapplication.adapter.SpecialPriceAdapter;
 import com.example.myapplication.adapter.ViewPagerMainPagerAdapter;
 import com.example.myapplication.databinding.FragmentListBinding;
 import com.example.myapplication.databinding.FragmentMainBinding;
+import com.example.myapplication.dto.MobileProductForList;
+import com.example.myapplication.service.ListService;
+import com.example.myapplication.service.ServiceProvider;
+import com.example.myapplication.viewHolder.SpecialPriceViewHolder;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainFragment extends Fragment {
     private static final String TAG = "MainFragment";
@@ -39,12 +52,51 @@ public class MainFragment extends Fragment {
         //NavController 얻기
         navController = NavHostFragment.findNavController(this);
 
-        initAd();
-
+        initSpecialPrice();
         initViewPagerMain();
         initCategoryBtn();
 
         return binding.getRoot();
+    }
+
+    private void initSpecialPrice() {
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+        binding.specialPrice.setLayoutManager(layoutManager);
+
+        SpecialPriceAdapter specialPriceAdapter = new SpecialPriceAdapter();
+
+        //API 서버에서 JSON 목록 받기
+        ListService listService = ServiceProvider.getListService(getContext());
+        Call<List<MobileProductForList>> call = listService.getMobileProductsForList();
+
+        call.enqueue(new Callback<List<MobileProductForList>>() {
+            @Override
+            public void onResponse(Call<List<MobileProductForList>> call, Response<List<MobileProductForList>> response) {
+                List<MobileProductForList> list = response.body();
+                specialPriceAdapter.setList(list);
+                binding.specialPrice.setAdapter(specialPriceAdapter);
+                Log.i(TAG, "size: " + specialPriceAdapter.getItemCount());
+            }
+
+            @Override
+            public void onFailure(Call<List<MobileProductForList>> call, Throwable t) {
+
+            }
+        });
+
+        //항목을 클릭했을 때 콜백 객체를 등록
+        /*specialPriceAdapter.setOnItemClickListener(new SpecialPriceViewHolder.OnItemClickListener() {
+            @Override
+            public void onItemClick(View itemView, int position) {
+                Log.i(TAG, position + "번 항목 클릭됨");
+                MobileProductForList mobileProductForList = specialPriceAdapter.getItem(position);
+
+                Bundle args = new Bundle();
+                args.putSerializable("mobileProductForList", mobileProductForList);
+                navController.navigate(R.id.action_main_to_detail, args);
+            }
+        });*/
+
     }
 
     private void initAd() {

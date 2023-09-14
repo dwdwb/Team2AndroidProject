@@ -6,9 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainFragment">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -351,15 +356,13 @@
 
                     <androidx.fragment.app.FragmentContainerView
                         android:id="@+id/ad_cherry"
+                        android:name="com.example.myapplication.ui.CherryAdFragment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="3dp"
-                        android:name="com.example.myapplication.ui.CherryAdFragment"/>
+                        android:layout_marginBottom="3dp" />
 
                 </LinearLayout>
 
-                
-
 
             </LinearLayout>
 
@@ -369,57 +372,127 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="오늘의 발견"
                     android:layout_gravity="center_horizontal"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/coupon_size"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
                     android:text="오늘의 판매자 특가"
-                    android:layout_gravity="center_horizontal"
                     android:textSize="20dp"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/special_price"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:nestedScrollingEnabled="false" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:layout_height="150dp"
                 android:layout_marginTop="20dp"
-                android:gravity="center_horizontal">
+                android:background="#f1f3f5"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView36"
-                    android:layout_width="wrap_content"
+
+                <ImageView
+                    android:id="@+id/logo2"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="사이트 정보" />
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/fruitlight_logo_footer" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="3sp"
+                        android:text="고객 센터"
+                        android:textColor="#878787"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1588-8282"
+                        android:textColor="#878787"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="주중: 오전 9시 ~
+                                           \t\t\t\t\t오후 6시"
+                        android:textColor="#878787"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="주말: 휴무"
+                        android:textColor="#878787"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="3sp"
+                        android:text="미니프로젝트"
+                        android:textColor="#878787"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="기간: 2023.9.11 ~
+                                           \t\t\t\t\t2023.09.27"
+                        android:textColor="#878787"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="팀장: 송원석"
+                        android:textColor="#878787"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="팀원: 이은지"
+                        android:textColor="#878787"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="팀원: 김시온"
+                        android:textColor="#878787"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
