@@ -3,6 +3,7 @@ package com.example.myapplication.viewHolder;
 import android.graphics.Paint;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -26,6 +27,7 @@ public class AddressViewHolder extends RecyclerView.ViewHolder {
     private TextView shipping_address;
     private TextView receiver_tel;
     private TextView shipping_preference;
+    private Button btnDel;
 
     public AddressViewHolder(@NonNull View itemView, AddressAdapter.OnItemClickListener onItemClickListener) {
         super(itemView);
@@ -36,12 +38,19 @@ public class AddressViewHolder extends RecyclerView.ViewHolder {
         shipping_address = (TextView) itemView.findViewById(R.id.shipping_address);
         receiver_tel = (TextView) itemView.findViewById(R.id.receiver_tel);
         shipping_preference = (TextView) itemView.findViewById(R.id.shipping_preference);
+        btnDel = itemView.findViewById(R.id.btnDel);
 
 
-        //클릭 이벤트 처리
-        itemView.setOnClickListener(v -> {
-            Log.i(TAG, address_no + " 항목이 클릭됨");
-            onItemClickListener.onItemClick(v, getAdapterPosition());
+
+        btnDel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 버튼 클릭 시 해당 아이템의 address_no를 전달
+                Log.i(TAG, "address_no선택됨?"+address_no);
+
+                onItemClickListener.onItemClick(btnDel, getAdapterPosition());
+
+            }
         });
     }
 
