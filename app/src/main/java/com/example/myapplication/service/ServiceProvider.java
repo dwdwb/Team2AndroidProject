@@ -54,4 +54,9 @@ public class ServiceProvider {
         ReviewService reviewService = getRetrofit(context).create(ReviewService.class);
         return reviewService;
     }
+
+    public static MyPageCouponService getMyPageCouponService(Context context) {
+        MyPageCouponService myPageCouponService = getRetrofit(context).create(MyPageCouponService.class);
+        return myPageCouponService;
+    }
 }
