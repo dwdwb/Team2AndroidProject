@@ -17,4 +17,12 @@ public interface AddressBookService {
     @POST("deleteAddress")
     Call<AddressResult> deleteAddress(@Query("address_no") int address_no);
 
+    @POST("addAddress")
+    Call<AddressResult> addAddress(
+            @Query("shopper_no") int shopper_no,
+            @Query("shipping_name") String shipping_name,
+            @Query("shipping_address") String shipping_address,
+            @Query("receiver_tel") String receiver_tel,
+            @Query("shipping_preference") String shipping_preference);
+
 }

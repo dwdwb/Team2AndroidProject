@@ -1,12 +1,8 @@
 package com.example.myapplication.viewHolder;
 
-import android.graphics.Paint;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,11 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.adapter.AddressAdapter;
-import com.example.myapplication.adapter.ListAdapter;
 import com.example.myapplication.dto.AddressList;
-import com.example.myapplication.dto.MobileProductForList;
-import com.example.myapplication.service.ListService;
-import com.google.android.material.card.MaterialCardView;
 
 public class AddressViewHolder extends RecyclerView.ViewHolder {
     private static final String TAG = "AddressViewHolder";
@@ -35,7 +27,7 @@ public class AddressViewHolder extends RecyclerView.ViewHolder {
         //아이템 UI 얻기
 
         shipping_name = (TextView) itemView.findViewById(R.id.shipping_name);
-        shipping_address = (TextView) itemView.findViewById(R.id.shipping_address);
+        shipping_address = (TextView) itemView.findViewById(R.id.add_shipping_address);
         receiver_tel = (TextView) itemView.findViewById(R.id.receiver_tel);
         shipping_preference = (TextView) itemView.findViewById(R.id.shipping_preference);
         btnDel = itemView.findViewById(R.id.btnDel);

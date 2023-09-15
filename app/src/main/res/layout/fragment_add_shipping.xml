@@ -21,20 +21,19 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="받는 사람"
+            android:hint="배송지 이름"
             app:endIconMode="clear_text"
             app:errorEnabled="true"
-            app:helperText="받을 사람을 입력해주세요."
+            app:helperText="배송지 이름을 입력해주세요."
             app:helperTextEnabled="true"
             app:startIconDrawable="@drawable/ic_person_24dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/name"
+                android:id="@+id/add_shipping_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionSearch"
-                android:inputType="text|textPostalAddress"
-                android:text="사용자" />
+                android:inputType="text|textPostalAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
@@ -52,12 +51,11 @@
                 app:startIconDrawable="@drawable/ic_address_24dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/shipping_address"
+                    android:id="@+id/add_shipping_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionSearch"
-                    android:inputType="text|textPostalAddress"
-                    android:text="주소" />
+                    android:inputType="text|textPostalAddress" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -77,6 +75,7 @@
             app:helperText="받을 주소를 입력해주세요.">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/add_shipping_address_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -92,6 +91,7 @@
             app:startIconDrawable="@drawable/ic_phone_24dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/add_receiver_tel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text|textPhonetic" />
@@ -109,6 +109,7 @@
             app:startIconDrawable="@drawable/ic_message_24dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/add_shipping_preference"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text" />
