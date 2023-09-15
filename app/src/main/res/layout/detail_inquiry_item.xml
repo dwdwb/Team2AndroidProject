@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/white">
 
@@ -37,6 +37,7 @@
                     android:layout_marginBottom="5dp">
 
                     <TextView
+                        android:id="@+id/shopper_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="이*릇"
@@ -44,6 +45,7 @@
                         android:textSize="15sp"/>
 
                     <TextView
+                        android:id="@+id/inquiry_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="2023/08/21"
@@ -52,6 +54,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/inquiry_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="맛있는 걸로 보내주세여"/>
@@ -97,6 +100,7 @@
                         android:textSize="15sp"/>
 
                     <TextView
+                        android:id="@+id/answer_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="2023/08/21"
@@ -105,6 +109,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/answer_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="구매 감사합니다 :)"/>
@@ -115,6 +120,10 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="?android:attr/listDivider" />
+        
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp"/>
     </LinearLayout>
 
 </LinearLayout>

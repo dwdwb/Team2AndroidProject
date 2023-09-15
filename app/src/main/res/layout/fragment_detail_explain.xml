@@ -3,62 +3,185 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".ui.DetailExplainFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="13dp"
-        android:background="@drawable/shape_cart_rectangle" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp">
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="필수표기정보"
-            android:textSize="14dp"
-            android:layout_weight="1"/>
+            android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:srcCompat="@drawable/ic_expand_24dp" />
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/product_image"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/image_product_sample" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="13dp"
-        android:background="@drawable/shape_cart_rectangle" />
+            <!--<FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="400dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp">
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/detail_image_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    app:tabGravity="center"
+                    app:tabIndicatorHeight="0dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="배송/교환/반품 안내"
-            android:textSize="14dp"
-            android:layout_weight="1"/>
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/detail_image_view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:srcCompat="@drawable/ic_expand_24dp" />
-    </LinearLayout>
+            </FrameLayout>-->
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="13dp"
-        android:background="@drawable/shape_cart_rectangle" />
+            <!--===== 상품 상단 정보 =====-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="15dp"
+                android:layout_marginVertical="5dp">
+
+                <!--===== 상품 이름 =====-->
+                <TextView
+                    android:id="@+id/product_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="간편 수박, 한입 수박"
+                    android:textSize="16sp"/>
+
+
+                <!--===== 상품평 =====-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <RatingBar
+                        android:id="@+id/rating"
+                        style="@style/Widget.AppCompat.RatingBar.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:progressTint="@android:color/holo_orange_dark"
+                        android:rating="3.5"
+                        android:layout_gravity="center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="12개 상품평"
+                        android:textSize="13sp"
+                        android:layout_gravity="center"/>
+
+                </LinearLayout>
+
+                <!--===== 할인가 =====-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <TextView
+                        android:id="@+id/product_discount_rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="15%"
+                        android:textStyle="bold"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/product_original_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="29,000원"
+                        android:textColor="#979797"
+                        android:paddingHorizontal="5dp"
+                        android:textSize="15sp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/product_discount_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="24,650원"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginVertical="5dp"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="13dp"
+                android:background="@drawable/shape_cart_rectangle" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/detail_content_image_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="13dp"
+                android:background="@drawable/shape_cart_rectangle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="필수표기정보"
+                    android:textSize="14dp"
+                    android:layout_weight="1"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:srcCompat="@drawable/ic_expand_24dp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="13dp"
+                android:background="@drawable/shape_cart_rectangle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="배송/교환/반품 안내"
+                    android:textSize="14dp"
+                    android:layout_weight="1"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:srcCompat="@drawable/ic_expand_24dp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="13dp"
+                android:background="@drawable/shape_cart_rectangle" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

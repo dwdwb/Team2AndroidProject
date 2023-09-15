@@ -105,4 +105,9 @@ public class ServiceProvider {
         ShopperService shopperService = getRetrofit(context).create(ShopperService.class);
         return shopperService;
     }
+
+    public static DetailViewService getDetailViewService(Context context) {
+        DetailViewService detailViewService = getRetrofit(context).create(DetailViewService.class);
+        return detailViewService;
+    }
 }

@@ -12,10 +12,17 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ScrollView
+        <!--<androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">-->
+
+        <!--<ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1">-->
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -23,14 +30,33 @@
                 android:orientation="vertical">
 
                 <!--===== 상품 사진 =====-->
-                <ImageView
-                    android:id="@+id/imageView"
+                <!--<ImageView
+                    android:id="@+id/product_image"
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/image_product_sample" />
+                    app:srcCompat="@drawable/image_product_sample" />-->
 
-                <!--===== 상품 상단 정보 =====-->
+                <!--<FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp">
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/detail_image_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        app:tabGravity="center"
+                        app:tabIndicatorHeight="0dp" />
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/detail_image_view_pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </FrameLayout>
+
+                &lt;!&ndash;===== 상품 상단 정보 =====&ndash;&gt;
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -38,15 +64,16 @@
                     android:paddingHorizontal="15dp"
                     android:layout_marginVertical="5dp">
 
-                    <!--===== 상품 이름 =====-->
+                    &lt;!&ndash;===== 상품 이름 =====&ndash;&gt;
                     <TextView
+                        android:id="@+id/product_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="간편 수박, 한입 수박"
                         android:textSize="16sp"/>
 
 
-                    <!--===== 상품평 =====-->
+                    &lt;!&ndash;===== 상품평 =====&ndash;&gt;
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -71,13 +98,14 @@
 
                     </LinearLayout>
 
-                    <!--===== 할인가 =====-->
+                    &lt;!&ndash;===== 할인가 =====&ndash;&gt;
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp">
 
                         <TextView
+                            android:id="@+id/product_discount_rate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="15%"
@@ -85,6 +113,7 @@
                             android:textSize="15sp" />
 
                         <TextView
+                            android:id="@+id/product_original_price"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="29,000원"
@@ -94,6 +123,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/product_discount_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="24,650원"
@@ -105,41 +135,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="13dp"
-                    android:background="@drawable/shape_cart_rectangle" />
-
-                <!--<FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="10000dp">
-
-                    <androidx.viewpager2.widget.ViewPager2
-                        android:id="@+id/detail_view_pager"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                    </androidx.viewpager2.widget.ViewPager2>
-
-                    <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/detail_tab_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <com.google.android.material.tabs.TabItem
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="상품 상세" />
-
-                        <com.google.android.material.tabs.TabItem
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="상품평" />
-
-                        <com.google.android.material.tabs.TabItem
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="상품문의" />
-                    </com.google.android.material.tabs.TabLayout>
-
-                </FrameLayout>-->
+                    android:background="@drawable/shape_cart_rectangle" />-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -160,7 +156,8 @@
                 </LinearLayout>
 
             </LinearLayout>
-        </ScrollView>
+        <!--</ScrollView>-->
+        <!--</androidx.core.widget.NestedScrollView>-->
 
         <!--===== 하단 버튼 =====-->
         <View

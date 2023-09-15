@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="10dp">
 
     <!--===== 리뷰자명 =====-->
     <TextView
+        android:id="@+id/shopper_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="김감자"
@@ -31,6 +32,7 @@
             android:rating="3"/>
 
         <TextView
+            android:id="@+id/review_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2023.07.29"
@@ -40,6 +42,7 @@
 
     <!--===== 리뷰내용 =====-->
     <TextView
+        android:id="@+id/review_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="맛은 좋은데 크기가 작아서 금방 없어져요"
@@ -54,6 +57,7 @@
         android:layout_marginVertical="5dp">
 
         <TextView
+            android:id="@+id/review_help_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="5"
@@ -65,6 +69,7 @@
             android:textSize="14sp"/>
 
         <Button
+            android:id="@+id/review_help_btn"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="도움이 돼요"

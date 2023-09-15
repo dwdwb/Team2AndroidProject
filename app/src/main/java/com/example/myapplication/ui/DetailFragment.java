@@ -19,13 +19,25 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.adapter.DetailPagerAdapter;
 import com.example.myapplication.databinding.FragmentDetailBinding;
+import com.example.myapplication.dto.CartProduct;
+import com.example.myapplication.dto.ProductBoard;
+import com.example.myapplication.service.CartService;
+import com.example.myapplication.service.DetailViewService;
+import com.example.myapplication.service.ServiceProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DetailFragment extends Fragment {
     private static final String TAG = "DetailFragment";
@@ -101,17 +113,6 @@ public class DetailFragment extends Fragment {
 
     //뷰페이저
     private void initPagerView() {
-        /*DetailPagerAdapter productPagerAdapter = new DetailPagerAdapter(this);
-        binding.detailViewPager.setAdapter(productPagerAdapter);
-
-        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(
-                binding.detailTabLayout, binding.detailViewPager, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-            }
-        });
-        tabLayoutMediator.attach();*/
-
         DetailPagerAdapter detailPagerAdapter = new DetailPagerAdapter(getActivity().getSupportFragmentManager(), getLifecycle());
         binding.detailViewPager.setAdapter(detailPagerAdapter);
 
@@ -119,8 +120,6 @@ public class DetailFragment extends Fragment {
         new TabLayoutMediator(binding.detailTabLayout, binding.detailViewPager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                tab.setText("Tab " + (position + 1));
-
                 switch (position) {
                     case 0:
                         tab.setText("상품 상세");
