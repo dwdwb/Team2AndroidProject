@@ -3,8 +3,8 @@
 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,6 +17,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
             <!-- Title, secondary and supporting text -->
@@ -72,31 +74,40 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnDel"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="삭제"
-                android:textColor="#FFFFFF" />
+                android:textColor="#A0DE5F"
+                app:strokeColor="#A0DE5F" />
+
 
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
+
             <Button
                 android:id="@+id/buttonSelect"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/custom_button_background"
+                android:backgroundTint="#A0DE5F"
                 android:text="선택"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"
+                app:strokeColor="#A0DE5F" />
+
         </LinearLayout>
 
     </LinearLayout>

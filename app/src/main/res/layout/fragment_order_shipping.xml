@@ -24,15 +24,19 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
+
         <Button
             android:id="@+id/btn_order_shipping_add"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="350dp"
-            android:layout_height="50dp"
-
+            android:layout_height="55dp"
             android:layout_marginStart="25dp"
 
             android:layout_marginEnd="10dp"
-            android:text="배송지 추가" />
+
+            android:text="배송지 추가"
+            android:textStyle="bold"
+            app:strokeColor="#A0DE5F" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
