@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.myapplication.MainActivity;
+import com.example.myapplication.R;
 import com.example.myapplication.databinding.FragmentLoginBinding;
 import com.example.myapplication.datastore.AppKeyValueStore;
 import com.example.myapplication.dto.LoginResult;
@@ -66,8 +67,8 @@ public class LoginFragment extends Fragment {
                         AppKeyValueStore.put(getContext(), "shopperPw", loginResult.getShopperPw());
                         ((MainActivity) requireActivity()).reloadBottomNavigationView();
 
-                        //이전 화면 이동
-                        navController.popBackStack();
+                        //메인으로 이동
+                        navController.popBackStack(R.id.main, false);
 
                     } else {
                         AlertDialog alertDialog = new AlertDialog.Builder(getContext())

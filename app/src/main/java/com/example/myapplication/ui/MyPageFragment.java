@@ -77,8 +77,8 @@ public class MyPageFragment extends Fragment {
         list.add(new MyPageMenuItem(R.drawable.ic_loyalty_36dp, "쿠폰함"));
         //상품 문의
         list.add(new MyPageMenuItem(R.drawable.ic_inquiry_36dp, "상품 문의"));
-        //내 정보 관리
-        list.add(new MyPageMenuItem(R.drawable.ic_person_36dp, "내 정보 관리"));
+        /*//내 정보 관리
+        list.add(new MyPageMenuItem(R.drawable.ic_person_36dp, "내 정보 관리"));*/
         //리뷰 관리
         list.add(new MyPageMenuItem(R.drawable.ic_review_36dp, "리뷰 관리"));
         //배송지 관리
@@ -101,9 +101,9 @@ public class MyPageFragment extends Fragment {
                     navController.navigate(R.id.action_myPage_to_coupon);
                 } else if (myPageMenuItem.getMenuText().equals("상품 문의")) {
                     navController.navigate(R.id.action_myPage_to_inquiry);
-                } else if (myPageMenuItem.getMenuText().equals("내 정보 관리")) {
-                    navController.navigate(R.id.action_myPage_to_orderHistory);
-                } else if (myPageMenuItem.getMenuText().equals("리뷰 관리")) {
+                } /*else if (myPageMenuItem.getMenuText().equals("내 정보 관리")) {
+                    navController.navigate(R.id.action_myPage_to_orderHistory);*/
+                else if (myPageMenuItem.getMenuText().equals("리뷰 관리")) {
                     navController.navigate(R.id.action_myPage_to_review);
                 } else if (myPageMenuItem.getMenuText().equals("배송지 관리")) {
                     navController.navigate(R.id.action_myPage_to_shipping);
