@@ -19,9 +19,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.adapter.MyPageMenuItemAdapter;
 import com.example.myapplication.databinding.FragmentMyPageBinding;
+import com.example.myapplication.datastore.AppKeyValueStore;
 import com.example.myapplication.dto.MyPageMenuItem;
 import com.example.myapplication.viewHolder.MyPageMenuItemViewHolder;
 
@@ -42,9 +44,18 @@ public class MyPageFragment extends Fragment {
 
         initRecyclerView();
 
-
+        initLogoutBtn();
 
         return binding.getRoot();
+    }
+
+    private void initLogoutBtn() {
+        binding.btnLogout.setOnClickListener(v -> {
+            AppKeyValueStore.remove(getContext(), "shopperId");
+            AppKeyValueStore.remove(getContext(), "shopperPw");
+            ((MainActivity) requireActivity()).reloadBottomNavigationView();
+            navController.popBackStack(R.id.main, false);
+        });
     }
 
     public void initRecyclerView() {

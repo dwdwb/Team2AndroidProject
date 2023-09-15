@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.myapplication.databinding.ActivityMainBinding;
+import com.example.myapplication.datastore.AppKeyValueStore;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -50,7 +51,12 @@ public class MainActivity extends AppCompatActivity {
         binding.bottomNavigationView.setSelectedItemId(itemId);
     }
 
+    public void reloadBottomNavigationView() {
+        initBottomNavigationBar();
+    }
+
     private void initBottomNavigationBar() {
+        String shopperId = AppKeyValueStore.getValue(this, "shopperId");
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.main) {
                 navController.popBackStack(R.id.main, false);
@@ -60,12 +66,20 @@ public class MainActivity extends AppCompatActivity {
                 navController.navigate(R.id.action_main_to_search);
                 return true;
             } else if (item.getItemId() == R.id.cart) {
-                navController.popBackStack(R.id.main, false);
-                navController.navigate(R.id.action_main_to_cart);
+                if (shopperId == null) {
+                    navController.navigate(R.id.login);
+                } else {
+                    navController.popBackStack(R.id.main, false);
+                    navController.navigate(R.id.action_main_to_cart);
+                }
                 return true;
             } else if (item.getItemId() == R.id.myPage) {
-                navController.popBackStack(R.id.main, false);
-                navController.navigate(R.id.action_main_to_myPage);
+                if (shopperId == null) {
+                    navController.navigate(R.id.login);
+                } else {
+                    navController.popBackStack(R.id.main, false);
+                    navController.navigate(R.id.action_main_to_myPage);
+                }
                 return true;
             }
             return false;
@@ -104,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
                 //이동한 대상에 따른 처리
-                if(navDestination.getId() == R.id.detail) {
+                if(navDestination.getId() == R.id.detail || navDestination.getId() == R.id.cart) {
                     getSupportActionBar().show();
                 } else  {
                     getSupportActionBar().hide();

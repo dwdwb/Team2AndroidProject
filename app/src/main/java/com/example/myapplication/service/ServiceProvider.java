@@ -21,6 +21,41 @@ public class ServiceProvider {
     private static final String TAG = "ServiceProvider";
 
     public static Retrofit getRetrofit(Context context) {
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+            .addInterceptor(new Interceptor() {
+                @Override
+                public Response intercept(Chain chain) throws IOException {
+                    // 오리지널 요청 내용을 가지고 있는 요청 객체
+                    Request request = chain.request();
+                    //공통 파라미터 설정---------------------------------
+                /*HttpUrl newUrl = request.url().newBuilder()
+                        .addQueryParameter("param1", "value1")
+                        .addQueryParameter("param2", "value2")
+                        .build();*/
+
+                    HttpUrl.Builder httpUrlBuilder = request.url().newBuilder();
+                    String shopperId = AppKeyValueStore.getValue(context, "shopperId");
+                    String shopperPw = AppKeyValueStore.getValue(context, "shopperPw");
+                    if (shopperId != null && shopperPw != null) {
+                        //mid로 이름을 주었을 경우에 게시물 쓰기의 mid와 중복 발생
+                        //인증 정보를 보낼 때 이름을 userId로 변경
+                        httpUrlBuilder.addQueryParameter("userId", shopperId);
+                        httpUrlBuilder.addQueryParameter("userPassword", shopperPw);
+                    }
+                    HttpUrl newUrl = httpUrlBuilder.build();
+
+                    // 공통 헤더 설정
+                    Request updatedRequest = request.newBuilder()
+                            .url(newUrl)
+                            //.addHeader("name1", "value1")
+                            //.addHeader("name2", "value2")
+                            .build();
+
+                    return chain.proceed(updatedRequest);
+                }
+            })
+            .build();
+
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(30, TimeUnit.SECONDS) // 연결 타임아웃
                 .readTimeout(30, TimeUnit.SECONDS)    // 읽기 타임아웃
@@ -31,6 +66,7 @@ public class ServiceProvider {
                 .baseUrl(NetworkInfo.BASE_URL)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
                 .build();
         return retrofit;
     }
@@ -63,5 +99,10 @@ public class ServiceProvider {
     public static MyPageOrderedService getMyPageOrderedService(Context context) {
         MyPageOrderedService myPageOrderedService = getRetrofit(context).create(MyPageOrderedService.class);
         return myPageOrderedService;
+    }
+
+    public static ShopperService getShopperService(Context context) {
+        ShopperService shopperService = getRetrofit(context).create(ShopperService.class);
+        return shopperService;
     }
 }
