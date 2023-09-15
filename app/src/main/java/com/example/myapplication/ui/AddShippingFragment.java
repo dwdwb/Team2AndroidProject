@@ -75,7 +75,7 @@ public class AddShippingFragment extends Fragment {
                                 .setPositiveButton("확인", null)
                                 .create();
 
-                        navController.popBackStack(R.id.shipping, false);
+                        navController.popBackStack();
 
 
                         // 주소 추가 성공 시 처리
