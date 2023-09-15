@@ -14,6 +14,7 @@ public class ProductInquiry implements Serializable {
     private long answer_DATE;		//답변날짜
     private String strAnswerDate;	//답변날짜(날짜 포맷팅 후 저장할 필드)
     private String shopper_NAME;	//문의한 회원이름(이*지)
+    private int shopper_NO;			//문의한 회원번호
 
     public int getInquiry_NO() {
         return inquiry_NO;
@@ -103,6 +104,14 @@ public class ProductInquiry implements Serializable {
         this.shopper_NAME = shopper_NAME;
     }
 
+    public int getShopper_NO() {
+        return shopper_NO;
+    }
+
+    public void setShopper_NO(int shopper_NO) {
+        this.shopper_NO = shopper_NO;
+    }
+
     @Override
     public String toString() {
         return "ProductInquiry{" +
@@ -117,6 +126,7 @@ public class ProductInquiry implements Serializable {
                 ", answer_DATE=" + answer_DATE +
                 ", strAnswerDate='" + strAnswerDate + '\'' +
                 ", shopper_NAME='" + shopper_NAME + '\'' +
+                ", shopper_NO=" + shopper_NO +
                 '}';
     }
 }
