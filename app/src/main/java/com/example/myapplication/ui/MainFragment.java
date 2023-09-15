@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -56,6 +57,7 @@ public class MainFragment extends Fragment {
         initSpecialPrice();
         initViewPagerMain();
         initCategoryBtn();
+        initScrollToTopBtn();
 
 
         return binding.getRoot();
@@ -259,6 +261,23 @@ public class MainFragment extends Fragment {
 
         binding.orangeCtgryBtn.setOnClickListener(v -> {
             navController.navigate(R.id.action_main_to_list);
+        });
+    }
+
+    private void initScrollToTopBtn() {
+        binding.nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (scrollY > 0) {
+                    binding.scrollToTopBtn.show();
+                } else {
+                    binding.scrollToTopBtn.hide();
+                }
+            }
+        });
+
+        binding.scrollToTopBtn.setOnClickListener(v -> {
+            binding.nestedScrollView.smoothScrollTo(0, 0);
         });
     }
 
