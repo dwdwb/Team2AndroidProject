@@ -1,6 +1,8 @@
 package com.example.myapplication.viewHolder;
 
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,6 +33,8 @@ public class MyPageOrderedViewHolder extends RecyclerView.ViewHolder {
     private TextView price;
     private TextView stock;
     private TextView payment_price;
+
+    private Button btnReview;
     public MyPageOrderedViewHolder(@NonNull View itemView, MyPageOrderedAdapter.OnItemClickListener onItemClickListener) {
         super(itemView);
 
@@ -39,7 +43,25 @@ public class MyPageOrderedViewHolder extends RecyclerView.ViewHolder {
         product_name = (TextView) itemView.findViewById(R.id.ordered_product_name);
         price = (TextView) itemView.findViewById(R.id.price);
         payment_price = (TextView) itemView.findViewById(R.id.payment_price);
+        btnReview = itemView.findViewById(R.id.btn_write_review);
+
+
+        btnReview.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                // 버튼 클릭 시 해당 아이템의 address_no를 전달
+                Log.i(TAG, "ordered_no 선택됨?");
+
+                onItemClickListener.onItemClick(btnReview, getAdapterPosition());
+
+            }
+        });
+
     }
+
+
+
 
     public void setData(OrderHistory orderHistory) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // 원하는 날짜 형식을 지정
@@ -50,8 +72,8 @@ public class MyPageOrderedViewHolder extends RecyclerView.ViewHolder {
         ListService.loadThumbnailImage(product_no, ordered_image);
 
         product_name.setText(orderHistory.getProduct_name() + orderHistory.getProduct_option());
-        price.setText(orderHistory.getStock()+" , "+orderHistory.getPrice());
-        payment_price.setText(String.valueOf(orderHistory.getPayment_price()));
+        price.setText(orderHistory.getStock()+"개 , "+orderHistory.getPrice() + "원");
+        payment_price.setText("총 결제 금액: " + orderHistory.getPayment_price()+"원");
 
     }
 
