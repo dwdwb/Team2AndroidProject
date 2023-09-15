@@ -14,6 +14,8 @@ import com.example.myapplication.dto.CartProduct;
 import com.example.myapplication.dto.ProductInquiry;
 import com.example.myapplication.service.CartService;
 
+import java.text.SimpleDateFormat;
+
 public class DetailInquiryViewHolder extends RecyclerView.ViewHolder {
     private static final String TAG = "DetailInquiryViewHolder";
     private TextView shopper_name;
@@ -41,7 +43,9 @@ public class DetailInquiryViewHolder extends RecyclerView.ViewHolder {
 
     public void setData(ProductInquiry productInquiry) {
         shopper_name.setText(String.valueOf(productInquiry.getShopper_NAME()));
-        inquiry_date.setText(String.valueOf(productInquiry.getInquiry_DATE()));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd"); // 원하는 날짜 형식을 지정
+        String formattedDate = dateFormat.format(productInquiry.getInquiry_DATE());
+        inquiry_date.setText(formattedDate);
         inquiry_content.setText(String.valueOf(productInquiry.getInquiry_CONTENT()));
         answer_date.setText(String.valueOf(productInquiry.getAnswer_DATE()));
         answer_content.setText(String.valueOf(productInquiry.getAnswer_CONTENT()));

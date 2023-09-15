@@ -7,32 +7,45 @@
     android:orientation="vertical"
     tools:context=".ui.DetailInquiryFragment">
 
-    <Button
-        android:id="@+id/btn_write_inquiry"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="상품 문의하기"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:cornerRadius="2dp"
-        style="@style/Widget.Material3.Button.OutlinedButton"
-        app:strokeColor="#A0DE5F"
-        android:layout_margin="10dp"/>
+        android:layout_height="match_parent">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_write_inquiry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="상품 문의하기"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:cornerRadius="2dp"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                app:strokeColor="#A0DE5F"
+                android:layout_margin="10dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
@@ -36,6 +37,9 @@ public class DetailInquiryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentDetailInquiryBinding.inflate(inflater);
 
+        //NavController 얻기
+        navController = NavHostFragment.findNavController(this);
+
         //RecyclerView 초기화
         initRecyclerView();
 
@@ -47,7 +51,7 @@ public class DetailInquiryFragment extends Fragment {
 
     private void initWriteInquiry() {
         binding.btnWriteInquiry.setOnClickListener(v -> {
-
+            navController.navigate(R.id.action_detail_to_writeInquiry);
         });
     }
 

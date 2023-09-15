@@ -18,6 +18,7 @@ import com.example.myapplication.adapter.DetailContentImageAdpater;
 import com.example.myapplication.databinding.FragmentDetailExplainBinding;
 import com.example.myapplication.dto.CartProduct;
 import com.example.myapplication.dto.ProductBoard;
+import com.example.myapplication.dto.ReviewInfo;
 import com.example.myapplication.service.CartService;
 import com.example.myapplication.service.DetailViewService;
 import com.example.myapplication.service.ServiceProvider;
@@ -54,9 +55,11 @@ public class DetailExplainFragment extends Fragment {
     public void initView() {
         //DetailViewService.loadProductImage(1, binding.productImage);
 
+        DetailViewService.loadMainImage(21, binding.productImage);
+
         //API 서버에서 JSON 목록 받기
         DetailViewService detailViewService = ServiceProvider.getDetailViewService(getContext());
-        Call<ProductBoard> call = detailViewService.getBoard(1);
+        Call<ProductBoard> call = detailViewService.getBoard(21);
         call.enqueue(new Callback<ProductBoard>() {
             @Override
             public void onResponse(Call<ProductBoard> call, Response<ProductBoard> response) {
@@ -76,6 +79,21 @@ public class DetailExplainFragment extends Fragment {
                 Log.i(TAG, "안됨......");
             }
         });
+
+        Call<ReviewInfo> callRating = detailViewService.getReviewInfo(21);
+        callRating.enqueue(new Callback<ReviewInfo>() {
+            @Override
+            public void onResponse(Call<ReviewInfo> call, Response<ReviewInfo> response) {
+                ReviewInfo reviewInfo = response.body();
+                binding.rating.setRating(reviewInfo.getStarRateAvg()*5/100);
+                binding.reviewCount.setText(reviewInfo.getReviewCount() + "개 상품평");
+            }
+
+            @Override
+            public void onFailure(Call<ReviewInfo> call, Throwable t) {
+
+            }
+        });
     }
 
     //이미지 불러오기
@@ -91,7 +109,7 @@ public class DetailExplainFragment extends Fragment {
 
         //API 서버에서 JSON 목록 받기
         DetailViewService detailViewService = ServiceProvider.getDetailViewService(getContext());
-        Call<List<Integer>> call = detailViewService.getMediaNoList(1);
+        Call<List<Integer>> call = detailViewService.getMediaNoList(18);
         call.enqueue(new Callback<List<Integer>>() {
             @Override
             public void onResponse(Call<List<Integer>> call, Response<List<Integer>> response) {

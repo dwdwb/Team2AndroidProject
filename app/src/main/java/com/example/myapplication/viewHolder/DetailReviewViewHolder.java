@@ -42,8 +42,8 @@ public class DetailReviewViewHolder extends RecyclerView.ViewHolder {
 
     public void setData(Review review) {
         shopper_name.setText(String.valueOf(review.getShopper_name()));
-        rating.setRating(review.getStar_rate());
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // 원하는 날짜 형식을 지정
+        rating.setRating(review.getStar_rate()*5/100);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd"); // 원하는 날짜 형식을 지정
         String formattedDate = dateFormat.format(review.getWrite_date());
         review_date.setText(formattedDate);
         review_content.setText(String.valueOf(review.getContent()));

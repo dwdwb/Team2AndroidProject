@@ -1,6 +1,7 @@
 package com.example.myapplication.viewHolder;
 
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ public class DetailContentImageViewHolder extends RecyclerView.ViewHolder {
 
     public void setData(int media_no) {
         this.media_no = media_no;
+
         DetailViewService.loadContentImage(media_no, content_image);
     }
 }

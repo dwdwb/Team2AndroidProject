@@ -26,6 +26,7 @@ import com.example.myapplication.adapter.DetailPagerAdapter;
 import com.example.myapplication.databinding.FragmentDetailBinding;
 import com.example.myapplication.dto.CartProduct;
 import com.example.myapplication.dto.ProductBoard;
+import com.example.myapplication.dto.ReviewInfo;
 import com.example.myapplication.service.CartService;
 import com.example.myapplication.service.DetailViewService;
 import com.example.myapplication.service.ServiceProvider;

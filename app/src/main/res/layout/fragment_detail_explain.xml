@@ -76,6 +76,7 @@
                         android:layout_gravity="center"/>
 
                     <TextView
+                        android:id="@+id/review_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="12개 상품평"
@@ -123,11 +124,19 @@
                 android:layout_height="13dp"
                 android:background="@drawable/shape_cart_rectangle" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/detail_content_image_recycler_view"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:overScrollMode="never"/>
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/detail_content_image_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"/>
+
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"

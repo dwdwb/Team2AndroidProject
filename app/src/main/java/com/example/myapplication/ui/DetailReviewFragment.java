@@ -16,6 +16,7 @@ import com.example.myapplication.adapter.DetailReviewAdapter;
 import com.example.myapplication.databinding.FragmentDetailReviewBinding;
 import com.example.myapplication.dto.ProductInquiry;
 import com.example.myapplication.dto.Review;
+import com.example.myapplication.dto.ReviewInfo;
 import com.example.myapplication.service.DetailViewService;
 import com.example.myapplication.service.ServiceProvider;
 
@@ -33,10 +34,32 @@ public class DetailReviewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentDetailReviewBinding.inflate(inflater);
 
+        //화면 초기화
+        initView();
+
         //RecyclerView 초기화
         initRecyclerView();
 
         return binding.getRoot();
+    }
+
+    private void initView() {
+        DetailViewService detailViewService = ServiceProvider.getDetailViewService(getContext());
+        Call<ReviewInfo> call = detailViewService.getReviewInfo(21);
+        call.enqueue(new Callback<ReviewInfo>() {
+            @Override
+            public void onResponse(Call<ReviewInfo> call, Response<ReviewInfo> response) {
+                ReviewInfo reviewInfo = response.body();
+                binding.ratingTotal.setRating(reviewInfo.getStarRateAvg()*5/100);
+                binding.ratingTotalTxt.setText(String.valueOf(reviewInfo.getTotalReviewScore()));
+                binding.ratingCount.setText("(" + reviewInfo.getReviewCount() + ")");
+            }
+
+            @Override
+            public void onFailure(Call<ReviewInfo> call, Throwable t) {
+
+            }
+        });
     }
 
     private void initRecyclerView() {
