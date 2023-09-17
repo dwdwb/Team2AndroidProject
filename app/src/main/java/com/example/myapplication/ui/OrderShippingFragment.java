@@ -142,7 +142,7 @@ public class OrderShippingFragment extends Fragment {
                     }
                 } else {
                     // 응답이 성공적이지 않은 경우 처리
-                    // 여기에 필요한 오류 처리 코드를 추가하세요.
+
                 }
             }
 
