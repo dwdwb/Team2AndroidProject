@@ -37,12 +37,17 @@ public class ListFragment extends Fragment {
         //NavController 얻기
         navController = NavHostFragment.findNavController(this);
 
-        initRecyclerView();
-
         initBtnMain();
         initBtnCart();
         initBtnBack();
 
+        Bundle bundle = getArguments();
+        String keyword = bundle.getString("keyword");
+        if (keyword == null) {
+            keyword = "";
+        }
+        initSearchText(keyword);
+        initList(keyword);
 
         return binding.getRoot();
     }
@@ -66,7 +71,11 @@ public class ListFragment extends Fragment {
         });
     }
 
-    private void initRecyclerView() {
+    private void initSearchText(String keyword) {
+        binding.search.setText(keyword);
+    }
+
+    private void initList(String keyword) {
         //RecyclerView에서 항목을 수직으로 배치하도록 설정
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
                 getContext(), LinearLayoutManager.VERTICAL, false
@@ -79,7 +88,7 @@ public class ListFragment extends Fragment {
 
         //API 서버에서 JSON 목록 받기
         ListService listService = ServiceProvider.getListService(getContext());
-        Call<List<MobileProductForList>> call = listService.getMobileProductsForList();
+        Call<List<MobileProductForList>> call = listService.getMobileProductsForList(keyword);
         call.enqueue(new Callback<List<MobileProductForList>>() {
             @Override
             public void onResponse(Call<List<MobileProductForList>> call, Response<List<MobileProductForList>> response) {

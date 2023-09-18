@@ -22,7 +22,7 @@
             app:srcCompat="@drawable/ic_arrow_back_24dp" />
 
         <EditText
-            android:id="@+id/Text"
+            android:id="@+id/search"
             android:layout_width="270dp"
             android:layout_height="40dp"
             android:layout_marginLeft="15dp"

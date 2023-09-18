@@ -64,6 +64,50 @@ public class MainFragment extends Fragment {
     }
 
 
+    public void initCategoryBtn() {
+        Bundle args = new Bundle();
+
+        binding.uglyCtgryBtn.setOnClickListener(v -> {
+            args.putSerializable("keyword", "못난이");
+            navController.navigate(R.id.action_main_to_list, args);
+        });
+
+        binding.watermelonCtgryBtn.setOnClickListener(v -> {
+            args.putSerializable("keyword", "수박");
+            navController.navigate(R.id.action_main_to_list, args);
+        });
+
+        binding.kWatermelonCtgryBtn.setOnClickListener(v -> {
+            args.putSerializable("keyword", "참외");
+            navController.navigate(R.id.action_main_to_list, args);
+        });
+
+        binding.cherryCtgryBtn.setOnClickListener(v -> {
+            args.putSerializable("keyword", "체리");
+            navController.navigate(R.id.action_main_to_list, args);
+        });
+
+        binding.avocadoCtgryBtn.setOnClickListener(v -> {
+            args.putSerializable("keyword", "아보카도");
+            navController.navigate(R.id.action_main_to_list, args);
+        });
+
+        binding.mangoCtgryBtn.setOnClickListener(v -> {
+            args.putSerializable("keyword", "망고");
+            navController.navigate(R.id.action_main_to_list, args);
+        });
+
+        binding.bananaCtgryBtn.setOnClickListener(v -> {
+            args.putSerializable("keyword", "바나나");
+            navController.navigate(R.id.action_main_to_list, args);
+        });
+
+        binding.orangeCtgryBtn.setOnClickListener(v -> {
+            args.putSerializable("keyword", "오렌지");
+            navController.navigate(R.id.action_main_to_list, args);
+        });
+    }
+
     private void initSpecialPrice() {
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         binding.specialPrice.setLayoutManager(layoutManager);
@@ -72,7 +116,7 @@ public class MainFragment extends Fragment {
 
         //API 서버에서 JSON 목록 받기
         ListService listService = ServiceProvider.getListService(getContext());
-        Call<List<MobileProductForList>> call = listService.getMobileProductsForList();
+        Call<List<MobileProductForList>> call = listService.getMobileProductsForList("");
 
         call.enqueue(new Callback<List<MobileProductForList>>() {
             @Override
@@ -228,40 +272,6 @@ public class MainFragment extends Fragment {
         super.onResume();
         sliderHandler.postDelayed(sliderRunnable, 5000);
         ((MainActivity) requireActivity()).updateBottomNavigationView(R.id.main);
-    }
-
-    public void initCategoryBtn() {
-        binding.uglyCtgryBtn.setOnClickListener(v -> {
-            navController.navigate(R.id.action_main_to_list);
-        });
-
-        binding.watermelonCtgryBtn.setOnClickListener(v -> {
-            navController.navigate(R.id.action_main_to_list);
-        });
-
-        binding.kWatermelonCtgryBtn.setOnClickListener(v -> {
-            navController.navigate(R.id.action_main_to_list);
-        });
-
-        binding.cherryCtgryBtn.setOnClickListener(v -> {
-            navController.navigate(R.id.action_main_to_list);
-        });
-
-        binding.avocadoCtgryBtn.setOnClickListener(v -> {
-            navController.navigate(R.id.action_main_to_list);
-        });
-
-        binding.mangoCtgryBtn.setOnClickListener(v -> {
-            navController.navigate(R.id.action_main_to_list);
-        });
-
-        binding.bananaCtgryBtn.setOnClickListener(v -> {
-            navController.navigate(R.id.action_main_to_list);
-        });
-
-        binding.orangeCtgryBtn.setOnClickListener(v -> {
-            navController.navigate(R.id.action_main_to_list);
-        });
     }
 
     private void initScrollToTopBtn() {

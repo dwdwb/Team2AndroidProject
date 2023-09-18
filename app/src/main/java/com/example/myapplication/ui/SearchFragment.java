@@ -33,8 +33,12 @@ public class SearchFragment extends Fragment {
     }
 
    private void initBtnList() {
+        String keyword = binding.search.getText().toString();
+        Bundle args = new Bundle();
+        args.putString("keyword", keyword);
+
         binding.btnList.setOnClickListener(v -> {
-            navController.navigate(R.id.action_search_to_list);
+            navController.navigate(R.id.action_search_to_list, args);
         });
     }
 

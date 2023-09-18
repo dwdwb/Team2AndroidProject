@@ -9,11 +9,12 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public interface ListService {
 
     @GET("list/getMobileProductsForList")
-    Call<List<MobileProductForList>> getMobileProductsForList();
+    Call<List<MobileProductForList>> getMobileProductsForList(@Query("keyword") String keyword);
 
     @GET("list/getCherryAdList")
     Call<List<MobileProductForList>> getCheryAdList();
