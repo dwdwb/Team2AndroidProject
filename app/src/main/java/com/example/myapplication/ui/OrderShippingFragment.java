@@ -67,7 +67,7 @@ public class OrderShippingFragment extends Fragment {
                 getContext(), LinearLayoutManager.VERTICAL, false
         );
         binding.recyclerView2
-                .setLayoutManager(linearLayoutManager);
+            .setLayoutManager(linearLayoutManager);
 
         //어댑터 생성
 
@@ -97,23 +97,39 @@ public class OrderShippingFragment extends Fragment {
 
         //항목을 클릭했을 때 콜백 객체를 등록
        addressAdapter.setOnItemClickListener(new AddressAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View itemView, int position) {
-                Log.i(TAG, position + "번 항목 클릭됨");
-                AddressList addressList = addressAdapter.getItem(position);
+
+           @Override
+           public void onDeleteClick(View itemView, int position) {
+               Log.i(TAG, position + "번 항목 클릭됨");
+               AddressList addressList = addressAdapter.getItem(position);
 
                 /*Bundle args = new Bundle();
                 args.putSerializable("addressList", addressList);*/
 
-                // 클릭한 항목의 address_no를 받아옴
-                int clickedAddressNo = addressList.getAddress_no();
-                Log.i(TAG, clickedAddressNo + "번 항목 클릭됨");
+               // 클릭한 항목의 address_no를 받아옴
+               int clickedAddressNo = addressList.getAddress_no();
+               Log.i(TAG, clickedAddressNo + "번 항목 클릭됨");
 
-                // 삭제 처리 메서드 호출
-                deleteAddress(clickedAddressNo);
+               // 삭제 처리 메서드 호출
+               deleteAddress(clickedAddressNo);
+           }
 
-            }
-        });
+           @Override
+           public void onSelectClick(View itemView, int position) {
+
+               AddressList selectedAddress = addressAdapter.getItem(position);
+               // Bundle 생성 및 데이터 추가
+               Bundle bundle = new Bundle();
+               bundle.putSerializable("selectedAddress", selectedAddress);
+               Log.i(TAG, "나 배송지목록"+selectedAddress.toString());
+               // Bundle을 이용해 이전 Fragment로 데이터 전달
+               getParentFragmentManager().setFragmentResult("selectedAddress", bundle);
+
+               // 현재 Fragment를 백 스택에서 제거
+               navController.popBackStack();
+
+           }
+       });
 
     }
     // 삭제 처리 메서드

@@ -98,7 +98,7 @@
 
 
             <Button
-                android:id="@+id/buttonSelect"
+                android:id="@+id/btnSelect"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -84,13 +84,10 @@ public class ShippingFragment extends Fragment {
 
         //항목을 클릭했을 때 콜백 객체를 등록
         addressAdapter.setOnItemClickListener(new AddressAdapter.OnItemClickListener() {
+
             @Override
-            public void onItemClick(View itemView, int position) {
-
+            public void onDeleteClick(View itemView, int position) {
                 AddressList addressList = addressAdapter.getItem(position);
-
-              /*  Bundle args = new Bundle();
-                args.putSerializable("addressList", addressList);*/
 
                 // 클릭한 항목의 address_no를 받아옴
                 int clickedAddressNo = addressList.getAddress_no();
@@ -98,10 +95,19 @@ public class ShippingFragment extends Fragment {
 
                 // 삭제 처리 메서드 호출
                 deleteAddress(clickedAddressNo);
+            }
+
+            @Override
+            public void onSelectClick(View itemView, int position) {
+
+                // 클릭한 항목의 address_no를 받아옴
+
+
+
+
 
             }
         });
-
     }
 
     // 삭제 처리 메서드

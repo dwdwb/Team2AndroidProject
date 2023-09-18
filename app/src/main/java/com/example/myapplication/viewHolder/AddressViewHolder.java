@@ -15,11 +15,15 @@ import com.example.myapplication.dto.AddressList;
 public class AddressViewHolder extends RecyclerView.ViewHolder {
     private static final String TAG = "AddressViewHolder";
     private int address_no;
+
+    private AddressList addressList;
     private TextView shipping_name;
     private TextView shipping_address;
     private TextView receiver_tel;
     private TextView shipping_preference;
     private Button btnDel;
+
+    private Button btnSel;
 
     public AddressViewHolder(@NonNull View itemView, AddressAdapter.OnItemClickListener onItemClickListener) {
         super(itemView);
@@ -31,6 +35,7 @@ public class AddressViewHolder extends RecyclerView.ViewHolder {
         receiver_tel = (TextView) itemView.findViewById(R.id.receiver_tel);
         shipping_preference = (TextView) itemView.findViewById(R.id.shipping_preference);
         btnDel = itemView.findViewById(R.id.btnDel);
+        btnSel = itemView.findViewById(R.id.btnSelect);
 
 
 
@@ -40,8 +45,16 @@ public class AddressViewHolder extends RecyclerView.ViewHolder {
                 // 버튼 클릭 시 해당 아이템의 address_no를 전달
                 Log.i(TAG, "address_no선택됨?"+address_no);
 
-                onItemClickListener.onItemClick(btnDel, getAdapterPosition());
+                onItemClickListener.onDeleteClick(btnDel, getAdapterPosition());
 
+            }
+        });
+
+        btnSel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i(TAG, "address가 선택됨" + address_no);
+                onItemClickListener.onSelectClick(btnSel, getAdapterPosition()); // 시그니처 변경
             }
         });
     }

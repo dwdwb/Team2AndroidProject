@@ -54,7 +54,8 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressViewHolder> {
     }
 
     public interface OnItemClickListener {
-        void onItemClick(View itemView, int position);
+        void onDeleteClick(View itemView, int position);
+        void onSelectClick(View itemView, int position);
     }
 
     public void setOnItemClickListener(AddressAdapter.OnItemClickListener onItemClickListener) {
