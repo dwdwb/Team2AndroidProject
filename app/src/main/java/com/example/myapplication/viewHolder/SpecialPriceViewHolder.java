@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.adapter.ListAdapter;
+import com.example.myapplication.adapter.SpecialPriceAdapter;
 import com.example.myapplication.dto.MobileProductForList;
 import com.example.myapplication.service.ListService;
 
@@ -29,7 +30,7 @@ public class SpecialPriceViewHolder extends RecyclerView.ViewHolder {
     private TextView rating_count;
     private LinearLayout discount_space;
 
-    public SpecialPriceViewHolder(@NonNull View itemView) {
+    public SpecialPriceViewHolder(@NonNull View itemView, SpecialPriceAdapter.OnItemClickListener onItemClickListener) {
         super(itemView);
 
         //아이템 UI 얻기
@@ -44,11 +45,10 @@ public class SpecialPriceViewHolder extends RecyclerView.ViewHolder {
 
         discount_space = (LinearLayout) itemView.findViewById(R.id.discount_space);
 
-       /* //클릭 이벤트 처리
         itemView.setOnClickListener(v -> {
             Log.i(TAG, product_no + " 항목이 클릭됨");
             onItemClickListener.onItemClick(v, getAdapterPosition());
-        });*/
+        });
     }
 
     public void setData(MobileProductForList mobileProductForList) {

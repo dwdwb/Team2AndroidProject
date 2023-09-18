@@ -134,17 +134,15 @@ public class MainFragment extends Fragment {
         });
 
         //항목을 클릭했을 때 콜백 객체를 등록
-        /*specialPriceAdapter.setOnItemClickListener(new SpecialPriceViewHolder.OnItemClickListener() {
+        specialPriceAdapter.setOnItemClickListener(new SpecialPriceAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View itemView, int position) {
-                Log.i(TAG, position + "번 항목 클릭됨");
                 MobileProductForList mobileProductForList = specialPriceAdapter.getItem(position);
-
                 Bundle args = new Bundle();
-                args.putSerializable("mobileProductForList", mobileProductForList);
+                args.putSerializable("board_no", mobileProductForList.getProduct_no());
                 navController.navigate(R.id.action_main_to_detail, args);
             }
-        });*/
+        });
 
     }
 

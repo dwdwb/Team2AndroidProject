@@ -108,11 +108,9 @@ public class ListFragment extends Fragment {
         listAdapter.setOnItemClickListener(new ListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View itemView, int position) {
-                Log.i(TAG, position + "번 항목 클릭됨");
                 MobileProductForList mobileProductForList = listAdapter.getItem(position);
-
                 Bundle args = new Bundle();
-                args.putSerializable("mobileProductForList", mobileProductForList);
+                args.putInt("board_no", mobileProductForList.getProduct_no());
                 navController.navigate(R.id.action_list_to_detail, args);
             }
         });
