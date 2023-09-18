@@ -15,13 +15,16 @@ import com.bumptech.glide.request.transition.Transition;
 import com.example.myapplication.dto.CartProduct;
 import com.example.myapplication.dto.ProductBoard;
 import com.example.myapplication.dto.ProductInquiry;
+import com.example.myapplication.dto.Result;
 import com.example.myapplication.dto.Review;
 import com.example.myapplication.dto.ReviewInfo;
 
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface DetailViewService {
@@ -84,4 +87,7 @@ public interface DetailViewService {
 
     @GET("detailView/getOptionProductList")
     Call<List<ProductBoard>> getOptionProductList(@Query("productName") String productName);
+
+    @POST("detailView/addCart")
+    Call<Void> addCart(@Body List<ProductBoard> productBoardList);
 }

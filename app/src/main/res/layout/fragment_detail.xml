@@ -34,7 +34,7 @@
         <!--</androidx.core.widget.NestedScrollView>-->
 
         <!--===== 하단 버튼 =====-->
-        <View
+        <!--<View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="?android:attr/listDivider" />
@@ -62,7 +62,7 @@
                 android:textSize="16dp"
                 app:cornerRadius="6dp" />
 
-        </LinearLayout>
+        </LinearLayout>-->
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

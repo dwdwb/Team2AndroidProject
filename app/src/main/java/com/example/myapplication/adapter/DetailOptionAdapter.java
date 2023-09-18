@@ -8,16 +8,25 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.dto.ProductBoard;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DetailOptionAdapter extends BaseAdapter {
-    private List<String> optionList;
+    //private List<String> optionList;
+    private List<ProductBoard> optionList = new ArrayList<>();
     private final LayoutInflater inflater;
     private String text;
 
-    public DetailOptionAdapter(Context context, List<String> list) {
-        this.optionList = list;
+    public DetailOptionAdapter(Context context, List<ProductBoard> list) {
+        ProductBoard defaultOption = new ProductBoard();
+        defaultOption.setProductOption("옵션");
+        optionList.add(defaultOption);
+        list.stream().forEach(productBoard -> {
+            optionList.add(productBoard);
+        });
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
     @Override
@@ -43,8 +52,16 @@ public class DetailOptionAdapter extends BaseAdapter {
         if (convertView == null)
             convertView = inflater.inflate(R.layout.detail_option_item, parent, false);
         if (optionList != null) {
-            text = optionList.get(position);
-            ((TextView) convertView.findViewById(R.id.option_product_txt)).setText(text);
+            if(position == 0) {
+                text = optionList.get(position).getProductOption();
+                ((TextView) convertView.findViewById(R.id.option_product_txt)).setText(text);
+            } else {
+                String option = optionList.get(position).getProductOption();
+                int price = optionList.get(position).getDiscountPrice();
+                DecimalFormat df = new DecimalFormat("#,###,###");
+                text = option + " : " + df.format(price) + "원";
+                ((TextView) convertView.findViewById(R.id.option_product_txt)).setText(text);
+            }
         }
         return convertView;
     }

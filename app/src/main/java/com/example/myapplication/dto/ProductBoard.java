@@ -14,6 +14,8 @@ public class ProductBoard implements Serializable {
     private String mediaName;			// 상품 사진 파일 이름
     private byte[] mediaData;			// 상품 사진
     private String base64Img;			// base64Img 인코딩
+    private int shopperNo = 1;
+    private int stock = 1;
 
     public int getBoardNo() {
         return boardNo;
@@ -95,6 +97,22 @@ public class ProductBoard implements Serializable {
         this.base64Img = base64Img;
     }
 
+    public int getShopperNo() {
+        return shopperNo;
+    }
+
+    public void setShopperNo(int shopperNo) {
+        this.shopperNo = shopperNo;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
     @Override
     public String toString() {
         return "ProductBoard{" +
@@ -108,6 +126,8 @@ public class ProductBoard implements Serializable {
                 ", mediaName='" + mediaName + '\'' +
                 ", mediaData=" + Arrays.toString(mediaData) +
                 ", base64Img='" + base64Img + '\'' +
+                ", shopperNo=" + shopperNo +
+                ", stock=" + stock +
                 '}';
     }
 }

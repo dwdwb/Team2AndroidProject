@@ -219,7 +219,7 @@
                 android:src="@drawable/ic_wish_36dp" />
 
             <Button
-                android:id="@+id/btn_order"
+                android:id="@+id/btn_buy"
                 android:layout_width="0dp"
                 android:layout_height="55dp"
                 android:layout_margin="10dp"

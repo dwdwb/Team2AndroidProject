@@ -144,7 +144,7 @@ public class DetailExplainFragment extends Fragment {
     }
 
     private void initBtnOrder() {
-        binding.btnOrder.setOnClickListener(v -> {
+        binding.btnBuy.setOnClickListener(v -> {
             DetailBottomSheetDialogFragment bottomSheet = new DetailBottomSheetDialogFragment();
             bottomSheet.show(getActivity().getSupportFragmentManager(), bottomSheet.getTag());
             /*bottomSheet.show(getSupportFragmentManager(), bottomSheet.getTag());*/
