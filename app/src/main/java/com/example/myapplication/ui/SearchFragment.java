@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,11 +34,11 @@ public class SearchFragment extends Fragment {
     }
 
    private void initBtnList() {
-        String keyword = binding.search.getText().toString();
-        Bundle args = new Bundle();
-        args.putString("keyword", keyword);
-
         binding.btnList.setOnClickListener(v -> {
+            String keyword = binding.search.getText().toString();
+            Bundle args = new Bundle();
+            args.putSerializable("keyword", keyword);
+
             navController.navigate(R.id.action_search_to_list, args);
         });
     }
