@@ -81,4 +81,7 @@ public interface DetailViewService {
 
     @GET("detailView/getReviewInfo")
     Call<ReviewInfo> getReviewInfo(@Query("bno") int bno);
+
+    @GET("detailView/getOptionProductList")
+    Call<List<ProductBoard>> getOptionProductList(@Query("productName") String productName);
 }

@@ -56,7 +56,7 @@ public class DetailFragment extends Fragment {
         initBtnOrder();
         initBtnWriteInquiry();
         initBtnBack();*/
-        initBtnOrder();
+        //initBtnOrder();
 
         //메뉴 초기화
         initMenu();
@@ -104,13 +104,13 @@ public class DetailFragment extends Fragment {
     }
 
     //바로주문
-    private void initBtnOrder() {
+    /*private void initBtnOrder() {
         binding.btnOrder.setOnClickListener(v -> {
             DetailBottomSheetDialogFragment bottomSheet = new DetailBottomSheetDialogFragment();
             bottomSheet.show(getActivity().getSupportFragmentManager(), bottomSheet.getTag());
-            /*bottomSheet.show(getSupportFragmentManager(), bottomSheet.getTag());*/
+            *//*bottomSheet.show(getSupportFragmentManager(), bottomSheet.getTag());*//*
         });
-    }
+    }*/
 
     //뷰페이저
     private void initPagerView() {

@@ -23,6 +23,8 @@ import com.example.myapplication.service.CartService;
 import com.example.myapplication.service.DetailViewService;
 import com.example.myapplication.service.ServiceProvider;
 
+import java.text.DecimalFormat;
+import java.util.Currency;
 import java.util.List;
 
 import retrofit2.Call;
@@ -37,11 +39,16 @@ public class DetailExplainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentDetailExplainBinding.inflate(inflater);
 
+        //Bundle bundle = getArguments();
+        //int bno = bundle.getInt("bno");
+
         //화면 초기화
         initView();
 
         //이미지 불러오기
         initContentImageRecyclerView();
+
+        initBtnOrder();
 
         return binding.getRoot();
     }
@@ -66,10 +73,17 @@ public class DetailExplainFragment extends Fragment {
                 //JSON -> List<Board> 변환
                 ProductBoard productBoard = response.body();
 
+                DecimalFormat df = new DecimalFormat("#,###,###");
+
                 binding.productName.setText(productBoard.getProductName());
-                binding.productDiscountRate.setText(productBoard.getDiscountRate() + "%");
-                binding.productOriginalPrice.setText(productBoard.getProductPrice() + "원");
-                binding.productDiscountPrice.setText(productBoard.getDiscountPrice() + "원");
+                if(productBoard.getDiscountRate() == 0) {
+                    binding.productDiscountRate.setVisibility(View.GONE);
+                    binding.productOriginalPrice.setVisibility(View.GONE);
+                } else {
+                    binding.productDiscountRate.setText(productBoard.getDiscountRate() + "%");
+                    binding.productOriginalPrice.setText(df.format(productBoard.getProductPrice()) + "원");
+                }
+                binding.productDiscountPrice.setText(df.format(productBoard.getDiscountPrice()) + "원");
 
                 Log.i(TAG, productBoard + "");
             }
@@ -126,6 +140,14 @@ public class DetailExplainFragment extends Fragment {
             public void onFailure(Call<List<Integer>> call, Throwable t) {
                 Log.i(TAG, "안됨......");
             }
+        });
+    }
+
+    private void initBtnOrder() {
+        binding.btnOrder.setOnClickListener(v -> {
+            DetailBottomSheetDialogFragment bottomSheet = new DetailBottomSheetDialogFragment();
+            bottomSheet.show(getActivity().getSupportFragmentManager(), bottomSheet.getTag());
+            /*bottomSheet.show(getSupportFragmentManager(), bottomSheet.getTag());*/
         });
     }
 }

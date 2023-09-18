@@ -8,11 +8,11 @@ public class ProductInquiry implements Serializable {
     private String product_NAME;	//상품이름
     private String inquiry_CONTENT;	//문의내용
     private long inquiry_DATE;		//문의날짜
-    private String strInquiryDate;	//문의날짜(날짜 포맷팅 후 저장할 필드)
+    private String strInquiryDate;	//문의날짜
     private boolean emptanswer;		//답변여부(default true)
     private String answer_CONTENT;	//답변내용
     private long answer_DATE;		//답변날짜
-    private String strAnswerDate;	//답변날짜(날짜 포맷팅 후 저장할 필드)
+    private String strAnswerDate;	//답변날짜
     private String shopper_NAME;	//문의한 회원이름(이*지)
     private int shopper_NO;			//문의한 회원번호
 
