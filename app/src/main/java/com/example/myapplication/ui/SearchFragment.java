@@ -1,5 +1,6 @@
 package com.example.myapplication.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.FragmentMainBinding;
@@ -30,6 +34,10 @@ public class SearchFragment extends Fragment {
         initBtnList();
         initBtnBack();
 
+        // EditText를 찾아서 포커스 설정
+        binding.search.requestFocus();
+        setShowKeyBoard();
+
         return binding.getRoot();
     }
 
@@ -41,12 +49,28 @@ public class SearchFragment extends Fragment {
 
             navController.navigate(R.id.action_search_to_list, args);
         });
+
+        binding.search.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                String keyword = binding.search.getText().toString();
+                Bundle args = new Bundle();
+                args.putSerializable("keyword", keyword);
+                navController.navigate(R.id.action_search_to_list, args);
+                return true;
+            }
+            return false;
+        });
     }
 
     private void initBtnBack() {
         binding.btnBack.setOnClickListener(v -> {
             navController.popBackStack();
         });
+    }
+
+    private void setShowKeyBoard() {
+        InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(binding.search, InputMethodManager.SHOW_IMPLICIT);
     }
 
 }

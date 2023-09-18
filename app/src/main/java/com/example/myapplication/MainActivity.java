@@ -47,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
         initDestinationChangedListener();
     }
 
+    public void moveMainToDetail() {
+        navController.navigate(R.id.action_main_to_detail);
+    }
+
     public void updateBottomNavigationView(int itemId) {
         binding.bottomNavigationView.setSelectedItemId(itemId);
     }

@@ -30,7 +30,7 @@
                 android:scaleType="fitXY"
                 app:srcCompat="@drawable/ic_arrow_back_24dp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/search"
                 android:layout_width="230dp"
                 android:layout_height="40dp"
@@ -41,7 +41,8 @@
                 android:paddingLeft="10dp"
                 android:textColor="@color/black"
                 android:textSize="16dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:gravity="center_vertical"/>
 
             <ImageView
                 android:id="@+id/btn_main"

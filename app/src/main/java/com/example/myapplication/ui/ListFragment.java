@@ -40,6 +40,7 @@ public class ListFragment extends Fragment {
         initBtnMain();
         initBtnCart();
         initBtnBack();
+        initSearch();
 
         Bundle bundle = getArguments();
         String keyword = bundle.getString("keyword");
@@ -68,6 +69,12 @@ public class ListFragment extends Fragment {
     private void initBtnBack() {
         binding.btnBack.setOnClickListener(v -> {
             navController.popBackStack();
+        });
+    }
+
+    private void initSearch() {
+        binding.search.setOnClickListener(v -> {
+            navController.navigate(R.id.action_list_to_search);
         });
     }
 

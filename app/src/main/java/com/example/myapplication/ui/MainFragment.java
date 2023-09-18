@@ -58,6 +58,7 @@ public class MainFragment extends Fragment {
         initViewPagerMain();
         initCategoryBtn();
         initScrollToTopBtn();
+        initAd();
 
 
         return binding.getRoot();
