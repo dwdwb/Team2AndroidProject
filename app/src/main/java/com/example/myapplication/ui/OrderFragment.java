@@ -20,6 +20,13 @@ import com.example.myapplication.R;
 import com.example.myapplication.databinding.FragmentOrderBinding;
 import com.example.myapplication.datastore.AppKeyValueStore;
 import com.example.myapplication.dto.AddressList;
+import com.example.myapplication.dto.Shopper;
+import com.example.myapplication.service.ServiceProvider;
+import com.example.myapplication.service.ShopperService;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class OrderFragment extends Fragment {
@@ -50,6 +57,28 @@ public class OrderFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         String shopperId = AppKeyValueStore.getValue(getContext(), "shopperId");
+        ShopperService shopperService = ServiceProvider.getShopperService(getContext());
+        Log.i(TAG, "나쇼퍼아이디임"+shopperId);
+        Call<Shopper> call = shopperService.getShopper(shopperId);
+
+        call.enqueue(new Callback<Shopper>() {
+            @Override
+            public void onResponse(Call<Shopper> call, Response<Shopper> response) {
+                Shopper shopper = response.body();
+                Log.i(TAG, "나쇼퍼임"+shopper.toString());
+                TextView shopperName = view.findViewById(R.id.order_shopper_name);
+                shopperName.setText(shopper.getShopperName());
+                TextView shopperTel = view.findViewById(R.id.order_shopper_tel);
+                shopperTel.setText(shopper.getShopperTel());
+
+            }
+
+            @Override
+            public void onFailure(Call<Shopper> call, Throwable t) {
+
+            }
+        });
+
 
         // Fragment에서 FragmentResultListener 구현
         getParentFragmentManager().setFragmentResultListener("selectedAddress", getViewLifecycleOwner(), new FragmentResultListener() {

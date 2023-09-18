@@ -3,60 +3,60 @@ package com.example.myapplication.dto;
 import java.io.Serializable;
 
 public class Shopper implements Serializable {
-    int shopper_no;
-    String shopper_id;
-    String shopper_pw;
-    String shopper_name;
-    String shopper_tel;
-    String shopper_auto_login;
+    int shopperNo;
+    String shopperId;
+    String shopperPw;
+    String shopperName;
+    String shopperTel;
+    String shopperAutoLogin;
     String activate;
 
-    public int getShopper_no() {
-        return shopper_no;
+    public int getShopperNo() {
+        return shopperNo;
     }
 
-    public void setShopper_no(int shopper_no) {
-        this.shopper_no = shopper_no;
+    public void setShopperNo(int shopperNo) {
+        this.shopperNo = shopperNo;
     }
 
-    public String getShopper_id() {
-        return shopper_id;
+    public String getShopperId() {
+        return shopperId;
     }
 
-    public void setShopper_id(String shopper_id) {
-        this.shopper_id = shopper_id;
+    public void setShopperId(String shopperId) {
+        this.shopperId = shopperId;
     }
 
-    public String getShopper_pw() {
-        return shopper_pw;
+    public String getShopperPw() {
+        return shopperPw;
     }
 
-    public void setShopper_pw(String shopper_pw) {
-        this.shopper_pw = shopper_pw;
+    public void setShopperPw(String shopperPw) {
+        this.shopperPw = shopperPw;
     }
 
-    public String getShopper_name() {
-        return shopper_name;
+    public String getShopperName() {
+        return shopperName;
     }
 
-    public void setShopper_name(String shopper_name) {
-        this.shopper_name = shopper_name;
+    public void setShopperName(String shopperName) {
+        this.shopperName = shopperName;
     }
 
-    public String getShopper_tel() {
-        return shopper_tel;
+    public String getShopperTel() {
+        return shopperTel;
     }
 
-    public void setShopper_tel(String shopper_tel) {
-        this.shopper_tel = shopper_tel;
+    public void setShopperTel(String shopperTel) {
+        this.shopperTel = shopperTel;
     }
 
-    public String getShopper_auto_login() {
-        return shopper_auto_login;
+    public String getShopperAutoLogin() {
+        return shopperAutoLogin;
     }
 
-    public void setShopper_auto_login(String shopper_auto_login) {
-        this.shopper_auto_login = shopper_auto_login;
+    public void setShopperAutoLogin(String shopperAutoLogin) {
+        this.shopperAutoLogin = shopperAutoLogin;
     }
 
     public String getActivate() {
@@ -70,12 +70,12 @@ public class Shopper implements Serializable {
     @Override
     public String toString() {
         return "Shopper{" +
-                "shopper_no=" + shopper_no +
-                ", shopper_id='" + shopper_id + '\'' +
-                ", shopper_pw='" + shopper_pw + '\'' +
-                ", shopper_name='" + shopper_name + '\'' +
-                ", shopper_tel='" + shopper_tel + '\'' +
-                ", shopper_auto_login='" + shopper_auto_login + '\'' +
+                "shopperNo=" + shopperNo +
+                ", shopperId='" + shopperId + '\'' +
+                ", shopperPw='" + shopperPw + '\'' +
+                ", shopperName='" + shopperName + '\'' +
+                ", shopperTel='" + shopperTel + '\'' +
+                ", shopperAutoLogin='" + shopperAutoLogin + '\'' +
                 ", activate='" + activate + '\'' +
                 '}';
     }

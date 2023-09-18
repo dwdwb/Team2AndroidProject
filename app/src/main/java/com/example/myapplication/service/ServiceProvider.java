@@ -115,4 +115,5 @@ public class ServiceProvider {
         MyPageShopperInquiryService myPageShopperInquiryService = getRetrofit(context).create(MyPageShopperInquiryService.class);
         return myPageShopperInquiryService;
     }
+
 }
