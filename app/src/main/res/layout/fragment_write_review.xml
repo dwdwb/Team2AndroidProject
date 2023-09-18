@@ -140,6 +140,7 @@
             <Button
                 android:id="@+id/outlinedButton2"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="첨부 삭제하기"
@@ -151,13 +152,14 @@
 
             <Space
                 android:layout_width="10dp"
-                android:layout_height="0dp"/>
+                android:layout_height="0dp" />
 
             <Button
                 android:id="@+id/outlinedButton"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
 
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="사진 첨부하기"
                 android:textColor="#00FF0A"

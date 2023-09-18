@@ -42,8 +42,11 @@ public class OrderHistoryFragment extends Fragment {
 
         initRecyclerView();
 
+
         return binding.getRoot();
     }
+
+
 
     private void initRecyclerView() {
         //RecyclerView에서 항목을 수직으로 배치하도록 설정
@@ -86,8 +89,10 @@ public class OrderHistoryFragment extends Fragment {
                 Log.i(TAG, position + "번 항목 클릭됨");
                 OrderHistory orderHistory = myPageOrderedAdapter.getItem(position);
 
-                Bundle args = new Bundle();
-                args.putSerializable("OrderHistory", orderHistory);
+                int clickProductNo = orderHistory.getProduct_no();
+                Log.i(TAG, clickProductNo+"번 항목 클릭됨");
+
+                navController.navigate(R.id.action_orderHistory_to_writeReview);
 
             }
         });

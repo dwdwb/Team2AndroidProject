@@ -50,8 +50,8 @@ public class MyPageOrderedViewHolder extends RecyclerView.ViewHolder {
 
             @Override
             public void onClick(View view) {
-                // 버튼 클릭 시 해당 아이템의 address_no를 전달
-                Log.i(TAG, "ordered_no 선택됨?");
+                // 버튼 클릭 시 해당 아이템의 product_no를 전달
+                Log.i(TAG, "product_no 선택됨?"+product_no);
 
                 onItemClickListener.onItemClick(btnReview, getAdapterPosition());
 
