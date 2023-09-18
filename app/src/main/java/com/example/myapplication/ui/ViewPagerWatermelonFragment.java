@@ -32,7 +32,25 @@ public class ViewPagerWatermelonFragment extends Fragment {
         binding.discountPrice.setText(bundle.getString("discountPrice"));
         //binding.ratingBar.setRating(bundle.getFloat("starRate"));
 
+        initBtn(bundle.getInt("productNo"));
+
         // Inflate the layout for this fragment
         return binding.getRoot();
+    }
+
+    private void initBtn(int board_no) {
+        binding.wholeButton.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putInt("board_no", board_no);
+
+            DetailFragment detailFragment = new DetailFragment();
+            detailFragment.setArguments(bundle);
+
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_fragment, detailFragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
     }
 }

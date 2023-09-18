@@ -82,4 +82,12 @@
 
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/whole_button"
+        android:layout_width="185dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="13dp"
+        android:background="@android:color/transparent"
+        android:layout_gravity="center_horizontal"/>
 </FrameLayout>
