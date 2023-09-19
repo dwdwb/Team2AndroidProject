@@ -3,6 +3,7 @@ package com.example.myapplication.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,7 +53,10 @@ public class DetailOptionProductAdapter extends RecyclerView.Adapter<DetailOptio
     }
 
     public interface OnItemClickListener {
-        void onItemClick(View itemView, int position);
+        void onBtnDeleteClick(View itemView, int position);
+        //void onBtnPlusClick(View itemView, int position);
+        void onBtnPlusClick(TextView optionStock, TextView optionPrice, int position);
+        void onBtnMinusClick(TextView optionStock, TextView optionPrice, int position);
     }
 
     public void setOnItemClickListener(DetailOptionProductAdapter.OnItemClickListener onItemClickListener) {

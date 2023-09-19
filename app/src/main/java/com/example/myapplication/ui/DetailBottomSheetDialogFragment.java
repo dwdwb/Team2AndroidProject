@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.adapter.CartProductAdapter;
@@ -32,6 +33,7 @@ import com.example.myapplication.service.DetailViewService;
 import com.example.myapplication.service.ServiceProvider;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -135,6 +137,49 @@ public class DetailBottomSheetDialogFragment extends BottomSheetDialogFragment {
             detailOptionProductAdapter.setList(selectedOptionProductList);
             //RecyclerView에 어댑터 세팅
             binding.recyclerView.setAdapter(detailOptionProductAdapter);
+
+
+            //항목을 클릭했을 때 콜백 객체를 등록
+            detailOptionProductAdapter.setOnItemClickListener(new DetailOptionProductAdapter.OnItemClickListener() {
+                @Override
+                public void onBtnDeleteClick(View itemView, int position) {
+                    Log.i(TAG, position + "항목 클릭됨");
+                    Log.i(TAG, "선택된 상품 리스트들에서 해당 포지션: " + selectedOptionProductList.get(position));
+                    ProductBoard productBoard = detailOptionProductAdapter.getItem(position);
+                    Log.i(TAG, "어댑터 리스트에서 해당 포지션: " + productBoard.toString());
+
+                    selectedOptionProductList.remove(position);
+                    detailOptionProductAdapter.setList(selectedOptionProductList);
+                    binding.recyclerView.setAdapter(detailOptionProductAdapter);
+                }
+
+                @Override
+                public void onBtnPlusClick(TextView optionStock, TextView optionPrice, int position) {
+                    int updateStock = Integer.parseInt(optionStock.getText().toString()) + 1;
+                    int updatePrice = updateStock * selectedOptionProductList.get(position).getDiscountPrice();
+                    optionStock.setText(String.valueOf(updateStock));
+                    DecimalFormat df = new DecimalFormat("#,###,###");
+                    optionPrice.setText(df.format(updatePrice) + "원");
+
+                    ProductBoard productBoard = selectedOptionProductList.get(position);
+                    productBoard.setStock(updateStock);
+                }
+
+                @Override
+                public void onBtnMinusClick(TextView optionStock, TextView optionPrice, int position) {
+                    int updateStock = Integer.parseInt(optionStock.getText().toString());
+                    int updatePrice = updateStock * selectedOptionProductList.get(position).getDiscountPrice();
+                    if(updateStock > 1) {
+                        updateStock--;
+                        optionStock.setText(String.valueOf(updateStock));
+                        DecimalFormat df = new DecimalFormat("#,###,###");
+                        optionPrice.setText(df.format(updatePrice) + "원");
+
+                        ProductBoard productBoard = selectedOptionProductList.get(position);
+                        productBoard.setStock(updateStock);
+                    }
+                }
+            });
         }
     }
 
@@ -145,23 +190,35 @@ public class DetailBottomSheetDialogFragment extends BottomSheetDialogFragment {
             }
 
             String shopperId = AppKeyValueStore.getValue(this.getContext(), "shopperId");
-            dismiss();
+            //dismiss();
             if (shopperId == null) {
+                dismiss();
                 navController.navigate(R.id.login);
             } else {
-                DetailViewService detailViewService = ServiceProvider.getDetailViewService(getContext());
-                Call<Void> call = detailViewService.addCart(selectedOptionProductList);
-                call.enqueue(new Callback<Void>() {
-                    @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
-                        navController.navigate(R.id.action_detail_to_cart);
-                    }
+                if(selectedOptionProductList.size() != 0) {
+                    dismiss();
+                    Log.i(TAG, selectedOptionProductList.toString());
+                    DetailViewService detailViewService = ServiceProvider.getDetailViewService(getContext());
+                    Call<Void> call = detailViewService.addCart(selectedOptionProductList);
+                    call.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            navController.navigate(R.id.action_detail_to_cart);
+                        }
 
-                    @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
 
-                    }
-                });
+                        }
+                    });
+                } else {
+                    AlertDialog alertDialog = new AlertDialog.Builder(getContext())
+                            .setTitle("옵션을 선택해주세요.")
+                            //.setMessage(joinResult.getResult())
+                            .setPositiveButton("확인", null)
+                            .create();
+                    alertDialog.show();
+                }
             }
         });
     }
@@ -169,13 +226,27 @@ public class DetailBottomSheetDialogFragment extends BottomSheetDialogFragment {
     private void initBtnOrder() {
         binding.btnOrder.setOnClickListener(v -> {
             String shopperId = AppKeyValueStore.getValue(this.getContext(), "shopperId");
-            dismiss();
+            //dismiss();
             if (shopperId == null) {
+                dismiss();
                 navController.navigate(R.id.login);
             } else {
-                navController.navigate(R.id.action_detail_to_orderFragment);
+                if(selectedOptionProductList.size() != 0) {
+                    dismiss();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("productList", (Serializable) selectedOptionProductList);
+
+                    navController.navigate(R.id.action_detail_to_orderFragment, bundle);
+                } else {
+                    AlertDialog alertDialog = new AlertDialog.Builder(getContext())
+                            .setTitle("옵션을 선택해주세요.")
+                            //.setMessage(joinResult.getResult())
+                            .setPositiveButton("확인", null)
+                            .create();
+                    alertDialog.show();
+                }
             }
-            //navController.navigate(R.id.action_detail_to_orderFragment);
         });
     }
 

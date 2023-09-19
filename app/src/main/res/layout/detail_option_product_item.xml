@@ -34,7 +34,7 @@
                 android:textStyle="bold" />
 
             <ImageButton
-                android:id="@+id/imageButton5"
+                android:id="@+id/btn_delete_option"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_x_24dp"
@@ -55,7 +55,7 @@
 
                 <!-- 감소 버튼 -->
                 <ImageButton
-                    android:id="@+id/imageButton8"
+                    android:id="@+id/btn_minus_stock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -64,7 +64,7 @@
 
                 <!-- 수량 표시 TextView -->
                 <TextView
-                    android:id="@+id/cart_product_stock"
+                    android:id="@+id/option_stock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="10dp"
@@ -75,7 +75,7 @@
 
                 <!-- 증가 버튼 -->
                 <ImageButton
-                    android:id="@+id/imageButton9"
+                    android:id="@+id/btn_plus_stock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

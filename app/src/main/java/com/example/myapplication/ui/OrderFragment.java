@@ -20,9 +20,12 @@ import com.example.myapplication.R;
 import com.example.myapplication.databinding.FragmentOrderBinding;
 import com.example.myapplication.datastore.AppKeyValueStore;
 import com.example.myapplication.dto.AddressList;
+import com.example.myapplication.dto.ProductBoard;
 import com.example.myapplication.dto.Shopper;
 import com.example.myapplication.service.ServiceProvider;
 import com.example.myapplication.service.ShopperService;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,6 +52,14 @@ public class OrderFragment extends Fragment {
         initBtnOrderHistory();
         initBtnOrderShipping();
 
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            ArrayList<ProductBoard> productList = (ArrayList<ProductBoard>) bundle.getSerializable("productList");
+            Log.i(TAG, productList.toString());
+        }
+
+
         return binding.getRoot();
     }
 
@@ -70,7 +81,6 @@ public class OrderFragment extends Fragment {
                 shopperName.setText(shopper.getShopperName());
                 TextView shopperTel = view.findViewById(R.id.order_shopper_tel);
                 shopperTel.setText(shopper.getShopperTel());
-
             }
 
             @Override
@@ -107,7 +117,6 @@ public class OrderFragment extends Fragment {
                 }
             }
         });
-
 
     }
 
