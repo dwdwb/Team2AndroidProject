@@ -182,7 +182,11 @@ public class OrderHistoryFragment extends Fragment {
                 int clickProductNo = orderHistory.getProduct_no();
                 Log.i(TAG, clickProductNo+"번 항목 클릭됨");
 
-                navController.navigate(R.id.action_orderHistory_to_writeReview);
+                Bundle args = new Bundle();
+                args.putInt("order_no", orderHistory.getOrder_no());
+                args.putInt("product_no", orderHistory.getProduct_no());
+
+                navController.navigate(R.id.action_orderHistory_to_writeReview, args);
 
             }
         });

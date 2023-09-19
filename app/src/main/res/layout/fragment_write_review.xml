@@ -100,7 +100,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:numStars="5"
-                android:progressTint="@android:color/holo_orange_dark" />
+                android:progressTint="@android:color/holo_orange_dark"
+                android:isIndicator="false"
+                android:rating="0"
+                android:stepSize="0.5"/>
         </LinearLayout>
 
         <LinearLayout
@@ -117,7 +120,7 @@
                 android:text="상품에 대한 솔직한 평가를 남겨주세요" />
 
             <EditText
-                android:id="@+id/editTextTextMultiLine"
+                android:id="@+id/review_content"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginTop="5dp"
@@ -131,44 +134,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginHorizontal="20dp">
 
-            <Button
-                android:id="@+id/outlinedButton2"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="첨부 삭제하기"
-                android:textColor="#aad94844"
-                app:icon="@drawable/ic_close_24dp"
-                app:iconGravity="textStart"
-                app:iconTint="#aad94844"
-                app:strokeColor="#aad94844" />
-
-            <Space
-                android:layout_width="10dp"
-                android:layout_height="0dp" />
-
-            <Button
-                android:id="@+id/outlinedButton"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                android:layout_width="wrap_content"
-
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="사진 첨부하기"
-                android:textColor="#00FF0A"
-                app:icon="@drawable/add_photo_24dp"
-                app:iconGravity="textStart"
-                app:iconTint="#00FF0A"
-                app:strokeColor="#00FF0A" />
-
-        </LinearLayout>
     </LinearLayout>
 
     <Button

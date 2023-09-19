@@ -17,6 +17,8 @@ import com.example.myapplication.dto.OrderHistory;
 import com.example.myapplication.dto.MobileProductForList;
 import com.example.myapplication.service.ListService;
 
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -24,6 +26,8 @@ public class MyPageOrderedViewHolder extends RecyclerView.ViewHolder {
 
     private static final String TAG = "MyPageOrderedViewHolder";
 
+    private TextView order_no_text_view;
+    private TextView product_no_text_view;
     private int product_no;
     private ImageView ordered_image;
 
@@ -37,7 +41,8 @@ public class MyPageOrderedViewHolder extends RecyclerView.ViewHolder {
     private Button btnReview;
     public MyPageOrderedViewHolder(@NonNull View itemView, MyPageOrderedAdapter.OnItemClickListener onItemClickListener) {
         super(itemView);
-
+        order_no_text_view = (TextView) itemView.findViewById(R.id.order_no_text_view);
+        product_no_text_view = (TextView) itemView.findViewById(R.id.product_no_text_view);
         ordered_image = (ImageView) itemView.findViewById(R.id.ordered_image);
         order_date = (TextView) itemView.findViewById(R.id.order_date);
         product_name = (TextView) itemView.findViewById(R.id.ordered_product_name);
@@ -71,6 +76,8 @@ public class MyPageOrderedViewHolder extends RecyclerView.ViewHolder {
         product_no = orderHistory.getProduct_no();
         ListService.loadThumbnailImage(product_no, ordered_image);
 
+        order_no_text_view.setText(String.valueOf(orderHistory.getOrder_no()));
+        product_no_text_view.setText(String.valueOf(orderHistory.getProduct_no()));
         product_name.setText(orderHistory.getProduct_name() + orderHistory.getProduct_option());
         price.setText(orderHistory.getStock()+"개 , "+orderHistory.getPrice() + "원");
         payment_price.setText("총 결제 금액: " + orderHistory.getPayment_price()+"원");

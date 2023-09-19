@@ -5,19 +5,36 @@ import java.util.Date;
 
 public class OrderHistory implements Serializable  {
     private long order_date;
-
+    private int order_no;
     private int product_no;
     private String product_name;
     private String product_option;
     private int price;
     private int stock;
     private int payment_price;
+
     public long getOrder_date() {
         return order_date;
     }
 
     public void setOrder_date(long order_date) {
         this.order_date = order_date;
+    }
+
+    public int getOrder_no() {
+        return order_no;
+    }
+
+    public void setOrder_no(int order_no) {
+        this.order_no = order_no;
+    }
+
+    public int getProduct_no() {
+        return product_no;
+    }
+
+    public void setProduct_no(int product_no) {
+        this.product_no = product_no;
     }
 
     public String getProduct_name() {
@@ -60,18 +77,11 @@ public class OrderHistory implements Serializable  {
         this.payment_price = payment_price;
     }
 
-    public int getProduct_no() {
-        return product_no;
-    }
-
-    public void setProduct_no(int product_no) {
-        this.product_no = product_no;
-    }
-
     @Override
     public String toString() {
         return "OrderHistory{" +
                 "order_date=" + order_date +
+                ", order_no=" + order_no +
                 ", product_no=" + product_no +
                 ", product_name='" + product_name + '\'' +
                 ", product_option='" + product_option + '\'' +
