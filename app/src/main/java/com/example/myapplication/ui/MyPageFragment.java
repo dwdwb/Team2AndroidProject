@@ -25,10 +25,18 @@ import com.example.myapplication.adapter.MyPageMenuItemAdapter;
 import com.example.myapplication.databinding.FragmentMyPageBinding;
 import com.example.myapplication.datastore.AppKeyValueStore;
 import com.example.myapplication.dto.MyPageMenuItem;
+import com.example.myapplication.dto.Shopper;
+import com.example.myapplication.service.ReviewService;
+import com.example.myapplication.service.ServiceProvider;
+import com.example.myapplication.service.ShopperService;
 import com.example.myapplication.viewHolder.MyPageMenuItemViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyPageFragment extends Fragment {
     private static final String TAG = "MyPageFragment";
@@ -42,11 +50,30 @@ public class MyPageFragment extends Fragment {
         //NavController 얻기
         navController = NavHostFragment.findNavController(this);
 
+        setData();
         initRecyclerView();
 
         initLogoutBtn();
 
         return binding.getRoot();
+    }
+
+    private void setData() {
+        String shopperId = AppKeyValueStore.getValue(getContext(), "shopperId");
+        ShopperService shopperService = ServiceProvider.getShopperService(getContext());
+        Call<Shopper> call = shopperService.getShopper(shopperId);
+        call.enqueue(new Callback<Shopper>() {
+            @Override
+            public void onResponse(Call<Shopper> call, Response<Shopper> response) {
+                Shopper shopper = response.body();
+                binding.shopperName.setText(shopper.getShopperName());
+            }
+
+            @Override
+            public void onFailure(Call<Shopper> call, Throwable t) {
+
+            }
+        });
     }
 
     private void initLogoutBtn() {

@@ -18,13 +18,15 @@ import java.util.List;
 
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewViewHolder> {
     private List<ReviewListItem> list = new ArrayList<>();
+    OnItemClickListener onItemClickListener1;
+    OnItemClickListener onItemClickListener2;
 
     @NonNull
     @Override
     public ReviewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View itemView = layoutInflater.inflate(R.layout.review_item, parent, false);
-        ReviewViewHolder reviewViewHolder = new ReviewViewHolder(itemView);
+        ReviewViewHolder reviewViewHolder = new ReviewViewHolder(itemView, onItemClickListener1, onItemClickListener2);
         return reviewViewHolder;
     }
 
@@ -45,5 +47,16 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewViewHolder> {
 
     public ReviewListItem getItem(int position) {
         return list.get(position);
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View itemView, int position);
+    }
+
+    public void setOnItemClickListener1(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener1 = onItemClickListener;
+    }
+    public void setOnItemClickListener2(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener2 = onItemClickListener;
     }
 }

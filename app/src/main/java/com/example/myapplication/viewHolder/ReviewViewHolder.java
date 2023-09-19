@@ -1,6 +1,7 @@
 package com.example.myapplication.viewHolder;
 
 import android.graphics.Paint;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.adapter.ListAdapter;
+import com.example.myapplication.adapter.ReviewAdapter;
 import com.example.myapplication.dto.MobileProductForList;
 import com.example.myapplication.dto.ReviewListItem;
 import com.example.myapplication.service.ListService;
@@ -35,7 +37,7 @@ public class ReviewViewHolder extends RecyclerView.ViewHolder {
     private Button review_delete_btn;
     private Button review_edit_btn;
 
-    public ReviewViewHolder(@NonNull View itemView) {
+    public ReviewViewHolder(@NonNull View itemView, ReviewAdapter.OnItemClickListener onItemClickListener1, ReviewAdapter.OnItemClickListener onItemClickListener2) {
         super(itemView);
 
         //아이템 UI 얻기
@@ -43,6 +45,17 @@ public class ReviewViewHolder extends RecyclerView.ViewHolder {
         product_image = (ImageView) itemView.findViewById(R.id.product_image);
         product_name_and_option = (TextView) itemView.findViewById(R.id.product_name_and_option);
         content = (TextView) itemView.findViewById(R.id.content);
+
+        review_edit_btn = (Button) itemView.findViewById(R.id.review_edit_btn);
+        review_delete_btn = (Button) itemView.findViewById(R.id.review_delete_btn);
+
+        review_edit_btn.setOnClickListener(v -> {
+            onItemClickListener1.onItemClick(review_edit_btn, getAdapterPosition());
+        });
+
+        review_delete_btn.setOnClickListener(v -> {
+            onItemClickListener2.onItemClick(review_delete_btn, getAdapterPosition());
+        });
     }
 
     public void setData(ReviewListItem reviewListItem) {
@@ -56,6 +69,8 @@ public class ReviewViewHolder extends RecyclerView.ViewHolder {
         String str = "" + reviewListItem.getProduct_name() + ", " + reviewListItem.getProduct_option();
         product_name_and_option.setText(str);
         content.setText(reviewListItem.getContent());
+
+
     }
 
 }

@@ -116,4 +116,9 @@ public class ServiceProvider {
         return myPageShopperInquiryService;
     }
 
+    public static ProductService getProductService(Context context) {
+        ProductService productService = getRetrofit(context).create(ProductService.class);
+        return productService;
+    }
+
 }

@@ -4,6 +4,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.myapplication.dto.MobileProductForList;
+import com.example.myapplication.dto.Review;
 import com.example.myapplication.dto.ReviewListItem;
 import com.example.myapplication.dto.WriteReviewResult;
 
@@ -21,6 +22,12 @@ public interface ReviewService {
     @GET("review/getReviewList")
     Call<List<ReviewListItem>> getReviewList();
 
+    @GET("review/getShopperReviewList")
+    Call<List<ReviewListItem>> getShopperReviewList(@Query("shopper_id") String shopper_id);
+
+    @GET("review/getReview")
+    Call<Review> getReview(@Query("review_no") int review_no);
+
     @POST("review/writeReview")
     Call<WriteReviewResult> writeReview(
             @Query("order_no") int order_no,
@@ -28,6 +35,15 @@ public interface ReviewService {
             @Query("board_no") int board_no,
             @Query("star_rate") int starRating,
             @Query("content") String reviewContent);
+
+    @POST("review/editReview")
+    Call<WriteReviewResult> editReview(
+            @Query("review_no") int review_no,
+            @Query("star_rate") int starRating,
+            @Query("content") String reviewContent);
+
+    @GET("review/deleteReview")
+    Call<WriteReviewResult> deleteReview(@Query("review_no") int review_no);
 
     static void loadThumbnailImage(int board_no, ImageView imageView) {
         String url = NetworkInfo.BASE_URL + "list/getThumbnailImage?board_no=" + board_no;

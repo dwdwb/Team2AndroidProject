@@ -17,9 +17,15 @@ import android.widget.RatingBar;
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.FragmentListBinding;
 import com.example.myapplication.databinding.FragmentWriteReviewBinding;
+import com.example.myapplication.dto.MobileProductForList;
+import com.example.myapplication.dto.Product;
 import com.example.myapplication.dto.WriteReviewResult;
+import com.example.myapplication.service.ListService;
+import com.example.myapplication.service.ProductService;
 import com.example.myapplication.service.ReviewService;
 import com.example.myapplication.service.ServiceProvider;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,12 +45,32 @@ public class WriteReviewFragment extends Fragment {
         int order_no = bundle.getInt("order_no");
         int product_no = bundle.getInt("product_no");
 
-
+        setData(product_no);
         initRatingBar();
         initBtnReview(order_no, product_no);
         initBtnBack();
 
         return binding.getRoot();
+    }
+
+    public void setData(int product_no) {
+        ListService listService = ServiceProvider.getListService(getContext());
+        ListService.loadThumbnailImage(product_no, binding.productImage);
+        ProductService productService = ServiceProvider.getProductService(getContext());
+        Call<Product> call = productService.getProduct(product_no);
+        call.enqueue(new Callback<Product>() {
+            @Override
+            public void onResponse(Call<Product> call, Response<Product> response) {
+                Product product = response.body();
+                String productNameAndOption = product.getProduct_NAME() + ", " + product.getProduct_OPTION();
+                binding.productNameAndOption.setText(productNameAndOption);
+            }
+
+            @Override
+            public void onFailure(Call<Product> call, Throwable t) {
+
+            }
+        });
     }
 
     public void initRatingBar() {
