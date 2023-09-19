@@ -3,6 +3,8 @@ package com.example.myapplication.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +19,7 @@ import java.util.List;
 
 public class CartProductAdapter extends RecyclerView.Adapter<CartProductViewHolder> {
     private List<CartProduct> cartProductList = new ArrayList<>();
+    private List<Boolean> checkList = new ArrayList<>();
     private OnItemClickListener onItemClickListener;
     @NonNull
     @Override
@@ -30,7 +33,8 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductViewHold
     @Override
     public void onBindViewHolder(@NonNull CartProductViewHolder holder, int position) {
         CartProduct cartProduct = cartProductList.get(position);
-        holder.setData(cartProduct);
+        boolean isChecked = checkList.get(position);
+        holder.setData(cartProduct, isChecked);
     }
 
     @Override
@@ -42,12 +46,27 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductViewHold
         this.cartProductList = list;
     }
 
+    public List<CartProduct> getList() {
+        return cartProductList;
+    }
+
+    public void setCheckList(List<Boolean> list) {
+        this.checkList = list;
+    }
+
+    public List<Boolean> getCheckList() {
+        return checkList;
+    }
+
     public CartProduct getItem(int position) {
         return cartProductList.get(position);
     }
 
     public interface OnItemClickListener {
-        void onItemClick(View itemView, int position);
+        void onBtnCheckClick(CheckBox checkBox , int position);
+        void onBtnDeleteClick(View itemView, int position);
+        void onBtnPlusClick(TextView stock, TextView price, int position);
+        void onBtnMinusClick(TextView stock, TextView price, int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {

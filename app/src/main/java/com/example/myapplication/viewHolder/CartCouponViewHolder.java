@@ -1,6 +1,8 @@
 package com.example.myapplication.viewHolder;
 
+import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +21,7 @@ public class CartCouponViewHolder  extends RecyclerView.ViewHolder {
     private TextView cart_coupon_price;
     private TextView cart_coupon_name;
     private TextView cart_coupon_rule;
+    private CheckBox btn_check_coupon;
     public CartCouponViewHolder(@NonNull View itemView, CartCouponAdapter.OnItemClickListener onItemClickListener) {
         super(itemView);
 
@@ -27,14 +30,18 @@ public class CartCouponViewHolder  extends RecyclerView.ViewHolder {
         cart_coupon_name = (TextView) itemView.findViewById(R.id.cart_coupon_name);
         cart_coupon_rule = (TextView) itemView.findViewById(R.id.cart_coupon_rule);
 
+        btn_check_coupon = (CheckBox) itemView.findViewById(R.id.btn_check_coupon);
+
         //클릭 이벤트 처리
-        /*itemView.setOnClickListener(v -> {
-            Log.i(TAG, product_no + " 항목이 클릭됨");
-            onItemClickListener.onItemClick(v, getAdapterPosition());
-        });*/
+        btn_check_coupon.setOnClickListener(v -> {
+            Log.i(TAG, coupon_no + " 항목이 클릭됨");
+            onItemClickListener.onBtnCheckClick(btn_check_coupon, getAdapterPosition());
+        });
     }
 
-    public void setData(Coupon coupon) {
+    public void setData(Coupon coupon, Boolean isChecked) {
+        btn_check_coupon.setChecked(isChecked);
+
         coupon_no = coupon.getCoupon_NO();
 
         cart_coupon_price.setText(String.valueOf(coupon.getDiscount_PRICE()) + coupon.getCoupon_TYPE());

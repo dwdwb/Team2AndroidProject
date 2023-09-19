@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,8 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CartCouponAdapter  extends RecyclerView.Adapter<CartCouponViewHolder> {
-    List<Coupon> couponList = new ArrayList<>();
-
+    private List<Coupon> couponList = new ArrayList<>();
+    private List<Boolean> checkList = new ArrayList<>();
     OnItemClickListener onItemClickListener;
 
     @NonNull
@@ -33,7 +34,8 @@ public class CartCouponAdapter  extends RecyclerView.Adapter<CartCouponViewHolde
     @Override
     public void onBindViewHolder(@NonNull CartCouponViewHolder holder, int position) {
         Coupon coupon = couponList.get(position);
-        holder.setData(coupon);
+        boolean isChecked = checkList.get(position);
+        holder.setData(coupon, isChecked);
     }
 
     @Override
@@ -45,12 +47,20 @@ public class CartCouponAdapter  extends RecyclerView.Adapter<CartCouponViewHolde
         this.couponList = list;
     }
 
+    public void setCheckList(List<Boolean> list) {
+        this.checkList = list;
+    }
+
+    public List<Boolean> getCheckList() {
+        return checkList;
+    }
+
     public Coupon getItem(int position) {
         return couponList.get(position);
     }
 
     public interface OnItemClickListener {
-        void onItemClick(View itemView, int position);
+        void onBtnCheckClick(CheckBox checkBox , int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {

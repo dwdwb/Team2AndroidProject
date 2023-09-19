@@ -19,7 +19,7 @@
             android:layout_marginVertical="10dp">
 
             <CheckBox
-                android:id="@+id/checkBox2"
+                android:id="@+id/btn_check_cart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -61,7 +61,7 @@
 
                     <!-- 감소 버튼 -->
                     <ImageButton
-                        android:id="@+id/imageButton8"
+                        android:id="@+id/btn_minus_cart_stock"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -81,7 +81,7 @@
 
                     <!-- 증가 버튼 -->
                     <ImageButton
-                        android:id="@+id/imageButton9"
+                        android:id="@+id/btn_plus_cart_stock"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -91,7 +91,7 @@
             </LinearLayout>
 
             <ImageButton
-                android:id="@+id/imageButton5"
+                android:id="@+id/btn_delete_cart_product"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_x_24dp"

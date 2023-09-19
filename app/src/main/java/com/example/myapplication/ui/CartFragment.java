@@ -17,6 +17,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.TextView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.adapter.CartCouponAdapter;
@@ -25,10 +27,13 @@ import com.example.myapplication.databinding.FragmentCartBinding;
 import com.example.myapplication.databinding.FragmentDetailBinding;
 import com.example.myapplication.dto.CartProduct;
 import com.example.myapplication.dto.Coupon;
+import com.example.myapplication.dto.ProductBoard;
 import com.example.myapplication.service.CartService;
 import com.example.myapplication.service.ServiceProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -39,6 +44,12 @@ public class CartFragment extends Fragment {
     private static final String TAG = "CartFragment";
     private FragmentCartBinding binding;
     private NavController navController;
+    private List<CartProduct> cartProductList = new ArrayList<>();
+    private List<Coupon> couponList = new ArrayList<>();
+    private List<Boolean> checkList = new ArrayList<>();
+    private List<Boolean> checkCouponList = new ArrayList<>();
+    private CartProductAdapter cartProductAdapter;
+    private CartCouponAdapter cartCouponAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,6 +63,7 @@ public class CartFragment extends Fragment {
         initCartCouponRecyclerView();
 
         initBtnOrder();
+        initCheckAll();
 
         //하단바 숨기기
         hideBottomNavigation(true);
@@ -77,7 +89,8 @@ public class CartFragment extends Fragment {
         binding.cartProductRecyclerView.setLayoutManager(linearLayoutManager);
 
         //어댑터 생성
-        CartProductAdapter cartProductAdapter = new CartProductAdapter();
+        //CartProductAdapter cartProductAdapter = new CartProductAdapter();
+        cartProductAdapter = new CartProductAdapter();
 
         //API 서버에서 JSON 목록 받기
         CartService cartService = ServiceProvider.getCartService(getContext());
@@ -86,10 +99,18 @@ public class CartFragment extends Fragment {
             @Override
             public void onResponse(Call<List<CartProduct>> call, Response<List<CartProduct>> response) {
                 //JSON -> List<Board> 변환
-                List<CartProduct> list = response.body();
-                Log.i(TAG, list + "");
+                cartProductList = response.body();
+
+                for(CartProduct cartProduct : cartProductList) {
+                    cartProduct.setShopper_NO(1);
+                    checkList.add(false);
+                }
+                binding.totalCartCountTxt.setText(String.valueOf(checkList.size()));
+
+                Log.i(TAG, "서비스에서 가져온 cartProductList: " + cartProductList);
                 //어댑터 데이터 세팅
-                cartProductAdapter.setList(list);
+                cartProductAdapter.setList(cartProductList);
+                cartProductAdapter.setCheckList(checkList);
                 //RecyclerView에 어댑터 세팅
                 binding.cartProductRecyclerView.setAdapter(cartProductAdapter);
             }
@@ -103,13 +124,78 @@ public class CartFragment extends Fragment {
         //항목을 클릭했을 때 콜백 객체를 등록
         cartProductAdapter.setOnItemClickListener(new CartProductAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View itemView, int position) {
-                Log.i(TAG, position + "항목 클릭됨");
-                CartProduct cartProduct = cartProductAdapter.getItem(position);
+            public void onBtnCheckClick(CheckBox checkBox, int position) {
+                checkList.set(position, checkBox.isChecked());
+                Log.i(TAG, "체크하면? checkList? " + checkList);
 
-                Bundle args = new Bundle();
-                args.putSerializable("cartProduct", cartProduct);
-                //navController.navigate(R.id.action_dest_list_to_dest_detail, args);
+                if(!checkList.contains(false)) {
+                    binding.btnCheckAll.setChecked(true);
+                } else {
+                    binding.btnCheckAll.setChecked(false);
+                }
+
+                initCheckedCountTxt();
+                calculatePrice("onBtnCheckClick");
+            }
+
+            @Override
+            public void onBtnDeleteClick(View itemView, int position) {
+                Log.i(TAG, position + "항목 클릭됨");
+                //CartProduct cartProduct = cartProductAdapter.getItem(position);
+                CartProduct cartProduct = cartProductList.get(position);
+
+                //Log.i(TAG, "삭제될 cartProduct: " + cartProduct);
+                Log.i(TAG, "삭제될 cartProductFromList: " + cartProduct);
+
+                cartProductList.remove(position);
+                checkList.remove(position);
+                //어댑터 데이터 세팅
+                cartProductAdapter.setList(cartProductList);
+                cartProductAdapter.setCheckList(checkList);
+                //RecyclerView에 어댑터 세팅
+                binding.cartProductRecyclerView.setAdapter(cartProductAdapter);
+
+                deleteCartProduct(cartProduct);
+
+                binding.totalCartCountTxt.setText(String.valueOf(cartProductList.size()));
+                initCheckedCountTxt();
+
+                calculatePrice("onBtnDeleteClick");
+            }
+
+            @Override
+            public void onBtnPlusClick(TextView stock, TextView price, int position) {
+                int updateStock = Integer.parseInt(stock.getText().toString()) + 1;
+                int updatePrice = updateStock * cartProductList.get(position).getDiscount_PRICE();
+                stock.setText(String.valueOf(updateStock));
+                DecimalFormat df = new DecimalFormat("#,###,###");
+                price.setText(df.format(updatePrice) + "원");
+
+                CartProduct cartProduct = cartProductList.get(position);
+                cartProduct.setCart_PRODUCT_STOCK(updateStock);
+
+                updateCartProductStock(cartProduct);
+
+                calculatePrice("onBtnPlusClick");
+            }
+
+            @Override
+            public void onBtnMinusClick(TextView stock, TextView price, int position) {
+                int updateStock = Integer.parseInt(stock.getText().toString());
+                if(updateStock > 1) {
+                    updateStock--;
+                    stock.setText(String.valueOf(updateStock));
+                    int updatePrice = updateStock * cartProductList.get(position).getDiscount_PRICE();
+                    DecimalFormat df = new DecimalFormat("#,###,###");
+                    price.setText(df.format(updatePrice) + "원");
+
+                    CartProduct cartProduct = cartProductList.get(position);
+                    cartProduct.setCart_PRODUCT_STOCK(updateStock);
+
+                    updateCartProductStock(cartProduct);
+
+                    calculatePrice("onBtnMinusClick");
+                }
             }
         });
     }
@@ -123,7 +209,7 @@ public class CartFragment extends Fragment {
         binding.cartCouponRecyclerView.setLayoutManager(linearLayoutManager);
 
         //어댑터 생성
-        CartCouponAdapter cartCouponAdapter = new CartCouponAdapter();
+        cartCouponAdapter = new CartCouponAdapter();
 
         //API 서버에서 JSON 목록 받기
         CartService cartService = ServiceProvider.getCartService(getContext());
@@ -132,9 +218,13 @@ public class CartFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Coupon>> call, Response<List<Coupon>> response) {
                 //JSON -> List<Board> 변환
-                List<Coupon> list = response.body();
+                couponList = response.body();
+                for(Coupon coupon : couponList) {
+                    checkCouponList.add(false);
+                }
                 //어댑터 데이터 세팅
-                cartCouponAdapter.setCouponList(list);
+                cartCouponAdapter.setCouponList(couponList);
+                cartCouponAdapter.setCheckList(checkCouponList);
                 //RecyclerView에 어댑터 세팅
                 binding.cartCouponRecyclerView.setAdapter(cartCouponAdapter);
             }
@@ -148,16 +238,214 @@ public class CartFragment extends Fragment {
         //항목을 클릭했을 때 콜백 객체를 등록
         cartCouponAdapter.setOnItemClickListener(new CartCouponAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View itemView, int position) {
+            public void onBtnCheckClick(CheckBox checkBox, int position) {
                 Log.i(TAG, position + "항목 클릭됨");
-                Coupon coupon = cartCouponAdapter.getItem(position);
 
-                Bundle args = new Bundle();
-                args.putSerializable("coupon", coupon);
-                //navController.navigate(R.id.action_dest_list_to_dest_detail, args);
+                calculatePrice("onBtnCheckClick");
             }
         });
     }
+
+    //장바구니 상품 삭제
+    private void deleteCartProduct(CartProduct cartProduct) {
+        //API 서버에서 JSON 목록 받기
+        CartService cartService = ServiceProvider.getCartService(getContext());
+        Call<Void> call = cartService.deleteCartProduct(cartProduct);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
+    }
+
+    //장바구니 상품 수량 변경
+    private void updateCartProductStock(CartProduct cartProduct) {
+        //API 서버에서 JSON 목록 받기
+        CartService cartService = ServiceProvider.getCartService(getContext());
+        Call<Void> call = cartService.updateStockCartProduct(cartProduct);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
+    }
+
+    //장바구니 전체 선택
+    private void initCheckAll() {
+        binding.btnCheckAll.setOnClickListener(v -> {
+            for(int i=0; i<checkList.size(); i++) {
+                checkList.set(i, binding.btnCheckAll.isChecked());
+            }
+
+            //어댑터 데이터 세팅
+            cartProductAdapter.setCheckList(checkList);
+            //RecyclerView에 어댑터 세팅
+            binding.cartProductRecyclerView.setAdapter(cartProductAdapter);
+
+            initCheckedCountTxt();
+            calculatePrice("initCheckAll");
+        });
+    }
+
+    //선택된 상품수 초기화
+    private void initCheckedCountTxt() {
+        int checkedCount = 0;
+        for(boolean isChecked : checkList) {
+            if(isChecked) {
+                checkedCount++;
+            }
+        }
+        binding.checkedCartCountTxt.setText(String.valueOf(checkedCount));
+    }
+
+    //주문금액 동작
+    private void calculatePrice(String method) {
+        Log.i(TAG, "실행되는 메소드: " + method);
+        int totalPrice = 0;
+        int totalDelivery = 0;
+        //총 상품금액 계산
+        for(int i=0; i<checkList.size(); i++) {
+            if(checkList.get(i)) {
+                totalPrice += (cartProductList.get(i).getDiscount_PRICE() * cartProductList.get(i).getCart_PRODUCT_STOCK());
+            }
+        }
+
+        Log.i(TAG, "totalPrice가 얼마길래 왜 안되는 거야 ㅡㅡ " + totalPrice);
+
+        if(totalPrice != 0) {
+            Log.i(TAG, "totalPrice가 얼마길래 왜 안되는 거야 ㅡㅡ " + totalPrice);
+            //총 배송비 계산
+            if(totalPrice >= 30000) {
+                totalDelivery = 0;
+            } else {
+                totalDelivery = 3000;
+            }
+
+            //쿠폰 적용
+            int[] returnArray = calculateCoupon(totalPrice, totalDelivery);
+            /*var coupon = calculateCoupon(totalPrice, totalDelivery);
+            var discountProduct = coupon.Pdis;
+            var discountDelivery = coupon.Ddis;*/
+            int discountProduct = returnArray[0];
+            int discountDelivery = returnArray[1];
+
+            int priceFinal = totalPrice;
+            int deliveryFinal = totalDelivery - discountDelivery;
+            int discountFinal = discountProduct + discountDelivery;
+            int orderPriceFinal = priceFinal + deliveryFinal - discountProduct;
+
+            DecimalFormat df = new DecimalFormat("#,###,###");
+            binding.totalProductPrice.setText(df.format(priceFinal) + "원");
+            binding.totalDeliveryPrice.setText(df.format(deliveryFinal) + "원");
+            binding.totalDiscountPrice.setText(df.format(discountFinal) + "원");
+            binding.finalProductPrice.setText(df.format(orderPriceFinal) + "원");
+
+        } else {
+            binding.totalProductPrice.setText("0원");
+            binding.totalDeliveryPrice.setText("0원");
+            binding.totalDiscountPrice.setText("0원");
+            binding.finalProductPrice.setText("0원");
+        }
+    }
+
+    private int[] calculateCoupon(int price, int delivery) {
+        //현재 총상품금액
+        int priceCurrent = price;
+        //현재 총배송비
+        int deliveryCurrent = delivery;
+
+        //적용할 상품할인가
+        int discountProduct = 0;
+        //적용할 배송비할인가
+        int discountDelivery = 0;
+
+        for(int i=0; i<checkCouponList.size(); i++) {
+            if(checkCouponList.get(i)) {
+                //couponType: ####[원|%]
+                String couponType = couponList.get(i).getCoupon_TYPE();
+                //couponCondition: [금액제한없음|####원 이상 구매 시 ~~~]
+                int couponCondition = couponList.get(i).getDiscount_RULE();
+                //isDlivery: 배송비 할인쿠폰인지 아닌지
+                String isDelivery = couponList.get(i).getCoupon_KIND();
+                //couponPrice: 쿠폰할인가격
+                int couponPrice = couponList.get(i).getDiscount_PRICE();
+
+                //쿠폰작용가능여부
+                boolean isUsable = false;
+
+                //#### '원' 일 경우
+                if(couponType.equals("원")) {
+                    //조건적합여부
+                    boolean isOk = true;
+
+                    //금액제한없음이 아니고 조건에 맞지 않는다면 isOk = false
+                    if(couponCondition != 0) {
+                        if(priceCurrent < couponCondition) { isOk = false; }
+                    }
+
+                    if(isOk) {
+                        //'배송비' 할인일 경우
+                        if(isDelivery.equals("배송비")) {
+                            if(deliveryCurrent >= couponPrice) {
+                                isUsable = true;
+                                discountDelivery += couponPrice;
+                            }
+                        } else if(isDelivery.equals("상품")) {
+                            //'배송비' 할인이 아닐 경우
+                            if(priceCurrent >= couponPrice) {
+                                isUsable = true;
+                                discountProduct += couponPrice;
+                            }
+                        }
+                    }
+
+                }
+                //#### '%' 일 경우
+                else if(couponType.equals("%")) {
+                    //조건적합여부
+                    boolean isOk = true;
+
+                    //금액제한없음이 아니고 조건에 맞지 않는다면 isOk = false
+                    if(couponCondition != 0) {
+                        if(priceCurrent < couponCondition) { isOk = false; }
+                    }
+
+                    if(isOk) {
+                        if(priceCurrent * (1-couponPrice/100) > 0) {
+                            isUsable = true;
+                            discountProduct += (priceCurrent * (couponPrice/100));
+                        }
+                    }
+                }
+
+                if(!isUsable) {
+                    checkCouponList.set(i, false);
+                    //$(item).prop("checked", false);
+                }
+                //checkCouponList.set(i, !isUsable);
+            }
+        }
+
+        cartCouponAdapter.setCheckList(checkCouponList);
+        //RecyclerView에 어댑터 세팅
+        binding.cartCouponRecyclerView.setAdapter(cartCouponAdapter);
+
+        int[] returnArray = {discountProduct, discountDelivery};
+        return returnArray;
+    }
+
 
     private void initBtnOrder() {
         binding.btnOrder.setOnClickListener(v -> {

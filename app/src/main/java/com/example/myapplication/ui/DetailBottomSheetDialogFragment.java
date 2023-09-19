@@ -168,10 +168,10 @@ public class DetailBottomSheetDialogFragment extends BottomSheetDialogFragment {
                 @Override
                 public void onBtnMinusClick(TextView optionStock, TextView optionPrice, int position) {
                     int updateStock = Integer.parseInt(optionStock.getText().toString());
-                    int updatePrice = updateStock * selectedOptionProductList.get(position).getDiscountPrice();
                     if(updateStock > 1) {
                         updateStock--;
                         optionStock.setText(String.valueOf(updateStock));
+                        int updatePrice = updateStock * selectedOptionProductList.get(position).getDiscountPrice();
                         DecimalFormat df = new DecimalFormat("#,###,###");
                         optionPrice.setText(df.format(updatePrice) + "원");
 

@@ -54,7 +54,6 @@ public class DetailOptionProductAdapter extends RecyclerView.Adapter<DetailOptio
 
     public interface OnItemClickListener {
         void onBtnDeleteClick(View itemView, int position);
-        //void onBtnPlusClick(View itemView, int position);
         void onBtnPlusClick(TextView optionStock, TextView optionPrice, int position);
         void onBtnMinusClick(TextView optionStock, TextView optionPrice, int position);
     }

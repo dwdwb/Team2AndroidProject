@@ -24,7 +24,7 @@
             android:layout_marginVertical="10dp">
 
             <CheckBox
-                android:id="@+id/checkBox2"
+                android:id="@+id/btn_check_coupon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"/>

@@ -5,10 +5,11 @@ import java.io.Serializable;
 public class CartProduct implements Serializable {
     private int product_NO;			//상품 번호
     private int cart_PRODUCT_STOCK;	//상품 수량
-    private int product_STOCK;		//상품 재고
+    private int product_STOCK;		//상품 재고 = 1000
     private String product_NAME;	//상품 이름
     private String product_OPTION;	//상품 옵션
     private int discount_PRICE;		//상품 가격
+    private int shopper_NO;         //회원 번호
 
     public int getProduct_NO() {
         return product_NO;
@@ -58,6 +59,14 @@ public class CartProduct implements Serializable {
         this.discount_PRICE = discount_PRICE;
     }
 
+    public int getShopper_NO() {
+        return shopper_NO;
+    }
+
+    public void setShopper_NO(int shopper_NO) {
+        this.shopper_NO = shopper_NO;
+    }
+
     @Override
     public String toString() {
         return "CartProduct{" +
@@ -67,6 +76,7 @@ public class CartProduct implements Serializable {
                 ", product_NAME='" + product_NAME + '\'' +
                 ", product_OPTION='" + product_OPTION + '\'' +
                 ", discount_PRICE=" + discount_PRICE +
+                ", shopper_NO=" + shopper_NO +
                 '}';
     }
 }
