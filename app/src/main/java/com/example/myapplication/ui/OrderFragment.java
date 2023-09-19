@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.adapter.OrderAdapter;
 import com.example.myapplication.databinding.FragmentOrderBinding;
 import com.example.myapplication.datastore.AppKeyValueStore;
 import com.example.myapplication.dto.AddressList;
@@ -25,6 +27,7 @@ import com.example.myapplication.dto.Shopper;
 import com.example.myapplication.service.ServiceProvider;
 import com.example.myapplication.service.ShopperService;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -51,16 +54,55 @@ public class OrderFragment extends Fragment {
 
         initBtnOrderHistory();
         initBtnOrderShipping();
-
+        initRecyclerView();
 
         Bundle bundle = getArguments();
         if (bundle != null) {
             ArrayList<ProductBoard> productList = (ArrayList<ProductBoard>) bundle.getSerializable("productList");
             Log.i(TAG, productList.toString());
+
+            int totalPrice = 0;
+            for(ProductBoard productBoard : productList) {
+                int stock = productBoard.getStock();
+                int price = productBoard.getDiscountPrice();
+                int orderPrice = stock * price;
+
+                totalPrice += orderPrice;
+            }
+            DecimalFormat decimalFormat = new DecimalFormat("#,###");
+            binding.orderTotalPrice.setText(decimalFormat.format(totalPrice)+"원");
+            binding.discountPrice.setText("-"+0+"원");
+            if(totalPrice > 30000) {
+                binding.delFee.setText(0+"원");
+                binding.finalPrice.setText(decimalFormat.format(totalPrice)+"원");
+            } else {
+                binding.delFee.setText(3000+"원");
+                binding.finalPrice.setText(decimalFormat.format(totalPrice+3000)+"원");
+            }
+
+
+
+
         }
 
 
         return binding.getRoot();
+    }
+
+    private void initRecyclerView() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
+                getContext(), LinearLayoutManager.VERTICAL, false
+        );
+        binding.recyclerView.setLayoutManager(linearLayoutManager);
+        OrderAdapter orderAdapter = new OrderAdapter();
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            ArrayList<ProductBoard> productList = (ArrayList<ProductBoard>) bundle.getSerializable("productList");
+            Log.i(TAG, productList.toString());
+            orderAdapter.setList(productList);
+            binding.recyclerView.setAdapter(orderAdapter);
+        }
     }
 
     @Override

@@ -103,7 +103,7 @@
                                 app:srcCompat="@drawable/fruit_ugly" />
 
                             <TextView
-                                android:id="@+id/textView23"
+                                android:id="@+id/order_product_price"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
@@ -159,7 +159,7 @@
                                 app:srcCompat="@drawable/fruit_korean_melon" />
 
                             <TextView
-                                android:id="@+id/textView25"
+                                android:id="@+id/order_price"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
@@ -349,7 +349,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/textView33"
+                            android:id="@+id/order_product_stock"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="카테고리 별"
