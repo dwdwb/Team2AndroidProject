@@ -71,8 +71,24 @@ public class OrderHistoryFragment extends Fragment {
         });
 
         initRecyclerView();
+        initScrollToTopBtn();
 
         return view;
+    }
+
+    private void initScrollToTopBtn() {
+        binding.recyclerView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if(scrollY > 0) {
+                    binding.historyScrollToTopBtn.show();
+                }
+            }
+        });
+
+        binding.historyScrollToTopBtn.setOnClickListener(v -> {
+            binding.recyclerView.smoothScrollToPosition(0);
+        });
     }
 
     private void performSearch(String searchKeyword) {

@@ -120,6 +120,7 @@ public class OrderShippingFragment extends Fragment {
                AddressList selectedAddress = addressAdapter.getItem(position);
                // Bundle 생성 및 데이터 추가
                Bundle bundle = new Bundle();
+
                bundle.putSerializable("selectedAddress", selectedAddress);
                Log.i(TAG, "나 배송지목록"+selectedAddress.toString());
                // Bundle을 이용해 이전 Fragment로 데이터 전달

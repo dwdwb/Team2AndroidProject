@@ -7,11 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.adapter.InquiryAdapter;
 import com.example.myapplication.adapter.InquiryProductAdapter;
-import com.example.myapplication.dto.ProductInquiry;
-
-import java.text.SimpleDateFormat;
 
 public class InquiryProductViewHolder extends RecyclerView.ViewHolder {
     private static final String TAG = "InquiryProductViewHolder";

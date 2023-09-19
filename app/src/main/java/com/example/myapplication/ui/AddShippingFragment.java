@@ -1,9 +1,15 @@
 package com.example.myapplication.ui;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.app.AlertDialog;
-import android.app.Service;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -12,10 +18,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
+import com.example.myapplication.DaumAddressActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.FragmentAddShippingBinding;
-import com.example.myapplication.databinding.FragmentCartBinding;
 import com.example.myapplication.dto.AddressResult;
 import com.example.myapplication.service.AddressBookService;
 import com.example.myapplication.service.ServiceProvider;
@@ -29,17 +38,57 @@ public class AddShippingFragment extends Fragment {
     private FragmentAddShippingBinding binding;
     private NavController navController;
 
+    private Button edit_addr;
+    private static final int SEARCH_ADDRESS_ACTIVITY = 1002;
+    private TextView et_order_zipcode;
+    private TextView et_order_address1;
+    private ActivityResultLauncher<Intent> addressLauncher;
+
+    //private Button edit_addr;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentAddShippingBinding.inflate(inflater);
-
         navController = NavHostFragment.findNavController(this);
 
         initBtnAddShipping();
         initBtnBack();
 
+
+        et_order_zipcode = binding.addShippingAddress;
+        et_order_address1 = binding.addShippingAddressDetail;
+        edit_addr = binding.editAddr;
+
+        addressLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == RESULT_OK) {
+                            Intent intent = result.getData();
+                            if (intent != null) {
+                                String data = intent.getStringExtra("data");
+                                if (data != null) {
+                                    // data의 정보를 각각 우편번호와 실주소로 나누어 EditText에 표시
+                                    et_order_zipcode.setText(data.substring(0, 5));
+                                    et_order_address1.setText(data.substring(7));
+                                }
+                            }
+                        }
+                    }
+                });
+
+        edit_addr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(requireContext(), DaumAddressActivity.class);
+                addressLauncher.launch(intent);
+            }
+        });
+
+
         return binding.getRoot();
     }
+
 
     private void initBtnAddShipping() {
         binding.btnAddShipping.setOnClickListener(v -> {
