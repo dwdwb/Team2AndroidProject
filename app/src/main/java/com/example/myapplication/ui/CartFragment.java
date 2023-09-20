@@ -366,12 +366,14 @@ public class CartFragment extends Fragment {
                 binding.totalDiscountPrice.setText("-" + df.format(discountFinal) + "원");
             }
             binding.finalProductPrice.setText(df.format(orderPriceFinal) + "원");
+            binding.cartOrderPrice.setText("총 " + df.format(orderPriceFinal) + "원");
 
         } else {
             binding.totalProductPrice.setText("0원");
             binding.totalShippingPrice.setText("0원");
             binding.totalDiscountPrice.setText("0원");
             binding.finalProductPrice.setText("0원");
+            binding.cartOrderPrice.setText("총 0원");
         }
     }
 
