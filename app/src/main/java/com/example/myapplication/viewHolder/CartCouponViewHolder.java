@@ -15,6 +15,8 @@ import com.example.myapplication.dto.CartProduct;
 import com.example.myapplication.dto.Coupon;
 import com.example.myapplication.service.CartService;
 
+import java.text.DecimalFormat;
+
 public class CartCouponViewHolder  extends RecyclerView.ViewHolder {
     private static final String TAG = "CartCouponViewHolder";
     private int coupon_no;
@@ -44,13 +46,14 @@ public class CartCouponViewHolder  extends RecyclerView.ViewHolder {
 
         coupon_no = coupon.getCoupon_NO();
 
-        cart_coupon_price.setText(String.valueOf(coupon.getDiscount_PRICE()) + coupon.getCoupon_TYPE());
+        DecimalFormat df = new DecimalFormat("#,###,###");
+        cart_coupon_price.setText(df.format(coupon.getDiscount_PRICE()) + coupon.getCoupon_TYPE());
 
         if (coupon.getCoupon_NAME() == null) {
             if(coupon.getCoupon_KIND().equals("배송비")) {
-                cart_coupon_name.setText(coupon.getCoupon_KIND() + " " + coupon.getDiscount_PRICE() + coupon.getCoupon_TYPE() + " 할인쿠폰");
+                cart_coupon_name.setText(coupon.getCoupon_KIND() + " " + df.format(coupon.getDiscount_PRICE()) + coupon.getCoupon_TYPE() + " 할인쿠폰");
             } else if(coupon.getCoupon_KIND().equals("상품")) {
-                cart_coupon_name.setText(coupon.getDiscount_PRICE() + coupon.getCoupon_TYPE() + " 할인쿠폰");
+                cart_coupon_name.setText(df.format(coupon.getDiscount_PRICE()) + coupon.getCoupon_TYPE() + " 할인쿠폰");
             }
         } else {
             cart_coupon_name.setText(coupon.getCoupon_NAME() + " 할인쿠폰");
@@ -59,7 +62,7 @@ public class CartCouponViewHolder  extends RecyclerView.ViewHolder {
         if(coupon.getDiscount_RULE() == 0) {
             cart_coupon_rule.setText("금액제한없음");
         } else {
-            cart_coupon_rule.setText(coupon.getDiscount_RULE() + "원 이상 구매시");
+            cart_coupon_rule.setText(df.format(coupon.getDiscount_RULE()) + "원 이상 구매시");
         }
     }
 }

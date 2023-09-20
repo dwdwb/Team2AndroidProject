@@ -33,6 +33,7 @@ public class DetailInquiryFragment extends Fragment {
     private FragmentDetailInquiryBinding binding;
     private NavController navController;
     private int bno;
+    private DetailInquiryAdapter detailInquiryAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,7 +55,9 @@ public class DetailInquiryFragment extends Fragment {
 
     private void initWriteInquiry() {
         binding.btnWriteInquiry.setOnClickListener(v -> {
-            navController.navigate(R.id.action_detail_to_writeInquiry);
+            Bundle bundle = new Bundle();
+            bundle.putInt("bno", bno);
+            navController.navigate(R.id.action_detail_to_writeInquiry, bundle);
         });
     }
 
@@ -66,7 +69,7 @@ public class DetailInquiryFragment extends Fragment {
         binding.recyclerView.setLayoutManager(linearLayoutManager);
 
         //어댑터 생성
-        DetailInquiryAdapter detailInquiryAdapter = new DetailInquiryAdapter();
+        detailInquiryAdapter = new DetailInquiryAdapter();
 
         //API 서버에서 JSON 목록 받기
         DetailViewService detailViewService = ServiceProvider.getDetailViewService(getContext());

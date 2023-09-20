@@ -1,6 +1,7 @@
 package com.example.myapplication.viewHolder;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ public class InquiryViewHolder extends RecyclerView.ViewHolder {
     private LinearLayout answer_layout;
     private TextView answer_content;
     private TextView answer_date;
+    private Button btn_delete_inquiry;
     public InquiryViewHolder(@NonNull View itemView, InquiryAdapter.OnItemClickListener onItemClickListener) {
         super(itemView);
 
@@ -32,11 +34,13 @@ public class InquiryViewHolder extends RecyclerView.ViewHolder {
         answer_content = (TextView) itemView.findViewById(R.id.answer_content);
         answer_date = (TextView) itemView.findViewById(R.id.answer_date);
 
+        btn_delete_inquiry = (Button) itemView.findViewById(R.id.btn_delete_inquiry);
+
         //클릭 이벤트 처리
-        /*itemView.setOnClickListener(v -> {
-            Log.i(TAG, product_no + " 항목이 클릭됨");
-            onItemClickListener.onItemClick(v, getAdapterPosition());
-        });*/
+        btn_delete_inquiry.setOnClickListener(v -> {
+            //Log.i(TAG, product_no + " 항목이 클릭됨");
+            onItemClickListener.onBtnDeleteClick(v, getAdapterPosition());
+        });
     }
 
     public void setData(ProductInquiry productInquiry) {

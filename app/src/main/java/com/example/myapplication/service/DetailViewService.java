@@ -90,4 +90,11 @@ public interface DetailViewService {
 
     @POST("detailView/addCart")
     Call<Void> addCart(@Body List<ProductBoard> productBoardList);
+
+    @POST("detailView/writeInquiry")
+    Call<Void> writeInquiry(
+            @Query("bno") int bno,
+            @Query("sno") int sno,
+            @Query("content") String content
+    );
 }

@@ -112,12 +112,24 @@
             android:paddingRight="20dp"
             android:gravity="right">
 
-            <ImageView
+            <!--<ImageView
                 android:id="@+id/imageView14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/ic_delete_btn" />
+                app:srcCompat="@drawable/ic_delete_btn" />-->
+
+            <Button
+                android:id="@+id/btn_delete_inquiry"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:padding="1dp"
+                android:text="삭제"
+                android:textSize="14sp"
+                app:cornerRadius="6dp"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:textColor="#aad94844"
+                app:strokeColor="#aad94844"/>
         </LinearLayout>
     </LinearLayout>
 

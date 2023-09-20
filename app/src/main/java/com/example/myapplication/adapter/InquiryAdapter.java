@@ -48,7 +48,7 @@ public class InquiryAdapter extends RecyclerView.Adapter<InquiryViewHolder> {
     }
 
     public interface OnItemClickListener {
-        void onItemClick(View itemView, int position);
+        void onBtnDeleteClick(View itemView, int position);
     }
 
     public void setOnItemClickListener(InquiryAdapter.OnItemClickListener onItemClickListener) {

@@ -43,53 +43,32 @@ public class InquiryFragment extends Fragment {
         //RecyclerView 초기화
         initRecyclerView();
 
+        Bundle bundle = getArguments();
+        if(bundle != null) {
+            ProductInquiry productInquiry = (ProductInquiry) bundle.getSerializable("deleteProductInquiry");
+            deleteProductInquiry(productInquiry);
+        }
+
         return binding.getRoot();
     }
 
-    /*private void initRecyclerView() {
-        //RecyclerView에서 항목을 수직으로 배치하도록 설정
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
-                getContext(), LinearLayoutManager.VERTICAL, false
-        );
-        binding.recyclerView.setLayoutManager(linearLayoutManager);
-
-        //어댑터 생성
-        InquiryAdapter inquiryAdapter = new InquiryAdapter();
-
+    private void deleteProductInquiry(ProductInquiry productInquiry) {
         //API 서버에서 JSON 목록 받기
         MyPageShopperInquiryService myPageShopperInquiryService = ServiceProvider.getMyPageShopperInquiryService(getContext());
-        Call<List<ProductInquiry>> call = myPageShopperInquiryService.getInquiryList(1);
-        call.enqueue(new Callback<List<ProductInquiry>>() {
+
+        Call<Void> call = myPageShopperInquiryService.deleteInquiry(productInquiry);
+        call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<List<ProductInquiry>> call, Response<List<ProductInquiry>> response) {
-                //JSON -> List<Board> 변환
-                List<ProductInquiry> list = response.body();
-                Log.i(TAG, list + "");
-                //어댑터 데이터 세팅
-                inquiryAdapter.setList(list);
-                //RecyclerView에 어댑터 세팅
-                binding.recyclerView.setAdapter(inquiryAdapter);
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
             }
 
             @Override
-            public void onFailure(Call<List<ProductInquiry>> call, Throwable t) {
-                Log.i(TAG, "안됨......");
+            public void onFailure(Call<Void> call, Throwable t) {
+
             }
         });
-
-        //항목을 클릭했을 때 콜백 객체를 등록
-        inquiryAdapter.setOnItemClickListener(new InquiryAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View itemView, int position) {
-                Log.i(TAG, position + "항목 클릭됨");
-                ProductInquiry productInquiry = inquiryAdapter.getItem(position);
-
-                Bundle args = new Bundle();
-                args.putSerializable("productInquiry", productInquiry);
-                //navController.navigate(R.id.action_dest_list_to_dest_detail, args);
-            }
-        });
-    }*/
+    }
 
     private void initRecyclerView() {
         //RecyclerView에서 항목을 수직으로 배치하도록 설정
@@ -115,6 +94,7 @@ public class InquiryFragment extends Fragment {
                 Log.i(TAG, list + "");
                 //어댑터 데이터 세팅
                 inquiryProductAdapter.setList(list);
+                inquiryProductAdapter.setNavController(navController);
                 //RecyclerView에 어댑터 세팅
                 binding.recyclerView.setAdapter(inquiryProductAdapter);
             }
@@ -131,6 +111,9 @@ public class InquiryFragment extends Fragment {
             public void onItemClick(View itemView, int position) {
                 Log.i(TAG, position + "항목 클릭됨");
                 String productName = inquiryProductAdapter.getItem(position);
+                ProductInquiry productInquiry = inquiryProductAdapter.getDeleteProductInquiry();
+
+                Log.i(TAG, "삭제할 상품문의 객체: " + productInquiry);
 
                 Bundle args = new Bundle();
                 args.putSerializable("productName", productName);

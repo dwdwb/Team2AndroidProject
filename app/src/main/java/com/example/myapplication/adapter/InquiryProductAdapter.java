@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +30,8 @@ public class InquiryProductAdapter extends RecyclerView.Adapter<InquiryProductVi
     private List<String> productNameList = new ArrayList<>();
     private List<ProductInquiry> productInquiryList = new ArrayList<>();
     private OnItemClickListener onItemClickListener;
+    private ProductInquiry deleteProductInquiry;
+    private NavController navController;
 
     @NonNull
     @Override
@@ -77,6 +81,18 @@ public class InquiryProductAdapter extends RecyclerView.Adapter<InquiryProductVi
         //항목을 클릭했을 때 콜백 객체를 등록
         inquiryAdapter.setOnItemClickListener(new InquiryAdapter.OnItemClickListener() {
             @Override
+            public void onBtnDeleteClick(View itemView, int position) {
+                deleteProductInquiry = inquiryAdapter.getItem(position);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("deleteProductInquiry", deleteProductInquiry);
+                NavOptions navOptions = new NavOptions.Builder()
+                        .setPopUpTo(R.id.inquiry,false)
+                        .setLaunchSingleTop(true)
+                        .build();
+                navController.navigate(R.id.inquiry, bundle, navOptions);
+            }
+
+            /*@Override
             public void onItemClick(View itemView, int position) {
                 //Log.i(TAG, position + "항목 클릭됨");
                 ProductInquiry productInquiry = inquiryAdapter.getItem(position);
@@ -84,7 +100,7 @@ public class InquiryProductAdapter extends RecyclerView.Adapter<InquiryProductVi
                 Bundle args = new Bundle();
                 args.putSerializable("productInquiry", productInquiry);
                 //navController.navigate(R.id.action_dest_list_to_dest_detail, args);
-            }
+            }*/
         });
     }
 
@@ -99,6 +115,22 @@ public class InquiryProductAdapter extends RecyclerView.Adapter<InquiryProductVi
 
     public String getItem(int position) {
         return productNameList.get(position);
+    }
+
+    public ProductInquiry getDeleteProductInquiry() {
+        return deleteProductInquiry;
+    }
+
+    public void setDeleteProductInquiry(ProductInquiry deleteProductInquiry) {
+        this.deleteProductInquiry = deleteProductInquiry;
+    }
+
+    public NavController getNavController() {
+        return navController;
+    }
+
+    public void setNavController(NavController navController) {
+        this.navController = navController;
     }
 
     public interface OnItemClickListener {

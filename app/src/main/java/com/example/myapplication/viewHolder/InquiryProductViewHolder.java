@@ -20,6 +20,12 @@ public class InquiryProductViewHolder extends RecyclerView.ViewHolder {
         //아이템 UI 얻기
         product_name = (TextView) itemView.findViewById(R.id.product_name);
         recycler_view = (RecyclerView) itemView.findViewById(R.id.recycler_view);
+
+        //클릭 이벤트 처리
+        itemView.setOnClickListener(v -> {
+            //Log.i(TAG, product_no + " 항목이 클릭됨");
+            onItemClickListener.onItemClick(v, getAdapterPosition());
+        });
     }
 
     public void setData(String productName) {
