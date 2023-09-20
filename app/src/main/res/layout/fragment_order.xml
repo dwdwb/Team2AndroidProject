@@ -271,12 +271,7 @@
                 android:layout_marginTop="10dp"
                 android:background="?android:attr/listDivider" />
 
-            <View
-                android:id="@+id/view8"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="20dp"
-                android:background="?android:attr/listDivider" />
+
 
             <TextView
                 android:id="@+id/textView42"
@@ -287,45 +282,69 @@
                 android:text="결제 수단 선택"
                 android:textSize="14sp" />
 
-            <RadioGroup
-                android:id="@+id/radioGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
-                    <RadioButton
-                        android:id="@+id/radioButtonA"
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-                        android:text="A" />
+                <Button
+                    android:id="@+id/card"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_weight="1"
 
-                    <RadioButton
-                        android:id="@+id/radioButtonB"
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-                        android:text="B" />
+                    android:text="카드 결제"
+                    android:textColor="#A0DE5F"
+                    app:strokeColor="#A0DE5F" />
 
+                <Button
+                    android:id="@+id/account"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_weight="1"
 
-                    <RadioButton
-                        android:id="@+id/radioButtonC"
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-                        android:text="C" />
+                    android:text="계좌 이체"
+                    android:textColor="#A0DE5F"
+                    app:strokeColor="#A0DE5F" />
+            </LinearLayout>
 
-                    <RadioButton
-                        android:id="@+id/radioButtonD"
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-                        android:text="D" />
-
-            </RadioGroup>
-
-            <View
-                android:id="@+id/view9"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="20dp"
-                android:background="?android:attr/listDivider" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/phone"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_weight="1"
+                    android:text="휴대폰"
+
+                    android:textColor="#A0DE5F"
+                    app:strokeColor="#A0DE5F" />
+
+                <Button
+                    android:id="@+id/noBank"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_weight="1"
+                    android:text="무통장 입금"
+
+                    android:textColor="#A0DE5F"
+                    app:strokeColor="#A0DE5F" />
+            </LinearLayout>
+
 
             <View
                 android:id="@+id/view10"
@@ -490,24 +509,29 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:orientation="horizontal">
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:paddingBottom="0dp">
 
                 <Spinner
-                    android:id="@+id/spinner"
-                    android:layout_width="155dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp">
+                    android:id="@+id/order_spinner"
+                    android:layout_width="150dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/background_spinner_option">
 
                 </Spinner>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="230dp"
-                    android:layout_height="48dp">
+                    android:layout_height="55dp"
+                    android:layout_marginTop="5dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="10dp"
                         android:hint="휴대폰 번호" />
                 </com.google.android.material.textfield.TextInputLayout>
 
