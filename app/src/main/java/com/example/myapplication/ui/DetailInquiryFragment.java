@@ -47,6 +47,8 @@ public class DetailInquiryFragment extends Fragment {
         //버튼 초기화
         initWriteInquiry();
 
+        Log.i(TAG, "inquiry에서 bno: " + bno);
+
         return binding.getRoot();
     }
 
@@ -75,10 +77,12 @@ public class DetailInquiryFragment extends Fragment {
                 //JSON -> List<Board> 변환
                 List<ProductInquiry> list = response.body();
                 Log.i(TAG, list + "");
-                //어댑터 데이터 세팅
-                detailInquiryAdapter.setList(list);
-                //RecyclerView에 어댑터 세팅
-                binding.recyclerView.setAdapter(detailInquiryAdapter);
+                if(list != null) {
+                    //어댑터 데이터 세팅
+                    detailInquiryAdapter.setList(list);
+                    //RecyclerView에 어댑터 세팅
+                    binding.recyclerView.setAdapter(detailInquiryAdapter);
+                }
             }
 
             @Override

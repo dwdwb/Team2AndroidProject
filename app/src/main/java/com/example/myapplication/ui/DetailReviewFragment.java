@@ -41,6 +41,8 @@ public class DetailReviewFragment extends Fragment {
         //RecyclerView 초기화
         initRecyclerView();
 
+        Log.i(TAG, "review에서 bno: " + bno);
+
         return binding.getRoot();
     }
 
@@ -51,9 +53,11 @@ public class DetailReviewFragment extends Fragment {
             @Override
             public void onResponse(Call<ReviewInfo> call, Response<ReviewInfo> response) {
                 ReviewInfo reviewInfo = response.body();
-                binding.ratingTotal.setRating(reviewInfo.getStarRateAvg()*5/100);
-                binding.ratingTotalTxt.setText(String.valueOf(reviewInfo.getTotalReviewScore()));
-                binding.ratingCount.setText("(" + reviewInfo.getReviewCount() + ")");
+                if(reviewInfo != null) {
+                    binding.ratingTotal.setRating(reviewInfo.getStarRateAvg()*5/100);
+                    binding.ratingTotalTxt.setText(String.valueOf(reviewInfo.getTotalReviewScore()));
+                    binding.ratingCount.setText("(" + reviewInfo.getReviewCount() + ")");
+                }
             }
 
             @Override
@@ -82,10 +86,12 @@ public class DetailReviewFragment extends Fragment {
                 //JSON -> List<Board> 변환
                 List<Review> list = response.body();
                 Log.i(TAG, list + "");
-                //어댑터 데이터 세팅
-                detailReviewAdapter.setList(list);
-                //RecyclerView에 어댑터 세팅
-                binding.recyclerView.setAdapter(detailReviewAdapter);
+                if(list != null) {
+                    //어댑터 데이터 세팅
+                    detailReviewAdapter.setList(list);
+                    //RecyclerView에 어댑터 세팅
+                    binding.recyclerView.setAdapter(detailReviewAdapter);
+                }
             }
 
             @Override
