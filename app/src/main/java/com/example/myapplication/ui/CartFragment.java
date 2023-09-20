@@ -32,6 +32,7 @@ import com.example.myapplication.service.CartService;
 import com.example.myapplication.service.ServiceProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -240,8 +241,16 @@ public class CartFragment extends Fragment {
             @Override
             public void onBtnCheckClick(CheckBox checkBox, int position) {
                 Log.i(TAG, position + "항목 클릭됨");
-
+                checkCouponList.set(position, checkBox.isChecked());
                 calculatePrice("onBtnCheckClick");
+
+                if(binding.totalProductPrice.getText().equals("0원")) {
+                    checkCouponList.set(position, false);
+
+                    cartCouponAdapter.setCheckList(checkCouponList);
+                    //RecyclerView에 어댑터 세팅
+                    binding.cartCouponRecyclerView.setAdapter(cartCouponAdapter);
+                }
             }
         });
     }
@@ -340,6 +349,8 @@ public class CartFragment extends Fragment {
             var discountDelivery = coupon.Ddis;*/
             int discountProduct = returnArray[0];
             int discountDelivery = returnArray[1];
+            Log.i(TAG, "상품할인되니? " + discountProduct);
+            Log.i(TAG, "배송비할인되니? " + discountDelivery);
 
             int priceFinal = totalPrice;
             int deliveryFinal = totalDelivery - discountDelivery;
@@ -348,19 +359,24 @@ public class CartFragment extends Fragment {
 
             DecimalFormat df = new DecimalFormat("#,###,###");
             binding.totalProductPrice.setText(df.format(priceFinal) + "원");
-            binding.totalDeliveryPrice.setText(df.format(deliveryFinal) + "원");
-            binding.totalDiscountPrice.setText(df.format(discountFinal) + "원");
+            binding.totalShippingPrice.setText(df.format(deliveryFinal) + "원");
+            if(discountFinal == 0) {
+                binding.totalDiscountPrice.setText("0원");
+            } else {
+                binding.totalDiscountPrice.setText("-" + df.format(discountFinal) + "원");
+            }
             binding.finalProductPrice.setText(df.format(orderPriceFinal) + "원");
 
         } else {
             binding.totalProductPrice.setText("0원");
-            binding.totalDeliveryPrice.setText("0원");
+            binding.totalShippingPrice.setText("0원");
             binding.totalDiscountPrice.setText("0원");
             binding.finalProductPrice.setText("0원");
         }
     }
 
     private int[] calculateCoupon(int price, int delivery) {
+        Log.i(TAG, "calculateCoupon의 쿠폰 체크리스트1: " + checkCouponList);
         //현재 총상품금액
         int priceCurrent = price;
         //현재 총배송비
@@ -373,6 +389,8 @@ public class CartFragment extends Fragment {
 
         for(int i=0; i<checkCouponList.size(); i++) {
             if(checkCouponList.get(i)) {
+                Log.i(TAG, "calculateCoupon의 체크된 애?: " + checkCouponList.get(i));
+                Log.i(TAG, "너 뉘기야: " + couponList.get(i));
                 //couponType: ####[원|%]
                 String couponType = couponList.get(i).getCoupon_TYPE();
                 //couponCondition: [금액제한없음|####원 이상 구매 시 ~~~]
@@ -414,6 +432,7 @@ public class CartFragment extends Fragment {
                 }
                 //#### '%' 일 경우
                 else if(couponType.equals("%")) {
+                    Log.i(TAG, "혹시 %조차 안되는거니??? ");
                     //조건적합여부
                     boolean isOk = true;
 
@@ -425,7 +444,14 @@ public class CartFragment extends Fragment {
                     if(isOk) {
                         if(priceCurrent * (1-couponPrice/100) > 0) {
                             isUsable = true;
-                            discountProduct += (priceCurrent * (couponPrice/100));
+                            discountProduct += Math.round(priceCurrent * (couponPrice/100.0));
+
+                            Log.i(TAG, "상품할인되니?? " + discountProduct);
+                            Log.i(TAG, "배송비할인되니?? " + discountDelivery);
+
+                            Log.i(TAG, "혹시 현재 상품금액이 0원이니? " + priceCurrent);
+                            Log.i(TAG, "아니면 할인금액이 0원????" + couponPrice);
+                            Log.i(TAG, "그것도 아니면 계산된 할인금액이 0원??????" + Math.round(priceCurrent * (couponPrice/100.0)));
                         }
                     }
                 }
@@ -433,14 +459,19 @@ public class CartFragment extends Fragment {
                 if(!isUsable) {
                     checkCouponList.set(i, false);
                     //$(item).prop("checked", false);
+                    Log.i(TAG, "calculateCoupon의 쿠폰 체크리스트2: " + checkCouponList);
+                    Log.i(TAG, "calculateCoupon의 체크 false된 애?2: " + checkCouponList.get(i));
                 }
                 //checkCouponList.set(i, !isUsable);
             }
         }
-
+        Log.i(TAG, "calculateCoupon의 쿠폰 체크리스트3 - 어댑터 설정: " + checkCouponList);
         cartCouponAdapter.setCheckList(checkCouponList);
         //RecyclerView에 어댑터 세팅
         binding.cartCouponRecyclerView.setAdapter(cartCouponAdapter);
+
+        Log.i(TAG, "상품할인되니??? " + discountProduct);
+        Log.i(TAG, "배송비할인되니??? " + discountDelivery);
 
         int[] returnArray = {discountProduct, discountDelivery};
         return returnArray;
@@ -449,7 +480,50 @@ public class CartFragment extends Fragment {
 
     private void initBtnOrder() {
         binding.btnOrder.setOnClickListener(v -> {
-            navController.navigate(R.id.action_cart_to_order);
+            Bundle bundle = new Bundle();
+
+            //주문할 상품 리스트
+            List<CartProduct> orderedCartProductList = new ArrayList<>();
+            for(int i=0; i<checkList.size(); i++) {
+                if(checkList.get(i)) {
+                    orderedCartProductList.add(cartProductList.get(i));
+                }
+            }
+            bundle.putSerializable("cartProductList", (Serializable) orderedCartProductList);
+
+            //사용할 쿠폰 리스트
+            List<Coupon> orderedCouponList = new ArrayList<>();
+            for(int i=0; i<checkCouponList.size(); i++) {
+                if(checkCouponList.get(i)) {
+                    orderedCouponList.add(couponList.get(i));
+                }
+            }
+            bundle.putSerializable("couponList", (Serializable) orderedCouponList);
+
+            //총 상품금액
+            int totalPrice = Integer.parseInt(binding.totalProductPrice.getText().toString().replaceAll("[^0-9]", ""));
+            bundle.putInt("totalPrice", totalPrice);
+
+            //총 할인금액
+            int totalDiscountPrice = Integer.parseInt(binding.totalDiscountPrice.getText().toString().replaceAll("[^0-9]", ""));
+            bundle.putInt("totalDiscountPrice", totalDiscountPrice);
+
+            //총 배송비
+            int totalShippingPrice = Integer.parseInt(binding.totalShippingPrice.getText().toString().replaceAll("[^0-9]", ""));
+            bundle.putInt("totalShippingPrice", totalShippingPrice);
+
+            //총 주문금액
+            int orderPrice = Integer.parseInt(binding.finalProductPrice.getText().toString().replaceAll("[^0-9]", ""));
+            bundle.putInt("orderPrice", orderPrice);
+
+            Log.i(TAG, "주문할 상품들: " + bundle.getSerializable("cartProductList"));
+            Log.i(TAG, "사용할 쿠폰들: " + bundle.getSerializable("couponList"));
+            Log.i(TAG, "총 상품금액: " + bundle.getInt("totalPrice"));
+            Log.i(TAG, "총 할인금액: " + bundle.getInt("totalDiscountPrice"));
+            Log.i(TAG, "총 배송비: " + bundle.getInt("totalShippingPrice"));
+            Log.i(TAG, "총 주문금액: " + bundle.getInt("orderPrice"));
+
+            navController.navigate(R.id.action_cart_to_order, bundle);
         });
     }
 
