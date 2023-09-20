@@ -17,12 +17,15 @@ import com.example.myapplication.R;
 import com.example.myapplication.adapter.CartProductAdapter;
 import com.example.myapplication.adapter.DetailContentImageAdpater;
 import com.example.myapplication.databinding.FragmentDetailExplainBinding;
+import com.example.myapplication.datastore.AppKeyValueStore;
 import com.example.myapplication.dto.CartProduct;
 import com.example.myapplication.dto.ProductBoard;
 import com.example.myapplication.dto.ReviewInfo;
+import com.example.myapplication.dto.WriteReviewResult;
 import com.example.myapplication.service.CartService;
 import com.example.myapplication.service.DetailViewService;
 import com.example.myapplication.service.ServiceProvider;
+import com.example.myapplication.service.WishService;
 
 import java.text.DecimalFormat;
 import java.util.Currency;
@@ -122,7 +125,31 @@ public class DetailExplainFragment extends Fragment {
 
 
         //찜 버튼 활성화 여부 결정
+        String shopperId = AppKeyValueStore.getValue(getContext(), "shopperId");
+        if (shopperId != null) {
+            WishService wishService = ServiceProvider.getWishService(getContext());
+            Call<WriteReviewResult> call2 = wishService.isInWish(bno, shopperId);
+            call2.enqueue(new Callback<WriteReviewResult>() {
+                @Override
+                public void onResponse(Call<WriteReviewResult> call, Response<WriteReviewResult> response) {
+                    WriteReviewResult writeReviewResult = response.body();
+                    if (writeReviewResult.getResult().equals("true")) {
 
+
+                        binding.wishBtn.setImageResource(R.drawable.ic_wish_filled_36dp);
+                        isWishToggled = true;
+                    } else {
+                        binding.wishBtn.setImageResource(R.drawable.ic_wish_36dp);
+                        isWishToggled = false;
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<WriteReviewResult> call, Throwable t) {
+                    t.printStackTrace();
+                }
+            });
+        }
     }
 
     //이미지 불러오기
@@ -169,12 +196,47 @@ public class DetailExplainFragment extends Fragment {
 
     private void initBtnWish() {
         binding.wishBtn.setOnClickListener(v -> {
-            if (isWishToggled == false) {
-                binding.wishBtn.setImageResource(R.drawable.ic_wish_filled_36dp);
-                isWishToggled = true;
-            } else {
-                binding.wishBtn.setImageResource(R.drawable.ic_wish_36dp);
-                isWishToggled = false;
+            String shopperId = AppKeyValueStore.getValue(getContext(), "shopperId");
+            if (shopperId != null) {
+                if (isWishToggled == false) {
+                    WishService wishService = ServiceProvider.getWishService(getContext());
+                    Call<WriteReviewResult> call = wishService.putInWishList(bno, shopperId);
+                    call.enqueue(new Callback<WriteReviewResult>() {
+                        @Override
+                        public void onResponse(Call<WriteReviewResult> call, Response<WriteReviewResult> response) {
+                            WriteReviewResult writeReviewResult = response.body();
+                            if (writeReviewResult.getResult().equals("success")) {
+                                binding.wishBtn.setImageResource(R.drawable.ic_wish_filled_36dp);
+                                isWishToggled = true;
+                            } else {
+
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<WriteReviewResult> call, Throwable t) {
+
+                        }
+                    });
+                } else {
+                    WishService wishService = ServiceProvider.getWishService(getContext());
+                    Call<WriteReviewResult> call = wishService.removeFromWishList(bno, shopperId);
+                    call.enqueue(new Callback<WriteReviewResult>() {
+                        @Override
+                        public void onResponse(Call<WriteReviewResult> call, Response<WriteReviewResult> response) {
+                            WriteReviewResult writeReviewResult = response.body();
+                            if (writeReviewResult.getResult().equals("success")) {
+                                binding.wishBtn.setImageResource(R.drawable.ic_wish_36dp);
+                                isWishToggled = false;
+                            } else {
+
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<WriteReviewResult> call, Throwable t) {
+
+                        }
+                    });
+                }
             }
         });
     }

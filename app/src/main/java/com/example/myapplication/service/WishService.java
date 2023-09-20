@@ -24,6 +24,15 @@ public interface WishService {
 
     @GET("wish/addToCart")
     Call<WriteReviewResult> addToCart(@Query("product_no") int product_no, @Query("shopper_no") int shopper_no);
+
+    @GET("wish/isInWish")
+    Call<WriteReviewResult> isInWish(@Query("product_no") int product_no, @Query("shopper_id") String shopper_id);
+
+    @GET("wish/putInWishList")
+    Call<WriteReviewResult> putInWishList(@Query("product_no") int product_no, @Query("shopper_id") String shopper_id);
+
+    @GET("wish/removeFromWishList")
+    Call<WriteReviewResult> removeFromWishList(@Query("product_no") int product_no, @Query("shopper_id") String shopper_id);
     /*@GET("review/getReviewList")
     Call<List<ReviewListItem>> getReviewList();
 

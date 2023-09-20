@@ -5,7 +5,8 @@
     android:id="@+id/top_toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ui.DetailFragment">
+    tools:context=".ui.DetailFragment"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
