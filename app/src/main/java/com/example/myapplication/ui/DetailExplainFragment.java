@@ -108,8 +108,10 @@ public class DetailExplainFragment extends Fragment {
             public void onResponse(Call<ReviewInfo> call, Response<ReviewInfo> response) {
                 ReviewInfo reviewInfo = response.body();
                 Log.i(TAG, "reviewInfo가 왜 null이지....?" + reviewInfo);
-                binding.rating.setRating(reviewInfo.getStarRateAvg()*5/100);
-                binding.reviewCount.setText(reviewInfo.getReviewCount() + "개 상품평");
+                if(reviewInfo != null) {
+                    binding.rating.setRating(reviewInfo.getStarRateAvg()*5/100);
+                    binding.reviewCount.setText(reviewInfo.getReviewCount() + "개 상품평");
+                }
             }
 
             @Override
