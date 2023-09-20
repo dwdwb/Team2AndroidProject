@@ -135,7 +135,7 @@ public class MyPageFragment extends Fragment {
                 } else if (myPageMenuItem.getMenuText().equals("배송지 관리")) {
                     navController.navigate(R.id.action_myPage_to_shipping);
                 } else if (myPageMenuItem.getMenuText().equals("회원 탈퇴")) {
-
+                    navController.navigate(R.id.action_myPage_to_withdraw);
                 }
             }
         });

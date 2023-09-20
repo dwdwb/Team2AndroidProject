@@ -118,6 +118,9 @@
         <action
             android:id="@+id/action_myPage_to_search"
             app:destination="@id/search" />
+        <action
+            android:id="@+id/action_myPage_to_withdraw"
+            app:destination="@id/withdraw" />
     </fragment>
     <fragment
         android:id="@+id/shipping"
@@ -247,4 +250,9 @@
             android:id="@+id/action_orderShipping_to_addShipping"
             app:destination="@id/addShipping" />
     </fragment>
+    <fragment
+        android:id="@+id/withdraw"
+        android:name="com.example.myapplication.ui.WithdrawFragment"
+        android:label="회원탈퇴"
+        tools:layout="@layout/fragment_withdraw" />
 </navigation>
