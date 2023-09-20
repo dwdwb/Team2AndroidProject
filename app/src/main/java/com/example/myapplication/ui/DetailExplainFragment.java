@@ -1,5 +1,6 @@
 package com.example.myapplication.ui;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,7 @@ import retrofit2.Response;
 public class DetailExplainFragment extends Fragment {
     private static final String TAG = "DetailExplainFragment";
     private FragmentDetailExplainBinding binding;
+    private boolean isWishToggled;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,6 +51,9 @@ public class DetailExplainFragment extends Fragment {
         initContentImageRecyclerView();
 
         initBtnOrder();
+
+        isWishToggled = false;
+        initBtnWish();
 
         return binding.getRoot();
     }
@@ -108,6 +113,10 @@ public class DetailExplainFragment extends Fragment {
 
             }
         });
+
+
+        //찜 버튼 활성화 여부 결정
+
     }
 
     //이미지 불러오기
@@ -148,6 +157,18 @@ public class DetailExplainFragment extends Fragment {
             DetailBottomSheetDialogFragment bottomSheet = new DetailBottomSheetDialogFragment();
             bottomSheet.show(getActivity().getSupportFragmentManager(), bottomSheet.getTag());
             /*bottomSheet.show(getSupportFragmentManager(), bottomSheet.getTag());*/
+        });
+    }
+
+    private void initBtnWish() {
+        binding.wishBtn.setOnClickListener(v -> {
+            if (isWishToggled == false) {
+                binding.wishBtn.setImageResource(R.drawable.ic_wish_filled_36dp);
+                isWishToggled = true;
+            } else {
+                binding.wishBtn.setImageResource(R.drawable.ic_wish_36dp);
+                isWishToggled = false;
+            }
         });
     }
 }
