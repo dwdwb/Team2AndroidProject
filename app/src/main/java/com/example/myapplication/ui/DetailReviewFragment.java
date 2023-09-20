@@ -29,6 +29,7 @@ import retrofit2.Response;
 public class DetailReviewFragment extends Fragment {
     private static final String TAG = "DetailReviewFragment";
     private FragmentDetailReviewBinding binding;
+    private int bno;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class DetailReviewFragment extends Fragment {
 
     private void initView() {
         DetailViewService detailViewService = ServiceProvider.getDetailViewService(getContext());
-        Call<ReviewInfo> call = detailViewService.getReviewInfo(21);
+        Call<ReviewInfo> call = detailViewService.getReviewInfo(bno);
         call.enqueue(new Callback<ReviewInfo>() {
             @Override
             public void onResponse(Call<ReviewInfo> call, Response<ReviewInfo> response) {
@@ -74,7 +75,7 @@ public class DetailReviewFragment extends Fragment {
 
         //API 서버에서 JSON 목록 받기
         DetailViewService detailViewService = ServiceProvider.getDetailViewService(getContext());
-        Call<List<Review>> call = detailViewService.getReviewList(21);
+        Call<List<Review>> call = detailViewService.getReviewList(bno);
         call.enqueue(new Callback<List<Review>>() {
             @Override
             public void onResponse(Call<List<Review>> call, Response<List<Review>> response) {
@@ -105,5 +106,13 @@ public class DetailReviewFragment extends Fragment {
                 //navController.navigate(R.id.action_dest_list_to_dest_detail, args);
             }
         });
+    }
+
+    public int getBno() {
+        return bno;
+    }
+
+    public void setBno(int bno) {
+        this.bno = bno;
     }
 }

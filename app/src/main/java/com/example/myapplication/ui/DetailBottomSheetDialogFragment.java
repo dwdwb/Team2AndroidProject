@@ -52,6 +52,7 @@ public class DetailBottomSheetDialogFragment extends BottomSheetDialogFragment {
     private DetailOptionAdapter detailOptionAdapter;
     private ProductBoard selectedItem;
     private NavController navController;
+    private String bname;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,7 +72,7 @@ public class DetailBottomSheetDialogFragment extends BottomSheetDialogFragment {
     private void initOption() {
         //API 서버에서 JSON 목록 받기
         DetailViewService detailViewService = ServiceProvider.getDetailViewService(getContext());
-        Call<List<ProductBoard>> call = detailViewService.getOptionProductList("고재승 꿀수박");
+        Call<List<ProductBoard>> call = detailViewService.getOptionProductList(bname);
         call.enqueue(new Callback<List<ProductBoard>>() {
             @Override
             public void onResponse(Call<List<ProductBoard>> call, Response<List<ProductBoard>> response) {
@@ -250,11 +251,11 @@ public class DetailBottomSheetDialogFragment extends BottomSheetDialogFragment {
         });
     }
 
-    /*@Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding.btnCart.setOnClickListener(v -> {
-            dismiss();
-        });
-    }*/
+    public String getBname() {
+        return bname;
+    }
+
+    public void setBname(String bname) {
+        this.bname = bname;
+    }
 }

@@ -36,6 +36,8 @@ public class DetailExplainFragment extends Fragment {
     private static final String TAG = "DetailExplainFragment";
     private FragmentDetailExplainBinding binding;
     private boolean isWishToggled;
+    private int bno;
+    private String bname;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,11 +69,11 @@ public class DetailExplainFragment extends Fragment {
     public void initView() {
         //DetailViewService.loadProductImage(1, binding.productImage);
 
-        DetailViewService.loadMainImage(21, binding.productImage);
+        DetailViewService.loadMainImage(bno, binding.productImage);
 
         //API 서버에서 JSON 목록 받기
         DetailViewService detailViewService = ServiceProvider.getDetailViewService(getContext());
-        Call<ProductBoard> call = detailViewService.getBoard(21);
+        Call<ProductBoard> call = detailViewService.getBoard(bno);
         call.enqueue(new Callback<ProductBoard>() {
             @Override
             public void onResponse(Call<ProductBoard> call, Response<ProductBoard> response) {
@@ -80,7 +82,8 @@ public class DetailExplainFragment extends Fragment {
 
                 DecimalFormat df = new DecimalFormat("#,###,###");
 
-                binding.productName.setText(productBoard.getProductName());
+                bname = productBoard.getProductName();
+                binding.productName.setText(bname);
                 if(productBoard.getDiscountRate() == 0) {
                     binding.productDiscountRate.setVisibility(View.GONE);
                     binding.productOriginalPrice.setVisibility(View.GONE);
@@ -99,11 +102,12 @@ public class DetailExplainFragment extends Fragment {
             }
         });
 
-        Call<ReviewInfo> callRating = detailViewService.getReviewInfo(21);
+        Call<ReviewInfo> callRating = detailViewService.getReviewInfo(bno);
         callRating.enqueue(new Callback<ReviewInfo>() {
             @Override
             public void onResponse(Call<ReviewInfo> call, Response<ReviewInfo> response) {
                 ReviewInfo reviewInfo = response.body();
+                Log.i(TAG, "reviewInfo가 왜 null이지....?" + reviewInfo);
                 binding.rating.setRating(reviewInfo.getStarRateAvg()*5/100);
                 binding.reviewCount.setText(reviewInfo.getReviewCount() + "개 상품평");
             }
@@ -132,7 +136,7 @@ public class DetailExplainFragment extends Fragment {
 
         //API 서버에서 JSON 목록 받기
         DetailViewService detailViewService = ServiceProvider.getDetailViewService(getContext());
-        Call<List<Integer>> call = detailViewService.getMediaNoList(18);
+        Call<List<Integer>> call = detailViewService.getMediaNoList(bno);
         call.enqueue(new Callback<List<Integer>>() {
             @Override
             public void onResponse(Call<List<Integer>> call, Response<List<Integer>> response) {
@@ -155,6 +159,7 @@ public class DetailExplainFragment extends Fragment {
     private void initBtnOrder() {
         binding.btnBuy.setOnClickListener(v -> {
             DetailBottomSheetDialogFragment bottomSheet = new DetailBottomSheetDialogFragment();
+            bottomSheet.setBname(bname);
             bottomSheet.show(getActivity().getSupportFragmentManager(), bottomSheet.getTag());
             /*bottomSheet.show(getSupportFragmentManager(), bottomSheet.getTag());*/
         });
@@ -170,5 +175,14 @@ public class DetailExplainFragment extends Fragment {
                 isWishToggled = false;
             }
         });
+    }
+
+
+    public int getBno() {
+        return bno;
+    }
+
+    public void setBno(int bno) {
+        this.bno = bno;
     }
 }

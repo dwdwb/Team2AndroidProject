@@ -32,6 +32,7 @@ public class DetailInquiryFragment extends Fragment {
     private static final String TAG = "DetailInquiryFragment";
     private FragmentDetailInquiryBinding binding;
     private NavController navController;
+    private int bno;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,7 +68,7 @@ public class DetailInquiryFragment extends Fragment {
 
         //API 서버에서 JSON 목록 받기
         DetailViewService detailViewService = ServiceProvider.getDetailViewService(getContext());
-        Call<List<ProductInquiry>> call = detailViewService.getInquiryList(1);
+        Call<List<ProductInquiry>> call = detailViewService.getInquiryList(bno);
         call.enqueue(new Callback<List<ProductInquiry>>() {
             @Override
             public void onResponse(Call<List<ProductInquiry>> call, Response<List<ProductInquiry>> response) {
@@ -98,5 +99,13 @@ public class DetailInquiryFragment extends Fragment {
                 //navController.navigate(R.id.action_dest_list_to_dest_detail, args);
             }
         });
+    }
+
+    public int getBno() {
+        return bno;
+    }
+
+    public void setBno(int bno) {
+        this.bno = bno;
     }
 }

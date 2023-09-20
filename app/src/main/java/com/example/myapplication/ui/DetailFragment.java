@@ -44,6 +44,7 @@ public class DetailFragment extends Fragment {
     private static final String TAG = "DetailFragment";
     private FragmentDetailBinding binding;
     private NavController navController;
+    private int bno;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,11 +53,12 @@ public class DetailFragment extends Fragment {
         //NavController 얻기
         navController = NavHostFragment.findNavController(this);
 
-        /*initBtnAddCart();
-        initBtnOrder();
-        initBtnWriteInquiry();
-        initBtnBack();*/
-        //initBtnOrder();
+        Bundle bundle = getArguments();
+        if(bundle != null) {
+            bno = bundle.getInt("board_no");
+        }
+
+        Log.i(TAG, "bno: " + bno);
 
         //메뉴 초기화
         initMenu();
@@ -103,18 +105,10 @@ public class DetailFragment extends Fragment {
             bottomNavigation.setVisibility(View.VISIBLE);
     }
 
-    //바로주문
-    /*private void initBtnOrder() {
-        binding.btnOrder.setOnClickListener(v -> {
-            DetailBottomSheetDialogFragment bottomSheet = new DetailBottomSheetDialogFragment();
-            bottomSheet.show(getActivity().getSupportFragmentManager(), bottomSheet.getTag());
-            *//*bottomSheet.show(getSupportFragmentManager(), bottomSheet.getTag());*//*
-        });
-    }*/
-
     //뷰페이저
     private void initPagerView() {
         DetailPagerAdapter detailPagerAdapter = new DetailPagerAdapter(getActivity().getSupportFragmentManager(), getLifecycle());
+        detailPagerAdapter.setBno(bno);
         binding.detailViewPager.setAdapter(detailPagerAdapter);
 
         //=== TabLayout기능 추가 부분 ============================================
@@ -137,30 +131,6 @@ public class DetailFragment extends Fragment {
             }
         }).attach();
     }
-
-    /*private void initBtnAddCart() {
-        binding.btnAddCart.setOnClickListener(v -> {
-            navController.navigate(R.id.action_detail_to_cart);
-        });
-    }
-
-    private void initBtnOrder() {
-        binding.btnOrder.setOnClickListener(v -> {
-            navController.navigate(R.id.action_detail_to_orderFragment);
-        });
-    }
-
-    private void initBtnWriteInquiry() {
-        binding.btnWriteInquiry.setOnClickListener(v -> {
-            navController.navigate(R.id.action_detail_to_writeInquiry);
-        });
-    }
-
-    private void initBtnBack() {
-        binding.btnBack.setOnClickListener(v -> {
-            navController.popBackStack();
-        });
-    }*/
 
     @Override
     public void onDestroy() {

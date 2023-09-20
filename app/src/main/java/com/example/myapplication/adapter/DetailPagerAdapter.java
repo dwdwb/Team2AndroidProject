@@ -16,6 +16,7 @@ import com.example.myapplication.ui.DetailReviewFragment;
 
 public class DetailPagerAdapter extends FragmentStateAdapter {
     private static final String TAG = "DetailPagerAdapter";
+    private int bno;
 
     /*public DetailPagerAdapter(@NonNull Fragment fragment) {
         super(fragment);
@@ -40,11 +41,17 @@ public class DetailPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new DetailExplainFragment();
+                DetailExplainFragment detailExplainFragment = new DetailExplainFragment();
+                detailExplainFragment.setBno(bno);
+                return detailExplainFragment;
             case 1:
-                return new DetailReviewFragment();
+                DetailReviewFragment detailReviewFragment = new DetailReviewFragment();
+                detailReviewFragment.setBno(bno);
+                return detailReviewFragment;
             case 2:
-                return new DetailInquiryFragment();
+                DetailInquiryFragment detailInquiryFragment = new DetailInquiryFragment();
+                detailInquiryFragment.setBno(bno);
+                return detailInquiryFragment;
             default:
                 return null;
         }
@@ -53,5 +60,13 @@ public class DetailPagerAdapter extends FragmentStateAdapter {
     @Override
     public int getItemCount() {
         return 3;       // 페이지 수
+    }
+
+    public int getBno() {
+        return bno;
+    }
+
+    public void setBno(int bno) {
+        this.bno = bno;
     }
 }
