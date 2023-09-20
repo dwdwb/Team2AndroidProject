@@ -27,9 +27,11 @@ import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.example.myapplication.adapter.OrderAdapter;
+import com.example.myapplication.adapter.OrderCartAdapter;
 import com.example.myapplication.databinding.FragmentOrderBinding;
 import com.example.myapplication.datastore.AppKeyValueStore;
 import com.example.myapplication.dto.AddressList;
+import com.example.myapplication.dto.CartProduct;
 import com.example.myapplication.dto.ProductBoard;
 import com.example.myapplication.dto.Shopper;
 import com.example.myapplication.service.ServiceProvider;
@@ -83,15 +85,12 @@ public class OrderFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getContext(), arrayList.get(position)+"가 선택 되었습니다.",
                         Toast.LENGTH_SHORT).show();
-
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
-
 
         payButtonCard = binding.card;
         payButtonAccount = binding.account;
@@ -108,10 +107,11 @@ public class OrderFragment extends Fragment {
         initBtnAccount();
         initBtnOrderHistory();
         initBtnOrderShipping();
-        initRecyclerView();
+
 
         Bundle bundle = getArguments();
         if (bundle.getSerializable("productList") != null) {
+            initRecyclerView();
             ArrayList<ProductBoard> productList = (ArrayList<ProductBoard>) bundle.getSerializable("productList");
             Log.i(TAG, productList.toString());
 
@@ -133,6 +133,19 @@ public class OrderFragment extends Fragment {
                 binding.delFee.setText(3000+"원");
                 binding.finalPrice.setText(decimalFormat.format(totalPrice+3000)+"원");
             }
+        } else if(bundle.getSerializable("cartProductList") != null) {
+            initRecyclerView();
+            ArrayList<CartProduct> cartProductList = (ArrayList<CartProduct>) bundle.getSerializable("cartProductList");
+            String totalPrice = bundle.getString("totalPrice");
+            String couponList = bundle.getString("couponList");
+            String totalDiscountPrice = bundle.getString("totalDiscountPrice");
+            String totalShippingPrice = bundle.getString("totalShippingPrice");
+            String orderPrice = bundle.getString("orderPrice");
+
+            binding.orderTotalPrice.setText(totalPrice);
+            binding.discountPrice.setText(totalDiscountPrice);
+            binding.delFee.setText(totalShippingPrice);
+            binding.finalPrice.setText(orderPrice);
         }
 
 
@@ -232,14 +245,20 @@ public class OrderFragment extends Fragment {
                 getContext(), LinearLayoutManager.VERTICAL, false
         );
         binding.recyclerView.setLayoutManager(linearLayoutManager);
-        OrderAdapter orderAdapter = new OrderAdapter();
+
 
         Bundle bundle = getArguments();
-        if (bundle != null) {
+        if (bundle.getSerializable("productList") != null) {
+            OrderAdapter orderAdapter = new OrderAdapter();
             ArrayList<ProductBoard> productList = (ArrayList<ProductBoard>) bundle.getSerializable("productList");
             Log.i(TAG, productList.toString());
             orderAdapter.setList(productList);
             binding.recyclerView.setAdapter(orderAdapter);
+        } else if (bundle.getSerializable("cartProductList") != null) {
+            OrderCartAdapter orderCartAdapter = new OrderCartAdapter();
+            ArrayList<CartProduct> cartProductList = (ArrayList<CartProduct>) bundle.getSerializable("cartProductList");
+            orderCartAdapter.setList(cartProductList);
+            binding.recyclerView.setAdapter(orderCartAdapter);
         }
     }
 

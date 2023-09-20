@@ -298,6 +298,7 @@
 
                     android:text="카드 결제"
                     android:textColor="#A0DE5F"
+                    android:textStyle="bold"
                     app:strokeColor="#A0DE5F" />
 
                 <Button
@@ -311,6 +312,7 @@
 
                     android:text="계좌 이체"
                     android:textColor="#A0DE5F"
+                    android:textStyle="bold"
                     app:strokeColor="#A0DE5F" />
             </LinearLayout>
 
@@ -330,6 +332,7 @@
                     android:text="휴대폰"
 
                     android:textColor="#A0DE5F"
+                    android:textStyle="bold"
                     app:strokeColor="#A0DE5F" />
 
                 <Button
@@ -342,6 +345,7 @@
                     android:text="무통장 입금"
 
                     android:textColor="#A0DE5F"
+                    android:textStyle="bold"
                     app:strokeColor="#A0DE5F" />
             </LinearLayout>
 

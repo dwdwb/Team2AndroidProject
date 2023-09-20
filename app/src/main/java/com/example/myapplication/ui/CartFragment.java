@@ -503,27 +503,27 @@ public class CartFragment extends Fragment {
             bundle.putSerializable("couponList", (Serializable) orderedCouponList);
 
             //총 상품금액
-            int totalPrice = Integer.parseInt(binding.totalProductPrice.getText().toString().replaceAll("[^0-9]", ""));
-            bundle.putInt("totalPrice", totalPrice);
+            String totalPrice = binding.totalProductPrice.getText().toString();
+            bundle.putString("totalPrice", totalPrice);
 
             //총 할인금액
-            int totalDiscountPrice = Integer.parseInt(binding.totalDiscountPrice.getText().toString().replaceAll("[^0-9]", ""));
-            bundle.putInt("totalDiscountPrice", totalDiscountPrice);
+            String totalDiscountPrice = binding.totalDiscountPrice.getText().toString();
+            bundle.putString("totalDiscountPrice", totalDiscountPrice);
 
             //총 배송비
-            int totalShippingPrice = Integer.parseInt(binding.totalShippingPrice.getText().toString().replaceAll("[^0-9]", ""));
-            bundle.putInt("totalShippingPrice", totalShippingPrice);
+            String totalShippingPrice = binding.totalShippingPrice.getText().toString();
+            bundle.putString("totalShippingPrice", totalShippingPrice);
 
             //총 주문금액
-            int orderPrice = Integer.parseInt(binding.finalProductPrice.getText().toString().replaceAll("[^0-9]", ""));
-            bundle.putInt("orderPrice", orderPrice);
+            String orderPrice = binding.finalProductPrice.getText().toString();
+            bundle.putString("orderPrice", orderPrice);
 
             Log.i(TAG, "주문할 상품들: " + bundle.getSerializable("cartProductList"));
             Log.i(TAG, "사용할 쿠폰들: " + bundle.getSerializable("couponList"));
-            Log.i(TAG, "총 상품금액: " + bundle.getInt("totalPrice"));
-            Log.i(TAG, "총 할인금액: " + bundle.getInt("totalDiscountPrice"));
-            Log.i(TAG, "총 배송비: " + bundle.getInt("totalShippingPrice"));
-            Log.i(TAG, "총 주문금액: " + bundle.getInt("orderPrice"));
+            Log.i(TAG, "총 상품금액: " + bundle.getString("totalPrice"));
+            Log.i(TAG, "총 할인금액: " + bundle.getString("totalDiscountPrice"));
+            Log.i(TAG, "총 배송비: " + bundle.getString("totalShippingPrice"));
+            Log.i(TAG, "총 주문금액: " + bundle.getString("orderPrice"));
 
             navController.navigate(R.id.action_cart_to_order, bundle);
         });
