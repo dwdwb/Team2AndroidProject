@@ -127,45 +127,6 @@ public class OrderFragment extends Fragment {
         initBtnOrderShipping();
 
 
-        Bundle bundle = getArguments();
-        if (bundle.getSerializable("productList") != null) {
-            initRecyclerView();
-            ArrayList<ProductBoard> productList = (ArrayList<ProductBoard>) bundle.getSerializable("productList");
-            Log.i(TAG, productList.toString());
-
-            int totalPrice = 0;
-            for(ProductBoard productBoard : productList) {
-                int stock = productBoard.getStock();
-                int price = productBoard.getDiscountPrice();
-                int orderPrice = stock * price;
-
-                totalPrice += orderPrice;
-            }
-            DecimalFormat decimalFormat = new DecimalFormat("#,###");
-             binding.orderTotalPrice.setText(decimalFormat.format(totalPrice)+"원");
-             binding.discountPrice.setText("-"+0+"원");
-            if(totalPrice > 30000) {
-                binding.delFee.setText(0+"원");
-                binding.finalPrice.setText(decimalFormat.format(totalPrice)+"원");
-            } else {
-                binding.delFee.setText(3000+"원");
-                binding.finalPrice.setText(decimalFormat.format(totalPrice+3000)+"원");
-            }
-        } else if(bundle.getSerializable("cartProductList") != null) {
-            initRecyclerView();
-            ArrayList<CartProduct> cartProductList = (ArrayList<CartProduct>) bundle.getSerializable("cartProductList");
-            String totalPrice = bundle.getString("totalPrice");
-
-            String totalDiscountPrice = bundle.getString("totalDiscountPrice");
-            String totalShippingPrice = bundle.getString("totalShippingPrice");
-            String orderPrice = bundle.getString("orderPrice");
-
-            binding.orderTotalPrice.setText(totalPrice);
-            binding.discountPrice.setText(totalDiscountPrice);
-            binding.delFee.setText(totalShippingPrice);
-            binding.finalPrice.setText(orderPrice);
-
-        }
 
 
         return binding.getRoot();
@@ -284,7 +245,7 @@ public class OrderFragment extends Fragment {
 
         String shopperId = AppKeyValueStore.getValue(getContext(), "shopperId");
         ShopperService shopperService = ServiceProvider.getShopperService(getContext());
-        Log.i(TAG, "나쇼퍼아이디임"+shopperId);
+        Log.i(TAG, "나쇼퍼아이디임" + shopperId);
         Call<Shopper> call = shopperService.getShopper(shopperId);
 
         call.enqueue(new Callback<Shopper>() {
@@ -292,11 +253,12 @@ public class OrderFragment extends Fragment {
             public void onResponse(Call<Shopper> call, Response<Shopper> response) {
                 Shopper shopper = response.body();
                 shopperNo = shopper.getShopperNo();
-                Log.i(TAG, "나쇼퍼임"+shopper.toString());
+                Log.i(TAG, "나쇼퍼임" + shopper.toString());
                 TextView shopperName = view.findViewById(R.id.order_shopper_name);
                 shopperName.setText(shopper.getShopperName());
                 TextView shopperTel = view.findViewById(R.id.order_shopper_tel);
                 shopperTel.setText(shopper.getShopperTel());
+
             }
 
             @Override
@@ -306,39 +268,161 @@ public class OrderFragment extends Fragment {
         });
 
         // Fragment에서 FragmentResultListener 구현
-        getParentFragmentManager().setFragmentResultListener("selectedAddress", getViewLifecycleOwner(), new FragmentResultListener() {
-            @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                if (requestKey.equals("selectedAddress")) {
-                    AddressList selectedAddress = (AddressList) result.getSerializable("selectedAddress");
+        Bundle bundle = getArguments();
+        if (bundle.getSerializable("selectedAddress") != null) {
+            AddressList selectedAddress = (AddressList) bundle.getSerializable("selectedAddress");
+            Log.i(TAG, "나SELECTED된 주소임" + selectedAddress.toString());
+            // AddressList 객체를 사용하여 뷰에 데이터 설정
+            if (selectedAddress != null) {
 
-                    Log.i(TAG, "나SELECTED된 주소임"+selectedAddress.toString());
-                    // AddressList 객체를 사용하여 뷰에 데이터 설정
-                    if (selectedAddress != null) {
+                addressNo = selectedAddress.getAddress_no();
+                // 예시: TextView에 데이터 설정
+                binding.orderShippingName.setText(selectedAddress.getShipping_name());
+                binding.orderReceiverTel.setText(selectedAddress.getReceiver_tel());
+                binding.orderShippingAddress.setText(selectedAddress.getShipping_address());
+                binding.orderShippingPreference.setText(selectedAddress.getShipping_preference());
 
-                        addressNo = selectedAddress.getAddress_no();
-                        // 예시: TextView에 데이터 설정
-                        TextView shipping_name = view.findViewById(R.id.order_shipping_name);
-                        shipping_name.setText(selectedAddress.getShipping_name());
+                Bundle bundle2 = new Bundle();
+                bundle2 = getArguments();
+                if (bundle2.getSerializable("productList") != null) {
 
-                        TextView shipping_address = view.findViewById(R.id.order_shipping_address);
-                        shipping_address.setText(selectedAddress.getShipping_address());
+                    ArrayList<ProductBoard> productList = (ArrayList<ProductBoard>) bundle2.getSerializable("productList");
+                    Log.i(TAG, productList.toString());
 
-                        TextView receiver_tel = view.findViewById(R.id.order_receiver_tel);
-                        receiver_tel.setText(selectedAddress.getReceiver_tel());
+                    int totalPrice = 0;
+                    for(ProductBoard productBoard : productList) {
+                        int stock = productBoard.getStock();
+                        int price = productBoard.getDiscountPrice();
+                        int orderPrice = stock * price;
 
-                        TextView shipping_preference = view.findViewById(R.id.order_shipping_preference);
-                        shipping_preference.setText(selectedAddress.getShipping_preference());
-
+                        totalPrice += orderPrice;
                     }
+                    DecimalFormat decimalFormat = new DecimalFormat("#,###");
+                    binding.orderTotalPrice.setText(decimalFormat.format(totalPrice)+"원");
+                    binding.discountPrice.setText("-"+0+"원");
+                    if(totalPrice > 30000) {
+                        binding.delFee.setText(0+"원");
+                        binding.finalPrice.setText(decimalFormat.format(totalPrice)+"원");
+                    } else {
+                        binding.delFee.setText(3000+"원");
+                        binding.finalPrice.setText(decimalFormat.format(totalPrice+3000)+"원");
+                    }
+                    initRecyclerView();
+                } else if(bundle2.getSerializable("cartProductList") != null) {
+                    ArrayList<CartProduct> cartProductList = (ArrayList<CartProduct>) bundle2.getSerializable("cartProductList");
+                    String totalPrice = bundle.getString("totalPrice");
+
+                    String totalDiscountPrice = bundle.getString("totalDiscountPrice");
+                    String totalShippingPrice = bundle.getString("totalShippingPrice");
+                    String orderPrice = bundle.getString("orderPrice");
+
+                    binding.orderTotalPrice.setText(totalPrice);
+                    binding.discountPrice.setText(totalDiscountPrice);
+                    binding.delFee.setText(totalShippingPrice);
+                    binding.finalPrice.setText(orderPrice);
+                    initRecyclerView();
+
                 }
+
             }
-        });
+        } else {
+            Call<Shopper> call2 = shopperService.getShopper(shopperId);
+
+            call2.enqueue(new Callback<Shopper>() {
+                @Override
+                public void onResponse(Call<Shopper> call, Response<Shopper> response) {
+                    Shopper shopper = response.body();
+                    shopperNo = shopper.getShopperNo();
+                    AddressList addressList = new AddressList();
+                    addressList.setShopper_no(shopperNo);
+                    int shopper_no = addressList.getShopper_no();
+                    OrderService orderService = ServiceProvider.getOrderService(getContext());
+                    Call<AddressList> call2 = orderService.defaultAddress(shopper_no);
+
+                    call2.enqueue(new Callback<AddressList>() {
+                        @Override
+                        public void onResponse(Call<AddressList> call, Response<AddressList> response) {
+                            AddressList addressList = response.body();
+                            Log.i(TAG, addressList.toString()+"나 디폴트어드레스");
+                            addressNo = addressList.getAddress_no();
+                            binding.orderShippingName.setText(addressList.getShipping_name());
+                            binding.orderReceiverTel.setText(addressList.getReceiver_tel());
+                            binding.orderShippingAddress.setText(addressList.getShipping_address());
+                            binding.orderShippingPreference.setText(addressList.getShipping_preference());
+
+                            Bundle bundle = getArguments();
+                            if (bundle.getSerializable("productList") != null) {
+                                initRecyclerView();
+                                ArrayList<ProductBoard> productList = (ArrayList<ProductBoard>) bundle.getSerializable("productList");
+                                Log.i(TAG, productList.toString());
+
+                                int totalPrice = 0;
+                                for(ProductBoard productBoard : productList) {
+                                    int stock = productBoard.getStock();
+                                    int price = productBoard.getDiscountPrice();
+                                    int orderPrice = stock * price;
+
+                                    totalPrice += orderPrice;
+                                }
+                                DecimalFormat decimalFormat = new DecimalFormat("#,###");
+                                binding.orderTotalPrice.setText(decimalFormat.format(totalPrice)+"원");
+                                binding.discountPrice.setText("-"+0+"원");
+                                if(totalPrice > 30000) {
+                                    binding.delFee.setText(0+"원");
+                                    binding.finalPrice.setText(decimalFormat.format(totalPrice)+"원");
+                                } else {
+                                    binding.delFee.setText(3000+"원");
+                                    binding.finalPrice.setText(decimalFormat.format(totalPrice+3000)+"원");
+                                }
+                            } else if(bundle.getSerializable("cartProductList") != null) {
+                                initRecyclerView();
+                                ArrayList<CartProduct> cartProductList = (ArrayList<CartProduct>) bundle.getSerializable("cartProductList");
+                                String totalPrice = bundle.getString("totalPrice");
+
+                                String totalDiscountPrice = bundle.getString("totalDiscountPrice");
+                                String totalShippingPrice = bundle.getString("totalShippingPrice");
+                                String orderPrice = bundle.getString("orderPrice");
+
+                                binding.orderTotalPrice.setText(totalPrice);
+                                binding.discountPrice.setText(totalDiscountPrice);
+                                binding.delFee.setText(totalShippingPrice);
+                                binding.finalPrice.setText(orderPrice);
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<AddressList> call, Throwable t) {
+
+                        }
+                    });
+                }
+
+                @Override
+                public void onFailure(Call<Shopper> call, Throwable t) {
+
+                }
+            });
+
+        }
     }
+
+
+
 
     private void initBtnOrderShipping() {
         binding.btnOrderShipping.setOnClickListener(v -> {
-            navController.navigate(R.id.action_order_to_orderShipping);
+            Bundle bundle = getArguments();
+            bundle.getSerializable("productList");
+            bundle.getSerializable("cartProductList");
+            bundle.getString("totalPrice");
+            bundle.getSerializable("couponList");
+            bundle.getString("totalDiscountPrice");
+            bundle.getString("totalShippingPrice");
+            bundle.getString("orderPrice");
+
+            navController.navigate(R.id.action_order_to_orderShipping, bundle);
 
         });
     }

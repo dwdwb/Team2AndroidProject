@@ -119,15 +119,22 @@ public class OrderShippingFragment extends Fragment {
 
                AddressList selectedAddress = addressAdapter.getItem(position);
                // Bundle 생성 및 데이터 추가
-               Bundle bundle = new Bundle();
+               Bundle bundle = getArguments();
+               bundle.getSerializable("productList");
+               bundle.getSerializable("cartProductList");
+               bundle.getString("totalPrice");
+               bundle.getSerializable("couponList");
+               bundle.getString("totalDiscountPrice");
+               bundle.getString("totalShippingPrice");
+               bundle.getString("orderPrice");
+
 
                bundle.putSerializable("selectedAddress", selectedAddress);
                Log.i(TAG, "나 배송지목록"+selectedAddress.toString());
                // Bundle을 이용해 이전 Fragment로 데이터 전달
-               getParentFragmentManager().setFragmentResult("selectedAddress", bundle);
 
                // 현재 Fragment를 백 스택에서 제거
-               navController.popBackStack();
+               navController.navigate(R.id.order, bundle);
 
            }
        });
