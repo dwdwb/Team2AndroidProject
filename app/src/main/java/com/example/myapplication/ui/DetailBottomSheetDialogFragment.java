@@ -32,6 +32,7 @@ import com.example.myapplication.service.CartService;
 import com.example.myapplication.service.DetailViewService;
 import com.example.myapplication.service.ServiceProvider;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
@@ -53,6 +54,11 @@ public class DetailBottomSheetDialogFragment extends BottomSheetDialogFragment {
     private ProductBoard selectedItem;
     private NavController navController;
     private String bname;
+    private DetailExplainFragment detailExplainFragment;
+
+    public DetailBottomSheetDialogFragment(DetailExplainFragment detailExplainFragment) {
+        this.detailExplainFragment = detailExplainFragment;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -197,20 +203,31 @@ public class DetailBottomSheetDialogFragment extends BottomSheetDialogFragment {
             }
 
             String shopperId = AppKeyValueStore.getValue(this.getContext(), "shopperId");
-            //dismiss();
+            dismiss();
             if (shopperId == null) {
                 dismiss();
                 navController.navigate(R.id.login);
             } else {
                 if(selectedOptionProductList.size() != 0) {
-                    dismiss();
+                    //dismiss();
                     Log.i(TAG, selectedOptionProductList.toString());
                     DetailViewService detailViewService = ServiceProvider.getDetailViewService(getContext());
                     Call<Void> call = detailViewService.addCart(selectedOptionProductList);
                     call.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
-                            navController.navigate(R.id.action_detail_to_cart);
+                            Snackbar snackbar = Snackbar.make(getContext(), binding.btnCart, "스낵바 메세지입니다.", Snackbar.LENGTH_LONG);
+                            snackbar.show();
+                            //Snackbar.make(v, "스낵바가 실행되었습니다!", Snackbar.LENGTH_SHORT).show();
+                            /*Snackbar.make(getContext(), R.string.text_label, Snackbar.LENGTH_LONG)
+                                    .setAction(R.string.action_text) {
+                                // Responds to click on the action
+                            }
+                            .show()*/
+                            //navController.navigate(R.id.action_detail_to_cart);
+                            detailExplainFragment.snackBar();
+
+                            Log.i(TAG, "바텀 닫힌다~~~~~~~~");
                         }
 
                         @Override
