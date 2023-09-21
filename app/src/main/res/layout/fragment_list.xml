@@ -20,7 +20,8 @@
             android:layout_height="60dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            tools:ignore="MissingConstraints">
+            tools:ignore="MissingConstraints"
+            android:layout_marginTop="2dp">
 
             <ImageView
                 android:id="@+id/btn_back"
@@ -46,17 +47,17 @@
 
             <ImageView
                 android:id="@+id/btn_main"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
 
                 app:srcCompat="@drawable/ic_main_24dp" />
 
             <ImageView
                 android:id="@+id/btn_cart"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
 
                 app:srcCompat="@drawable/ic_cart_24dp" />
         </LinearLayout>
