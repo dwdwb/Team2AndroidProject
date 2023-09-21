@@ -126,4 +126,9 @@ public class ServiceProvider {
         return wishService;
     }
 
+    public static OrderService getOrderService(Context context) {
+        OrderService orderService = getRetrofit(context).create(OrderService.class);
+        return orderService;
+    }
+
 }

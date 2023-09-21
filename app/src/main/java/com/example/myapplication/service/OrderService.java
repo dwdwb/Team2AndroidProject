@@ -1,4 +1,28 @@
 package com.example.myapplication.service;
 
+import com.example.myapplication.dto.Cart;
+import com.example.myapplication.dto.Coupon;
+import com.example.myapplication.dto.Order;
+import com.example.myapplication.dto.OrderRequestBody;
+import com.example.myapplication.dto.ProductBoard;
+import com.example.myapplication.dto.ReceiptHistory;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
+
 public interface OrderService {
+    @POST("addOrder1")
+    Call<Void> addOrder1(@Body Order order);
+
+    @POST("addOrder2")
+    Call<Void> addOrder2(@Body List<Coupon> couponList);
+
+    @POST("addOrder3")
+    Call<Void> addOrder3(@Body List<ReceiptHistory> ReceiptHistoryList);
+
+    @POST("addOrder4")
+    Call<Void> addOrder4(@Body List<Cart> CartList);
 }
