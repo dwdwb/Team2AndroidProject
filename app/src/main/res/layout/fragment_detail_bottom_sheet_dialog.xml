@@ -2,17 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
-    android:maxHeight="300dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".ui.DetailBottomSheetDialogFragment">
 
-    <androidx.core.widget.NestedScrollView
+    <!--<androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@color/white">
+        android:background="@color/white">-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,7 +44,7 @@
 
         </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+    <!--</androidx.core.widget.NestedScrollView>-->
 
     <!--===== 하단 버튼 =====-->
     <LinearLayout
@@ -71,6 +70,7 @@
                 android:layout_margin="10dp"
                 android:layout_weight="9"
                 android:text="장바구니 담기"
+                android:textColor="#A0DE5F"
                 android:textSize="16dp"
                 app:cornerRadius="6dp"
                 style="@style/Widget.Material3.Button.OutlinedButton"

@@ -55,6 +55,12 @@ public class DetailBottomSheetDialogFragment extends BottomSheetDialogFragment {
     private String bname;
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(STYLE_NORMAL, R.style.RoundCornerBottomSheetDialogTheme);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentDetailBottomSheetDialogBinding.inflate(inflater);
 

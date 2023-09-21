@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -189,6 +190,7 @@ public class DetailExplainFragment extends Fragment {
         binding.btnBuy.setOnClickListener(v -> {
             DetailBottomSheetDialogFragment bottomSheet = new DetailBottomSheetDialogFragment();
             bottomSheet.setBname(bname);
+            //bottomSheet.setStyle(DialogFragment.STYLE_NORMAL, R.style.RoundCornerBottomSheetDialogTheme);
             bottomSheet.show(getActivity().getSupportFragmentManager(), bottomSheet.getTag());
             /*bottomSheet.show(getSupportFragmentManager(), bottomSheet.getTag());*/
         });
