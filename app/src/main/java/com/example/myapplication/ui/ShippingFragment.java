@@ -42,6 +42,7 @@ public class ShippingFragment extends Fragment {
         initBtnAddShipping();
         initRecyclerView();
 
+        initBtnBack();
 
         return binding.getRoot();
     }
@@ -180,5 +181,10 @@ public class ShippingFragment extends Fragment {
         });
     }
 
+    private void initBtnBack() {
+        binding.btnBack.setOnClickListener(v -> {
+            navController.popBackStack();
+        });
+    }
 
 }

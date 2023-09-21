@@ -99,7 +99,7 @@ public class MyPageFragment extends Fragment {
         //주문 내역
         list.add(new MyPageMenuItem(R.drawable.ic_order_list_36dp, "주문 내역"));
         //찜 리스트
-        list.add(new MyPageMenuItem(R.drawable.ic_wish_list_36dp, "찜 리스트"));
+        list.add(new MyPageMenuItem(R.drawable.ic_wish_list_36dp, "찜 목록"));
         //쿠폰함
         list.add(new MyPageMenuItem(R.drawable.ic_loyalty_36dp, "쿠폰함"));
         //상품 문의
@@ -122,7 +122,7 @@ public class MyPageFragment extends Fragment {
                 MyPageMenuItem myPageMenuItem = myPageMenuItemAdapter.getItem(position);
                 if (myPageMenuItem.getMenuText().equals("주문 내역")) {
                     navController.navigate(R.id.action_myPage_to_orderHistory);
-                } else if (myPageMenuItem.getMenuText().equals("찜 리스트")) {
+                } else if (myPageMenuItem.getMenuText().equals("찜 목록")) {
                     navController.navigate(R.id.action_myPage_to_wish);
                 } else if (myPageMenuItem.getMenuText().equals("쿠폰함")) {
                     navController.navigate(R.id.action_myPage_to_coupon);

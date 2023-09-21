@@ -40,6 +40,8 @@ public class CouponFragment extends Fragment {
 
         initCouponList();
 
+        initBtnBack();
+
         return binding.getRoot();
     }
 
@@ -88,6 +90,12 @@ public class CouponFragment extends Fragment {
                 args.putSerializable("coupon", coupon);
                 //navController.navigate(R.id.action_dest_list_to_dest_detail, args);
             }
+        });
+    }
+
+    private void initBtnBack() {
+        binding.btnBack.setOnClickListener(v -> {
+            navController.popBackStack();
         });
     }
 }

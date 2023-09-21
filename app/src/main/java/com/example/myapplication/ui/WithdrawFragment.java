@@ -25,12 +25,20 @@ public class WithdrawFragment extends Fragment {
 
         initWithdrawBtn();
 
+        initBtnBack();
+
         return binding.getRoot();
     }
 
     private void initWithdrawBtn() {
         binding.withdrawBtn.setOnClickListener(v -> {
 
+        });
+    }
+
+    private void initBtnBack() {
+        binding.btnBack.setOnClickListener(v -> {
+            navController.popBackStack();
         });
     }
 }

@@ -75,6 +75,8 @@ public class OrderHistoryFragment extends Fragment {
         initRecyclerView();
         initScrollToTopBtn();
 
+        initBtnBack();
+
         return view;
     }
 
@@ -211,5 +213,10 @@ public class OrderHistoryFragment extends Fragment {
 
     }
 
+    private void initBtnBack() {
+        binding.btnBack.setOnClickListener(v -> {
+            navController.popBackStack();
+        });
+    }
 
 }

@@ -6,19 +6,46 @@
     android:layout_height="match_parent"
     tools:context=".ui.WithdrawFragment" >
 
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="15dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_arrow_back_24dp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="회원 탈퇴"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </FrameLayout>
+
     <LinearLayout
         android:id="@+id/linear_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
         android:background="#d3d3d3"
         android:orientation="vertical"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout">
 
         <TextView
             android:id="@+id/textView10"
@@ -38,20 +65,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text=" - 거래정보가 있는 경우, 전자상거래 등에서의 소비자 보호에\n  관한 법률에 따라 계약 또는 청약철회에 관한 기록, 대금결제 및\n  재화 등의 공급에 관한 기록은 5년동안 보존됩니다." />
+            android:text=" - 거래정보가 있는 경우, 전자상거래 등에서의 소비자 보호에 관한 법률에 따라 계약 또는 청약철회에 관한 기록, 대금결제 및 재화 등의 공급에 관한 기록은 5년동안 보존됩니다." />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:text=" - 유효기간이 경과되지 않은 미사용 쿠폰관련 정보는 유효기간\n  만료일까지 보관되며, 탈퇴 후에도 유효기간 내 사용하실 수\n  있습니다." />
+            android:text=" - 유효기간이 경과되지 않은 미사용 쿠폰관련 정보는 유효기간 만료일까지 보관되며, 탈퇴 후에도 유효기간 내 사용하실 수 있습니다." />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:text=" - 회원탈퇴 후 입력하신 상품문의 및 후기, 댓글은 삭제되지\n  않으며, 회원정보 삭제로 인해 작성자 본인을 확인할 수 없어\n  편집 및 삭제처리가 원천적으로 불가능 합니다.
-상품문의 및\n  후기, 댓글 삭제를 원하시는 경우에는 먼저 해당 게시물을\n  삭제하신 후 탈퇴를 신청하시기 바랍니다." />
+            android:text=" - 회원탈퇴 후 입력하신 상품문의 및 후기, 댓글은 삭제되지 않으며, 회원정보 삭제로 인해 작성자 본인을 확인할 수 없어 편집 및 삭제처리가 원천적으로 불가능 합니다.
+상품문의 및 후기, 댓글 삭제를 원하시는 경우에는 먼저 해당 게시물을 삭제하신 후 탈퇴를 신청하시기 바랍니다." />
 
 
         <TextView

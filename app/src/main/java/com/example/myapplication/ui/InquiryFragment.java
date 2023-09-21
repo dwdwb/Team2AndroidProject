@@ -49,6 +49,8 @@ public class InquiryFragment extends Fragment {
             deleteProductInquiry(productInquiry);
         }
 
+        initBtnBack();
+
         return binding.getRoot();
     }
 
@@ -119,6 +121,12 @@ public class InquiryFragment extends Fragment {
                 args.putSerializable("productName", productName);
                 //navController.navigate(R.id.action_dest_list_to_dest_detail, args);
             }
+        });
+    }
+
+    private void initBtnBack() {
+        binding.btnBack.setOnClickListener(v -> {
+            navController.popBackStack();
         });
     }
 }

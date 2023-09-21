@@ -51,6 +51,10 @@ public class ListBottomSheetDialogFragment extends BottomSheetDialogFragment {
         } else if (listItemOrder == ListItemOrder.PRICE_ASC) {
             binding.priceAscBtn.setChecked(true);
         }
+
+        binding.closeBtn.setOnClickListener(v -> {
+            dismiss();
+        });
     }
 
     private void initBtn() {

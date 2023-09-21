@@ -48,6 +48,8 @@ public class WishFragment extends Fragment {
 
         initRecyclerView();
 
+        initBtnBack();
+
         return binding.getRoot();
     }
 
@@ -143,4 +145,9 @@ public class WishFragment extends Fragment {
     }
 
 
+    private void initBtnBack() {
+        binding.btnBack.setOnClickListener(v -> {
+            navController.popBackStack();
+        });
+    }
 }

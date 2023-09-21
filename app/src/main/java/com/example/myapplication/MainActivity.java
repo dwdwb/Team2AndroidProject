@@ -122,8 +122,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
                 //이동한 대상에 따른 처리
-                if(navDestination.getId() == R.id.detail || navDestination.getId() == R.id.cart
-                        || navDestination.getId() == R.id.wish || navDestination.getId() == R.id.withdraw) {
+                if(navDestination.getId() == R.id.detail || navDestination.getId() == R.id.cart) {
                     getSupportActionBar().show();
                 } else  {
                     getSupportActionBar().hide();
