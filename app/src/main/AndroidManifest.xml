@@ -18,7 +18,8 @@
         tools:targetApi="31">
         <activity
             android:name=".DaumAddressActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".SplashActivity"
             android:exported="true"
@@ -34,7 +35,8 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="FRUITLIGHT">
+            android:label="FRUITLIGHT"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
