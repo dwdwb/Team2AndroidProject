@@ -35,13 +35,22 @@ public class SearchFragment extends Fragment {
         initBtnBack();
 
         // EditText를 찾아서 포커스 설정
-        binding.search.requestFocus();
-        setShowKeyBoard();
+        //binding.search.requestFocus();
+        //setShowKeyBoard();
 
         return binding.getRoot();
     }
 
-   private void initBtnList() {
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // EditText를 찾아서 포커스 설정
+        binding.search.requestFocus();
+        setShowKeyBoard();
+    }
+
+    private void initBtnList() {
         binding.btnList.setOnClickListener(v -> {
             String keyword = binding.search.getText().toString();
             Bundle args = new Bundle();
