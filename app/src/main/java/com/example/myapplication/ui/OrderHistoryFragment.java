@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -46,6 +47,7 @@ public class OrderHistoryFragment extends Fragment {
 
         // NavController 얻기
         navController = NavHostFragment.findNavController(this);
+
 
         // XML에서 정의한 SearchView를 참조합니다.
         searchView = view.findViewById(R.id.searchView);

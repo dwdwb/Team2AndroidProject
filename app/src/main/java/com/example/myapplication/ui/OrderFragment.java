@@ -14,6 +14,8 @@ import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -76,6 +78,8 @@ public class OrderFragment extends Fragment {
 
     int addressNo;
     int shopperNo;
+
+
     private static final String TAG = "OrderFragment";
 
 
@@ -138,8 +142,8 @@ public class OrderFragment extends Fragment {
                 totalPrice += orderPrice;
             }
             DecimalFormat decimalFormat = new DecimalFormat("#,###");
-            binding.orderTotalPrice.setText(decimalFormat.format(totalPrice)+"원");
-            binding.discountPrice.setText("-"+0+"원");
+             binding.orderTotalPrice.setText(decimalFormat.format(totalPrice)+"원");
+             binding.discountPrice.setText("-"+0+"원");
             if(totalPrice > 30000) {
                 binding.delFee.setText(0+"원");
                 binding.finalPrice.setText(decimalFormat.format(totalPrice)+"원");
@@ -160,6 +164,7 @@ public class OrderFragment extends Fragment {
             binding.discountPrice.setText(totalDiscountPrice);
             binding.delFee.setText(totalShippingPrice);
             binding.finalPrice.setText(orderPrice);
+
         }
 
 
@@ -342,11 +347,70 @@ public class OrderFragment extends Fragment {
         binding.btnOrderHistory.setOnClickListener(v -> {
             Bundle bundle = getArguments();
             if (bundle.getSerializable("productList") != null) {
-                OrderAdapter orderAdapter = new OrderAdapter();
                 ArrayList<ProductBoard> productList = (ArrayList<ProductBoard>) bundle.getSerializable("productList");
-                Log.i(TAG, productList.toString());
-                orderAdapter.setList(productList);
-                binding.recyclerView.setAdapter(orderAdapter);
+                //Log.i(TAG, productList.toString());
+                String totalPrice = binding.orderTotalPrice.getText().toString();
+                String totalDiscountPrice = binding.discountPrice.getText().toString();
+                String totalShippingPrice = binding.delFee.getText().toString();
+                String orderPrice = binding.finalPrice.getText().toString();
+
+                Order order = new Order();
+                order.setTotal_PRICE(parseInt(totalPrice.replaceAll("[^0-9]", "")));
+                order.setDiscount_PRICE(parseInt(totalDiscountPrice.replaceAll("[^0-9]", "")));
+                order.setShipping_PRICE(parseInt(totalShippingPrice.replaceAll("[^0-9]", "")));
+                order.setPayment_PRICE(parseInt(orderPrice.replaceAll("[^0-9]", "")));
+                order.setShopper_NO(shopperNo);
+                order.setAddress_NO(addressNo);
+                order.setPayment_TYPE("계좌이체");
+                order.setCash_RECEIPT_NO("010-1234-6789");
+                order.setCash_RECEIPT_TYPE("휴대폰번호");
+                order.setCash_RECEIPT_PURPOSE("소득공제");
+
+                ArrayList<ReceiptHistory> receiptHistoryArrayList = new ArrayList<ReceiptHistory>();
+                for (ProductBoard productBoard : productList) {
+                    ReceiptHistory receiptHistory = new ReceiptHistory();
+                    receiptHistory.setProduct_NO(productBoard.getProductNo());
+                    receiptHistory.setPrice(productBoard.getDiscountPrice());
+                    receiptHistory.setStock(productBoard.getStock());
+                    receiptHistoryArrayList.add(receiptHistory);
+
+                }
+
+                OrderService orderService = ServiceProvider.getOrderService(getContext());
+                Call<Void> call1 = orderService.addOrder1(order);
+                call1.enqueue(new Callback<Void>() {
+                      @Override
+                      public void onResponse(Call<Void> call1, Response<Void> response) {
+
+                          Call<Void> call3 = orderService.addOrder3(receiptHistoryArrayList);
+                          call3.enqueue(new Callback<Void>() {
+                              @Override
+                              public void onResponse(Call<Void> call3, Response<Void> response) {
+                                  AlertDialog alertDialog = new AlertDialog.Builder(getContext())
+                                          .setTitle("주문이 완료되었습니다.")
+                                          //.setMessage(joinResult.getResult())
+                                          .setPositiveButton("확인", null)
+                                          .create();
+                                  alertDialog.show();
+                                  Navigation.findNavController(requireActivity(), R.id.nav_host);
+                                  navController.popBackStack(R.id.main, false);
+                                  navController.navigate(R.id.action_main_to_myPage);
+                                  navController.navigate(R.id.action_myPage_to_orderHistory);
+                              }
+
+                              @Override
+                              public void onFailure(Call<Void> call3, Throwable t) {
+
+                              }
+                          });
+                      }
+
+                      @Override
+                      public void onFailure(Call<Void> call1, Throwable t) {
+
+                      }
+                });
+
             } else if (bundle.getSerializable("cartProductList") != null) {
                 ArrayList<CartProduct> cartProductList = (ArrayList<CartProduct>) bundle.getSerializable("cartProductList");
                 String totalPrice = bundle.getString("totalPrice");
@@ -412,7 +476,10 @@ public class OrderFragment extends Fragment {
                                                         .setPositiveButton("확인", null)
                                                         .create();
                                                 alertDialog.show();
-                                                navController.navigate(R.id.action_order_to_orderHistory);
+                                                Navigation.findNavController(requireActivity(), R.id.nav_host);
+                                                navController.popBackStack(R.id.main, false);
+                                                navController.navigate(R.id.action_main_to_myPage);
+                                                navController.navigate(R.id.action_myPage_to_orderHistory);
                                             }
 
                                             @Override
