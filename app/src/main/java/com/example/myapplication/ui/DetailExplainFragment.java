@@ -1,5 +1,6 @@
 package com.example.myapplication.ui;
 
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -94,6 +95,7 @@ public class DetailExplainFragment extends Fragment {
                 } else {
                     binding.productDiscountRate.setText(productBoard.getDiscountRate() + "%");
                     binding.productOriginalPrice.setText(df.format(productBoard.getProductPrice()) + "원");
+                    binding.productOriginalPrice.setPaintFlags(binding.productOriginalPrice.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
                 }
                 binding.productDiscountPrice.setText(df.format(productBoard.getDiscountPrice()) + "원");
 

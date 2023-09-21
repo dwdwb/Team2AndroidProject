@@ -75,7 +75,8 @@
                         android:numStars="5"
                         android:progressTint="@android:color/holo_orange_dark"
                         android:rating="0.0"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:layout_marginRight="5dp"/>
 
                     <TextView
                         android:id="@+id/review_count"

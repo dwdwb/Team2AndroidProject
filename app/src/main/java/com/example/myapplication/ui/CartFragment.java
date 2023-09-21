@@ -1,5 +1,6 @@
 package com.example.myapplication.ui;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -491,41 +492,51 @@ public class CartFragment extends Fragment {
                     orderedCartProductList.add(cartProductList.get(i));
                 }
             }
-            bundle.putSerializable("cartProductList", (Serializable) orderedCartProductList);
+            Log.i(TAG, "혹시 아무것도 안골랐니????? " + orderedCartProductList.size());
+            if(orderedCartProductList.size() != 0) {
+                bundle.putSerializable("cartProductList", (Serializable) orderedCartProductList);
 
-            //사용할 쿠폰 리스트
-            List<Coupon> orderedCouponList = new ArrayList<>();
-            for(int i=0; i<checkCouponList.size(); i++) {
-                if(checkCouponList.get(i)) {
-                    orderedCouponList.add(couponList.get(i));
+                //사용할 쿠폰 리스트
+                List<Coupon> orderedCouponList = new ArrayList<>();
+                for(int i=0; i<checkCouponList.size(); i++) {
+                    if(checkCouponList.get(i)) {
+                        orderedCouponList.add(couponList.get(i));
+                    }
                 }
+                bundle.putSerializable("couponList", (Serializable) orderedCouponList);
+
+                //총 상품금액
+                String totalPrice = binding.totalProductPrice.getText().toString();
+                bundle.putString("totalPrice", totalPrice);
+
+                //총 할인금액
+                String totalDiscountPrice = binding.totalDiscountPrice.getText().toString();
+                bundle.putString("totalDiscountPrice", totalDiscountPrice);
+
+                //총 배송비
+                String totalShippingPrice = binding.totalShippingPrice.getText().toString();
+                bundle.putString("totalShippingPrice", totalShippingPrice);
+
+                //총 주문금액
+                String orderPrice = binding.finalProductPrice.getText().toString();
+                bundle.putString("orderPrice", orderPrice);
+
+                Log.i(TAG, "주문할 상품들: " + bundle.getSerializable("cartProductList"));
+                Log.i(TAG, "사용할 쿠폰들: " + bundle.getSerializable("couponList"));
+                Log.i(TAG, "총 상품금액: " + bundle.getString("totalPrice"));
+                Log.i(TAG, "총 할인금액: " + bundle.getString("totalDiscountPrice"));
+                Log.i(TAG, "총 배송비: " + bundle.getString("totalShippingPrice"));
+                Log.i(TAG, "총 주문금액: " + bundle.getString("orderPrice"));
+
+                navController.navigate(R.id.action_cart_to_order, bundle);
+            } else {
+                AlertDialog alertDialog = new AlertDialog.Builder(getContext())
+                        //.setTitle("주문할 상품을 선택해주세요.")
+                        .setMessage("주문할 상품을 선택해주세요.")
+                        .setPositiveButton("확인", null)
+                        .create();
+                alertDialog.show();
             }
-            bundle.putSerializable("couponList", (Serializable) orderedCouponList);
-
-            //총 상품금액
-            String totalPrice = binding.totalProductPrice.getText().toString();
-            bundle.putString("totalPrice", totalPrice);
-
-            //총 할인금액
-            String totalDiscountPrice = binding.totalDiscountPrice.getText().toString();
-            bundle.putString("totalDiscountPrice", totalDiscountPrice);
-
-            //총 배송비
-            String totalShippingPrice = binding.totalShippingPrice.getText().toString();
-            bundle.putString("totalShippingPrice", totalShippingPrice);
-
-            //총 주문금액
-            String orderPrice = binding.finalProductPrice.getText().toString();
-            bundle.putString("orderPrice", orderPrice);
-
-            Log.i(TAG, "주문할 상품들: " + bundle.getSerializable("cartProductList"));
-            Log.i(TAG, "사용할 쿠폰들: " + bundle.getSerializable("couponList"));
-            Log.i(TAG, "총 상품금액: " + bundle.getString("totalPrice"));
-            Log.i(TAG, "총 할인금액: " + bundle.getString("totalDiscountPrice"));
-            Log.i(TAG, "총 배송비: " + bundle.getString("totalShippingPrice"));
-            Log.i(TAG, "총 주문금액: " + bundle.getString("orderPrice"));
-
-            navController.navigate(R.id.action_cart_to_order, bundle);
         });
     }
 

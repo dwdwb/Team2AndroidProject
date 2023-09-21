@@ -220,8 +220,8 @@ public class DetailBottomSheetDialogFragment extends BottomSheetDialogFragment {
                     });
                 } else {
                     AlertDialog alertDialog = new AlertDialog.Builder(getContext())
-                            .setTitle("옵션을 선택해주세요.")
-                            //.setMessage(joinResult.getResult())
+                            //.setTitle("옵션을 선택해주세요.")
+                            .setMessage("옵션을 선택해주세요.")
                             .setPositiveButton("확인", null)
                             .create();
                     alertDialog.show();
@@ -247,8 +247,8 @@ public class DetailBottomSheetDialogFragment extends BottomSheetDialogFragment {
                     navController.navigate(R.id.action_detail_to_orderFragment, bundle);
                 } else {
                     AlertDialog alertDialog = new AlertDialog.Builder(getContext())
-                            .setTitle("옵션을 선택해주세요.")
-                            //.setMessage(joinResult.getResult())
+                            //.setTitle("옵션을 선택해주세요.")
+                            .setMessage("옵션을 선택해주세요.")
                             .setPositiveButton("확인", null)
                             .create();
                     alertDialog.show();
