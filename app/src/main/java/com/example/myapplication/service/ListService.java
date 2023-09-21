@@ -16,6 +16,12 @@ public interface ListService {
     @GET("list/getMobileProductsForList")
     Call<List<MobileProductForList>> getMobileProductsForList(@Query("keyword") String keyword);
 
+    @GET("list/getMobileProductsForListPriceDesc")
+    Call<List<MobileProductForList>> getMobileProductsForListPriceDesc(@Query("keyword") String keyword);
+
+    @GET("list/getMobileProductsForListPriceAsc")
+    Call<List<MobileProductForList>> getMobileProductsForListPriceAsc(@Query("keyword") String keyword);
+
     @GET("list/getCherryAdList")
     Call<List<MobileProductForList>> getCheryAdList();
 

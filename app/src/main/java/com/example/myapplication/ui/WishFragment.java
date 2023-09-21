@@ -91,8 +91,10 @@ public class WishFragment extends Fragment {
                     public void onResponse(Call<WriteReviewResult> call, Response<WriteReviewResult> response) {
                         WriteReviewResult writeReviewResult = response.body();
                         if (writeReviewResult.getResult().equals("success")) {
-                            navController.popBackStack(R.id.myPage, false);
-                            navController.navigate(R.id.action_myPage_to_wish);
+                            initRecyclerView();
+                            /*navController.popBackStack(R.id.myPage, false);
+                            navController.navigate(R.id.action_myPage_to_wish);*/
+
                         } else {
                             AlertDialog alertDialog = new AlertDialog.Builder(getContext())
                                     .setTitle("삭제 실패")
