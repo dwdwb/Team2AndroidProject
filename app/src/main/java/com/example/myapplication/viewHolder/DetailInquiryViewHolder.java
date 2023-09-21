@@ -2,6 +2,7 @@ package com.example.myapplication.viewHolder;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ public class DetailInquiryViewHolder extends RecyclerView.ViewHolder {
     private TextView inquiry_content;
     private TextView answer_date;
     private TextView answer_content;
+    private LinearLayout answer_layout;
 
     public DetailInquiryViewHolder(@NonNull View itemView, DetailInquiryAdapter.OnItemClickListener onItemClickListener) {
         super(itemView);
@@ -33,6 +35,8 @@ public class DetailInquiryViewHolder extends RecyclerView.ViewHolder {
         inquiry_content = (TextView) itemView.findViewById(R.id.inquiry_content);
         answer_date = (TextView) itemView.findViewById(R.id.answer_date);
         answer_content = (TextView) itemView.findViewById(R.id.answer_content);
+
+        answer_layout = (LinearLayout) itemView.findViewById(R.id.answer_layout);
 
         //클릭 이벤트 처리
         /*itemView.setOnClickListener(v -> {
@@ -47,8 +51,12 @@ public class DetailInquiryViewHolder extends RecyclerView.ViewHolder {
         String formattedInquiryDate = dateFormat.format(productInquiry.getInquiry_DATE());
         inquiry_date.setText(formattedInquiryDate);
         inquiry_content.setText(productInquiry.getInquiry_CONTENT());
-        String formattedAnswerDate = dateFormat.format(productInquiry.getAnswer_DATE());
-        answer_date.setText(formattedAnswerDate);
-        answer_content.setText(productInquiry.getAnswer_CONTENT());
+        if(productInquiry.isEmptanswer()) {
+            answer_layout.setVisibility(View.GONE);
+        } else {
+            String formattedAnswerDate = dateFormat.format(productInquiry.getAnswer_DATE());
+            answer_date.setText(formattedAnswerDate);
+            answer_content.setText(productInquiry.getAnswer_CONTENT());
+        }
     }
 }

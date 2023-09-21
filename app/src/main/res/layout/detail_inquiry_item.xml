@@ -68,6 +68,7 @@
 
         <!--===== 답변 =====-->
         <LinearLayout
+            android:id="@+id/answer_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="15dp"
