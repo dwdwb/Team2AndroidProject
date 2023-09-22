@@ -237,7 +237,7 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="250dp"
+                    android:layout_width="360dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="6dp"
@@ -250,17 +250,6 @@
                         android:hint="요청 사항" />
 
                 </com.google.android.material.textfield.TextInputLayout>
-
-                <Button
-                    android:id="@+id/button3"
-                    android:layout_width="100dp"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_weight="1"
-                    android:text="변경" />
 
             </LinearLayout>
 
@@ -530,13 +519,13 @@
                 </Spinner>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="230dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
                     >
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
+                        android:layout_width="200dp"
                         android:layout_height="53dp"
                         android:layout_marginStart="10dp"
                         android:hint="휴대폰 번호" />
