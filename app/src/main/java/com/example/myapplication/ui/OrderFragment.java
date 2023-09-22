@@ -70,12 +70,17 @@ public class OrderFragment extends Fragment {
     private Button payButtonNoBank;
     private Button payButtonPhone;
 
+    private TextView cashPoneNo;
+    private String receiptType;
+
     private RadioGroup radioGroup;
     private RadioButton radioButton1, radioButton2;
     private boolean isCardToggled;
     private boolean isAccountToggled;
     private boolean isPhoneToggled;
     private boolean isNoBankToggled;
+
+    private View cashLayout;
     private Spinner spinner;
     ArrayList<String> arrayList;
     ArrayAdapter<String> arrayAdapter;
@@ -109,6 +114,10 @@ public class OrderFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getContext(), arrayList.get(position)+"가 선택 되었습니다.",
                         Toast.LENGTH_SHORT).show();
+                Log.i(TAG, "뭐가선택됐냐"+position);
+                receiptType = arrayList.get(position);
+                binding.cashPhoneNo.setHint(arrayList.get(position));
+
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -120,6 +129,10 @@ public class OrderFragment extends Fragment {
         payButtonAccount = binding.account;
         payButtonNoBank = binding.noBank;
         payButtonPhone = binding.phone;
+        cashPoneNo = binding.cashPhoneNo;
+        cashLayout = binding.cashLayout;
+        cashLayout.setVisibility(View.GONE);
+
         isCardToggled = false;
         isAccountToggled = false;
         isPhoneToggled = false;
@@ -176,6 +189,8 @@ public class OrderFragment extends Fragment {
             payButtonAccount.setTextColor(Color.parseColor("#ffffff"));
             ViewCompat.setBackgroundTintList(payButtonAccount, ColorStateList.valueOf(Color.parseColor("#A0DE5F")));
 
+            cashLayout = binding.cashLayout;
+            cashLayout.setVisibility(View.VISIBLE);
         });
     }
 
@@ -195,6 +210,9 @@ public class OrderFragment extends Fragment {
             isNoBankToggled = false;
             isPhoneToggled = false;
             isAccountToggled = false;
+
+            cashLayout = binding.cashLayout;
+            cashLayout.setVisibility(View.GONE);
 
             payButtonCard.setTextColor(Color.parseColor("#ffffff"));
             ViewCompat.setBackgroundTintList(payButtonCard, ColorStateList.valueOf(Color.parseColor("#A0DE5F")));
@@ -218,6 +236,8 @@ public class OrderFragment extends Fragment {
             isAccountToggled = false;
             payButtonNoBank.setTextColor(Color.parseColor("#ffffff"));
             ViewCompat.setBackgroundTintList(payButtonNoBank, ColorStateList.valueOf(Color.parseColor("#A0DE5F")));
+            cashLayout = binding.cashLayout;
+            cashLayout.setVisibility(View.VISIBLE);
 
         });
     }
@@ -238,6 +258,8 @@ public class OrderFragment extends Fragment {
             isAccountToggled = false;
             payButtonPhone.setTextColor(Color.parseColor("#ffffff"));
             ViewCompat.setBackgroundTintList(payButtonPhone, ColorStateList.valueOf(Color.parseColor("#A0DE5F")));
+            cashLayout = binding.cashLayout;
+            cashLayout.setVisibility(View.GONE);
 
         });
     }
@@ -462,6 +484,7 @@ public class OrderFragment extends Fragment {
                 String totalDiscountPrice = binding.discountPrice.getText().toString();
                 String totalShippingPrice = binding.delFee.getText().toString();
                 String orderPrice = binding.finalPrice.getText().toString();
+                String orderCashNo = binding.cashPhoneNo.getText().toString();
 
                 Order order = new Order();
                 order.setTotal_PRICE(parseInt(totalPrice.replaceAll("[^0-9]", "")));
@@ -481,8 +504,8 @@ public class OrderFragment extends Fragment {
                 } else if (isNoBankToggled) {
                     order.setPayment_TYPE("무통장 입금");
                 }
-                order.setCash_RECEIPT_NO("010-1234-6789");
-                order.setCash_RECEIPT_TYPE("휴대폰번호");
+                order.setCash_RECEIPT_NO(orderCashNo);
+                order.setCash_RECEIPT_TYPE(receiptType);
                 order.setCash_RECEIPT_PURPOSE(selectedOption);
 
                 ArrayList<ReceiptHistory> receiptHistoryArrayList = new ArrayList<ReceiptHistory>();
@@ -537,6 +560,7 @@ public class OrderFragment extends Fragment {
                 String totalDiscountPrice = bundle.getString("totalDiscountPrice");
                 String totalShippingPrice = bundle.getString("totalShippingPrice");
                 String orderPrice = bundle.getString("orderPrice");
+                String orderCashNo = binding.cashPhoneNo.getText().toString();
 
                 Order order = new Order();
                 order.setTotal_PRICE(parseInt(totalPrice.replaceAll("[^0-9]", "")));
@@ -556,8 +580,8 @@ public class OrderFragment extends Fragment {
                 } else if (isNoBankToggled) {
                     order.setPayment_TYPE("무통장 입금");
                 }
-                order.setCash_RECEIPT_NO("010-1234-6789");
-                order.setCash_RECEIPT_TYPE("휴대폰번호");
+                order.setCash_RECEIPT_NO(orderCashNo);
+                order.setCash_RECEIPT_TYPE(receiptType);
                 order.setCash_RECEIPT_PURPOSE(selectedOption);
                 Log.i(TAG,selectedOption+"라디오선택된값은?");
 

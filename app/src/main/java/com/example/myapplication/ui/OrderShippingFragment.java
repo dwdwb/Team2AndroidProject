@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.example.myapplication.R;
 import com.example.myapplication.adapter.AddressAdapter;
 import com.example.myapplication.adapter.ListAdapter;
+import com.example.myapplication.adapter.OrderAddressAdapter;
 import com.example.myapplication.databinding.FragmentOrderBinding;
 import com.example.myapplication.databinding.FragmentOrderShippingBinding;
 import com.example.myapplication.dto.AddressList;
@@ -38,7 +39,7 @@ public class OrderShippingFragment extends Fragment {
     private FragmentOrderShippingBinding binding;
     private NavController navController;
 
-    AddressAdapter addressAdapter = new AddressAdapter();
+    OrderAddressAdapter orderAddressAdapter = new OrderAddressAdapter();
 
 
     @Override
@@ -82,10 +83,10 @@ public class OrderShippingFragment extends Fragment {
                 List<AddressList> list = response.body();
 
                 // onResponse 콜백 내에서 어댑터에 데이터 설정 및 리사이클러뷰에 연결
-                addressAdapter.setList(list);
-                binding.recyclerView2.setAdapter(addressAdapter);
+                orderAddressAdapter.setList(list);
+                binding.recyclerView2.setAdapter(orderAddressAdapter);
 
-                Log.i(TAG, "size: " + addressAdapter.getItemCount());
+                Log.i(TAG, "size: " + orderAddressAdapter.getItemCount());
             }
 
             @Override
@@ -96,12 +97,12 @@ public class OrderShippingFragment extends Fragment {
         });
 
         //항목을 클릭했을 때 콜백 객체를 등록
-       addressAdapter.setOnItemClickListener(new AddressAdapter.OnItemClickListener() {
+        orderAddressAdapter.setOnItemClickListener(new OrderAddressAdapter.OnItemClickListener() {
 
            @Override
            public void onDeleteClick(View itemView, int position) {
                Log.i(TAG, position + "번 항목 클릭됨");
-               AddressList addressList = addressAdapter.getItem(position);
+               AddressList addressList = orderAddressAdapter.getItem(position);
 
                 /*Bundle args = new Bundle();
                 args.putSerializable("addressList", addressList);*/
@@ -117,7 +118,7 @@ public class OrderShippingFragment extends Fragment {
            @Override
            public void onSelectClick(View itemView, int position) {
 
-               AddressList selectedAddress = addressAdapter.getItem(position);
+               AddressList selectedAddress = orderAddressAdapter.getItem(position);
                // Bundle 생성 및 데이터 추가
                Bundle bundle = getArguments();
                bundle.getSerializable("productList");
@@ -186,9 +187,9 @@ public class OrderShippingFragment extends Fragment {
                 if (response.isSuccessful()) {
                     List<AddressList> list = response.body();
                     // 어댑터에 새로운 목록 설정
-                    addressAdapter.setList(list);
+                    orderAddressAdapter.setList(list);
                     // 어댑터 갱신
-                    addressAdapter.notifyDataSetChanged();
+                    orderAddressAdapter.notifyDataSetChanged();
                 } else {
                     // 응답이 성공적이지 않은 경우 처리
 

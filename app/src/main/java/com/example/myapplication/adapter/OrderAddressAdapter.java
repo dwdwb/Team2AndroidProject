@@ -1,6 +1,5 @@
 package com.example.myapplication.adapter;
 
-import android.location.Address;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,31 +10,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.dto.AddressList;
-import com.example.myapplication.dto.MobileProductForList;
-import com.example.myapplication.dto.MyPageMenuItem;
 import com.example.myapplication.viewHolder.AddressViewHolder;
-import com.example.myapplication.viewHolder.ListViewHolder;
-import com.example.myapplication.viewHolder.MyPageMenuItemViewHolder;
+import com.example.myapplication.viewHolder.OrderAddressViewHolder;
+import com.example.myapplication.viewHolder.OrderViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddressAdapter extends RecyclerView.Adapter<AddressViewHolder> {
-    private static final String TAG = "AddressAdapter";
+public class OrderAddressAdapter extends RecyclerView.Adapter<OrderAddressViewHolder> {
+    private static final String TAG = "OrderAddressAdapter";
     private List<AddressList> list = new ArrayList<>();
     private OnItemClickListener onItemClickListener;
 
     @NonNull
     @Override
-    public AddressViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public OrderAddressViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View itemView = layoutInflater.inflate(R.layout.list_address_item, parent, false);
-        AddressViewHolder addressViewHolder = new AddressViewHolder(itemView, onItemClickListener);
-        return addressViewHolder;
+        View itemView = layoutInflater.inflate(R.layout.list_order_address_item, parent, false);
+        OrderAddressViewHolder orderAddressViewHolder = new OrderAddressViewHolder(itemView, onItemClickListener);
+        return orderAddressViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AddressViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull OrderAddressViewHolder holder, int position) {
         AddressList addressList = list.get(position);
         Log.i(TAG, addressList.toString());
         holder.setData(addressList);
@@ -55,10 +52,10 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressViewHolder> {
 
     public interface OnItemClickListener {
         void onDeleteClick(View itemView, int position);
-        void onModifyClick(View itemView, int position);
+        void onSelectClick(View itemView, int position);
     }
 
-    public void setOnItemClickListener(AddressAdapter.OnItemClickListener onItemClickListener) {
+    public void setOnItemClickListener(OrderAddressAdapter.OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 

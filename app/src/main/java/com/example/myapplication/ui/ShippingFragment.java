@@ -99,12 +99,12 @@ public class ShippingFragment extends Fragment {
             }
 
             @Override
-            public void onSelectClick(View itemView, int position) {
+            public void onModifyClick(View itemView, int position) {
+                AddressList selectedAddress = addressAdapter.getItem(position);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("selectedAddress", selectedAddress);
 
-                // 클릭한 항목의 address_no를 받아옴
-
-
-
+                navController.navigate(R.id.action_shipping_to_modifyShipping, bundle);
 
 
             }

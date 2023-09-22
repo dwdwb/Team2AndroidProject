@@ -139,6 +139,9 @@
         <action
             android:id="@+id/action_shipping_to_cart"
             app:destination="@id/cart" />
+        <action
+            android:id="@+id/action_shipping_to_modifyShipping"
+            app:destination="@id/modifyShipping" />
     </fragment>
     <fragment
         android:id="@+id/coupon"
@@ -258,4 +261,9 @@
         android:name="com.example.myapplication.ui.WithdrawFragment"
         android:label="회원탈퇴"
         tools:layout="@layout/fragment_withdraw" />
+    <fragment
+        android:id="@+id/modifyShipping"
+        android:name="com.example.myapplication.ui.ModifyShippingFragment"
+        android:label="fragment_modify_shipping"
+        tools:layout="@layout/fragment_modify_shipping" />
 </navigation>

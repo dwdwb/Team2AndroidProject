@@ -98,13 +98,13 @@
 
 
             <Button
-                android:id="@+id/btnModify"
+                android:id="@+id/btnSel"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="#A0DE5F"
-                android:text="수정"
+                android:text="선택"
                 android:textColor="#FFFFFF"
                 app:strokeColor="#A0DE5F" />
 

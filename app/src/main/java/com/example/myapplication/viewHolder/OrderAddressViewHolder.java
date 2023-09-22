@@ -9,11 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.adapter.AddressAdapter;
+import com.example.myapplication.adapter.OrderAddressAdapter;
 import com.example.myapplication.dto.AddressList;
 
-public class AddressViewHolder extends RecyclerView.ViewHolder {
-    private static final String TAG = "AddressViewHolder";
+public class OrderAddressViewHolder extends RecyclerView.ViewHolder {
+    private static final String TAG = "OrderAddressViewHolder";
     private int address_no;
 
     private AddressList addressList;
@@ -23,9 +23,9 @@ public class AddressViewHolder extends RecyclerView.ViewHolder {
     private TextView shipping_preference;
     private Button btnDel;
 
-    private Button btnModify;
+    private Button btnSel;
 
-    public AddressViewHolder(@NonNull View itemView, AddressAdapter.OnItemClickListener onItemClickListener) {
+    public OrderAddressViewHolder(@NonNull View itemView, OrderAddressAdapter.OnItemClickListener onItemClickListener) {
         super(itemView);
 
         //아이템 UI 얻기
@@ -35,7 +35,7 @@ public class AddressViewHolder extends RecyclerView.ViewHolder {
         receiver_tel = (TextView) itemView.findViewById(R.id.receiver_tel);
         shipping_preference = (TextView) itemView.findViewById(R.id.shipping_preference);
         btnDel = itemView.findViewById(R.id.btnDel);
-        btnModify = itemView.findViewById(R.id.btnModify);
+        btnSel = itemView.findViewById(R.id.btnSel);
 
 
 
@@ -50,11 +50,11 @@ public class AddressViewHolder extends RecyclerView.ViewHolder {
             }
         });
 
-        btnModify.setOnClickListener(new View.OnClickListener() {
+        btnSel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.i(TAG, "address가 선택됨" + address_no);
-                onItemClickListener.onModifyClick(btnModify, getAdapterPosition()); // 시그니처 변경
+                onItemClickListener.onSelectClick(btnSel, getAdapterPosition()); // 시그니처 변경
             }
         });
     }
