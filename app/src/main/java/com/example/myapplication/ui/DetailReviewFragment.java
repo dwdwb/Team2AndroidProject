@@ -62,7 +62,7 @@ public class DetailReviewFragment extends Fragment {
                 ReviewInfo reviewInfo = response.body();
                 if(reviewInfo != null) {
                     binding.ratingTotal.setRating(reviewInfo.getStarRateAvg()*5/100);
-                    binding.ratingTotalTxt.setText(String.valueOf(reviewInfo.getStarRateAvg()*5/100.0));
+                    binding.ratingTotalTxt.setText(String.valueOf(Math.round((reviewInfo.getStarRateAvg()*5/100.0)*10)/10.0));
                     binding.ratingCount.setText("(" + reviewInfo.getReviewCount() + ")");
                 }
             }
