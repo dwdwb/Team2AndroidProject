@@ -1,6 +1,7 @@
 package com.example.myapplication.ui;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -492,28 +493,36 @@ public class CartFragment extends Fragment {
                 }
             }
             if(deleteCartProductList.size() != 0) {
-                for(CartProduct cartProduct : deleteCartProductList) {
-                    //API 서버에서 JSON 목록 받기
-                    CartService cartService = ServiceProvider.getCartService(getContext());
-                    Call<Void> call = cartService.deleteCartProduct(cartProduct);
-                    call.enqueue(new Callback<Void>() {
-                        @Override
-                        public void onResponse(Call<Void> call, Response<Void> response) {
-                            //dest_list를 제외한 백스택의 위쪽 대상을 모두 제거
-                            /*navController.popBackStack(R.id.dest_list, false);*/
-                            NavOptions navOptions = new NavOptions.Builder()
-                                    .setPopUpTo(R.id.cart,false)
-                                    .setLaunchSingleTop(true)
-                                    .build();
-                            navController.navigate(R.id.cart, null, navOptions);
-                        }
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("선택한 상품을 삭제하시겠습니까?");
+                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                for(CartProduct cartProduct : deleteCartProductList) {
+                                    //API 서버에서 JSON 목록 받기
+                                    CartService cartService = ServiceProvider.getCartService(getContext());
+                                    Call<Void> call = cartService.deleteCartProduct(cartProduct);
+                                    call.enqueue(new Callback<Void>() {
+                                        @Override
+                                        public void onResponse(Call<Void> call, Response<Void> response) {
+                                            //dest_list를 제외한 백스택의 위쪽 대상을 모두 제거
+                                            /*navController.popBackStack(R.id.dest_list, false);*/
+                                            NavOptions navOptions = new NavOptions.Builder()
+                                                    .setPopUpTo(R.id.cart,false)
+                                                    .setLaunchSingleTop(true)
+                                                    .build();
+                                            navController.navigate(R.id.cart, null, navOptions);
+                                        }
 
-                        @Override
-                        public void onFailure(Call<Void> call, Throwable t) {
+                                        @Override
+                                        public void onFailure(Call<Void> call, Throwable t) {
 
-                        }
-                    });
-                }
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                builder.setNegativeButton("취소", null).create().show();
             } else {
                 AlertDialog alertDialog = new AlertDialog.Builder(getContext())
                         //.setTitle("주문할 상품을 선택해주세요.")
