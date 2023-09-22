@@ -8,6 +8,7 @@ import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
 import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -66,6 +67,7 @@ public class CartFragment extends Fragment {
 
         initBtnOrder();
         initCheckAll();
+        initBtnDeletePartial();
 
         //하단바 숨기기
         hideBottomNavigation(true);
@@ -478,6 +480,49 @@ public class CartFragment extends Fragment {
 
         int[] returnArray = {discountProduct, discountDelivery};
         return returnArray;
+    }
+
+    //선택삭제
+    private void initBtnDeletePartial() {
+        binding.btnDeletePartial.setOnClickListener(v -> {
+            List<CartProduct> deleteCartProductList = new ArrayList<>();
+            for(int i=0; i<checkList.size(); i++) {
+                if(checkList.get(i)) {
+                    deleteCartProductList.add(cartProductList.get(i));
+                }
+            }
+            if(deleteCartProductList.size() != 0) {
+                for(CartProduct cartProduct : deleteCartProductList) {
+                    //API 서버에서 JSON 목록 받기
+                    CartService cartService = ServiceProvider.getCartService(getContext());
+                    Call<Void> call = cartService.deleteCartProduct(cartProduct);
+                    call.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            //dest_list를 제외한 백스택의 위쪽 대상을 모두 제거
+                            /*navController.popBackStack(R.id.dest_list, false);*/
+                            NavOptions navOptions = new NavOptions.Builder()
+                                    .setPopUpTo(R.id.cart,false)
+                                    .setLaunchSingleTop(true)
+                                    .build();
+                            navController.navigate(R.id.cart, null, navOptions);
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+
+                        }
+                    });
+                }
+            } else {
+                AlertDialog alertDialog = new AlertDialog.Builder(getContext())
+                        //.setTitle("주문할 상품을 선택해주세요.")
+                        .setMessage("삭제할 상품을 선택해주세요.")
+                        .setPositiveButton("확인", null)
+                        .create();
+                alertDialog.show();
+            }
+        });
     }
 
 
