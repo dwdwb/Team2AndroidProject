@@ -47,6 +47,11 @@ public class MyPageOrderedAdapter extends RecyclerView.Adapter<MyPageOrderedView
         return orderedList.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
     public void setOrderedList(List<OrderHistory> list) {this.orderedList = list;}
 
     public OrderHistory getItem(int position) {return orderedList.get(position); }
