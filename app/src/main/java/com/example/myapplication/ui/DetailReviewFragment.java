@@ -7,9 +7,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.adapter.DetailInquiryAdapter;
 import com.example.myapplication.adapter.DetailReviewAdapter;
@@ -39,7 +44,9 @@ public class DetailReviewFragment extends Fragment {
         initView();
 
         //RecyclerView 초기화
-        initRecyclerView();
+        initRecyclerView("최신순");
+
+        initAlign();
 
         Log.i(TAG, "review에서 bno: " + bno);
 
@@ -55,7 +62,7 @@ public class DetailReviewFragment extends Fragment {
                 ReviewInfo reviewInfo = response.body();
                 if(reviewInfo != null) {
                     binding.ratingTotal.setRating(reviewInfo.getStarRateAvg()*5/100);
-                    binding.ratingTotalTxt.setText(String.valueOf(reviewInfo.getTotalReviewScore()));
+                    binding.ratingTotalTxt.setText(String.valueOf(reviewInfo.getStarRateAvg()*5/100.0));
                     binding.ratingCount.setText("(" + reviewInfo.getReviewCount() + ")");
                 }
             }
@@ -67,7 +74,7 @@ public class DetailReviewFragment extends Fragment {
         });
     }
 
-    private void initRecyclerView() {
+    private void initRecyclerView(String filterKeyword) {
         //RecyclerView에서 항목을 수직으로 배치하도록 설정
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
                 getContext(), LinearLayoutManager.VERTICAL, false
@@ -77,6 +84,53 @@ public class DetailReviewFragment extends Fragment {
         //어댑터 생성
         DetailReviewAdapter detailReviewAdapter = new DetailReviewAdapter();
 
+        DetailViewService detailViewService = ServiceProvider.getDetailViewService(getContext());
+        if(filterKeyword.equals("최신순")) {
+            //API 서버에서 JSON 목록 받기
+            Call<List<Review>> call = detailViewService.getRecentReviewList(bno);
+            call.enqueue(new Callback<List<Review>>() {
+                @Override
+                public void onResponse(Call<List<Review>> call, Response<List<Review>> response) {
+                    //JSON -> List<Board> 변환
+                    List<Review> list = response.body();
+                    Log.i(TAG, list + "");
+                    if(list != null) {
+                        //어댑터 데이터 세팅
+                        detailReviewAdapter.setList(list);
+                        //RecyclerView에 어댑터 세팅
+                        binding.recyclerView.setAdapter(detailReviewAdapter);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<Review>> call, Throwable t) {
+                    Log.i(TAG, "최신순 안됨......");
+                }
+            });
+        } else if (filterKeyword.equals("베스트순")) {
+            //API 서버에서 JSON 목록 받기
+            Call<List<Review>> call = detailViewService.getBestReviewList(bno);
+            call.enqueue(new Callback<List<Review>>() {
+                @Override
+                public void onResponse(Call<List<Review>> call, Response<List<Review>> response) {
+                    //JSON -> List<Board> 변환
+                    List<Review> list = response.body();
+                    Log.i(TAG, list + "");
+                    if(list != null) {
+                        //어댑터 데이터 세팅
+                        detailReviewAdapter.setList(list);
+                        //RecyclerView에 어댑터 세팅
+                        binding.recyclerView.setAdapter(detailReviewAdapter);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<Review>> call, Throwable t) {
+                    Log.i(TAG, "베스트순 안됨......");
+                }
+            });
+        }
+        /*
         //API 서버에서 JSON 목록 받기
         DetailViewService detailViewService = ServiceProvider.getDetailViewService(getContext());
         Call<List<Review>> call = detailViewService.getReviewList(bno);
@@ -98,10 +152,10 @@ public class DetailReviewFragment extends Fragment {
             public void onFailure(Call<List<Review>> call, Throwable t) {
                 Log.i(TAG, "안됨......");
             }
-        });
+        });*/
 
         //항목을 클릭했을 때 콜백 객체를 등록
-        detailReviewAdapter.setOnItemClickListener(new DetailReviewAdapter.OnItemClickListener() {
+        /*detailReviewAdapter.setOnItemClickListener(new DetailReviewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View itemView, int position) {
                 Log.i(TAG, position + "항목 클릭됨");
@@ -111,6 +165,33 @@ public class DetailReviewFragment extends Fragment {
                 args.putSerializable("review", review);
                 //navController.navigate(R.id.action_dest_list_to_dest_detail, args);
             }
+        });*/
+    }
+
+    private void initAlign() {
+        binding.alignLayout.setOnClickListener(v -> {
+            //PopupMenu 객체 생성
+            PopupMenu popup= new PopupMenu(getContext(), binding.alignTxt); //두 번째 파라미터가 팝업메뉴가 붙을 뷰
+            //PopupMenu popup= new PopupMenu(MainActivity.this, btn2); //첫번째 버튼을 눌렀지만 팝업메뉴는 btn2에 붙어서 나타남
+            popup.getMenuInflater().inflate(R.menu.review_optoin_menu, popup.getMenu());
+            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+                    if (menuItem.getItemId() == R.id.align_recent){
+                        Log.i(TAG, "최신순 선택");
+                        initRecyclerView("최신순");
+                        binding.alignTxt.setText("최신순");
+
+                    }else if (menuItem.getItemId() == R.id.align_best){
+                        Log.i(TAG, "베스트순 선택");
+                        initRecyclerView("베스트순");
+                        binding.alignTxt.setText("베스트순");
+                    }
+
+                    return false;
+                }
+            });
+            popup.show();
         });
     }
 

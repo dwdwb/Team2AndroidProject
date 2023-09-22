@@ -82,6 +82,12 @@ public interface DetailViewService {
     @GET("detailView/getReviewList")
     Call<List<Review>> getReviewList(@Query("bno") int bno);
 
+    @GET("detailView/getRecentReviewList")
+    Call<List<Review>> getRecentReviewList(@Query("bno") int bno);
+
+    @GET("detailView/getBestReviewList")
+    Call<List<Review>> getBestReviewList(@Query("bno") int bno);
+
     @GET("detailView/getReviewInfo")
     Call<ReviewInfo> getReviewInfo(@Query("bno") int bno);
 
