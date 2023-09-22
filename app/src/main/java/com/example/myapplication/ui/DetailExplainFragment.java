@@ -1,5 +1,7 @@
 package com.example.myapplication.ui;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
@@ -211,6 +213,7 @@ public class DetailExplainFragment extends Fragment {
     private void initBtnWish() {
         binding.wishBtn.setOnClickListener(v -> {
             String shopperId = AppKeyValueStore.getValue(getContext(), "shopperId");
+            //로그인 되어 있을 경우
             if (shopperId != null) {
                 if (isWishToggled == false) {
                     WishService wishService = ServiceProvider.getWishService(getContext());
@@ -251,6 +254,24 @@ public class DetailExplainFragment extends Fragment {
                         }
                     });
                 }
+            }
+            //로그인이 안돼있을 경우
+            else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
+                        .setMessage("찜 기능을 사용하려면 로그인 해야 합니다.")
+                        .setPositiveButton("로그인", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                navController.navigate(R.id.action_detail_to_login);
+                            }
+                        })
+                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
     }

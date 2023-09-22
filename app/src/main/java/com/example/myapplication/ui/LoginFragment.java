@@ -67,8 +67,10 @@ public class LoginFragment extends Fragment {
                         AppKeyValueStore.put(getContext(), "shopperPw", loginResult.getShopperPw());
                         ((MainActivity) requireActivity()).reloadBottomNavigationView();
 
+                        navController.popBackStack();
+
                         //메인으로 이동
-                        navController.popBackStack(R.id.main, false);
+                        //navController.popBackStack(R.id.main, false);
 
                     } else {
                         AlertDialog alertDialog = new AlertDialog.Builder(getContext())

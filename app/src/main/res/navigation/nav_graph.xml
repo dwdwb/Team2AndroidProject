@@ -67,6 +67,9 @@
         <action
             android:id="@+id/action_detail_to_writeInquiry"
             app:destination="@id/writeInquiry" />
+        <action
+            android:id="@+id/action_detail_to_login"
+            app:destination="@id/login" />
     </fragment>
     <fragment
         android:id="@+id/cart"
