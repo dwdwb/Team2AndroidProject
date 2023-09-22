@@ -15,12 +15,20 @@ import com.example.myapplication.adapter.MyPageOrderedAdapter;
 import com.example.myapplication.dto.Coupon;
 import com.example.myapplication.dto.OrderHistory;
 import com.example.myapplication.dto.MobileProductForList;
+import com.example.myapplication.dto.WriteReviewResult;
 import com.example.myapplication.service.ListService;
+import com.example.myapplication.service.MyPageOrderedService;
+import com.example.myapplication.service.ReviewService;
+import com.example.myapplication.service.ServiceProvider;
 
 import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyPageOrderedViewHolder extends RecyclerView.ViewHolder {
 
@@ -28,6 +36,7 @@ public class MyPageOrderedViewHolder extends RecyclerView.ViewHolder {
 
     private TextView order_no_text_view;
     private TextView product_no_text_view;
+    private int order_no;
     private int product_no;
     private ImageView ordered_image;
 
@@ -63,6 +72,8 @@ public class MyPageOrderedViewHolder extends RecyclerView.ViewHolder {
             }
         });
 
+
+
     }
 
 
@@ -73,6 +84,7 @@ public class MyPageOrderedViewHolder extends RecyclerView.ViewHolder {
         String formattedDate = dateFormat.format(orderHistory.getOrder_date());
         order_date.setText(formattedDate);
 
+        order_no = orderHistory.getOrder_no();
         product_no = orderHistory.getProduct_no();
         ListService.loadThumbnailImage(product_no, ordered_image);
 
@@ -81,6 +93,25 @@ public class MyPageOrderedViewHolder extends RecyclerView.ViewHolder {
         product_name.setText(orderHistory.getProduct_name() + orderHistory.getProduct_option());
         price.setText(orderHistory.getStock()+"개 , "+orderHistory.getPrice() + "원");
         payment_price.setText("총 결제 금액: " + orderHistory.getPayment_price()+"원");
+
+        ReviewService reviewService = ServiceProvider.getReviewService(btnReview.getContext());
+        Call<WriteReviewResult> call = reviewService.checkReview(order_no, product_no);
+        Log.i(TAG, "order_no: " + order_no + ", product_no: " + product_no);
+        call.enqueue(new Callback<WriteReviewResult>() {
+            @Override
+            public void onResponse(Call<WriteReviewResult> call, Response<WriteReviewResult> response) {
+                WriteReviewResult writeReviewResult = response.body();
+                if (writeReviewResult.getResult().equals("success")) {
+                    Log.i(TAG, "success");
+                    btnReview.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<WriteReviewResult> call, Throwable t) {
+
+            }
+        });
 
     }
 

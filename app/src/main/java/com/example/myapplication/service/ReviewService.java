@@ -45,6 +45,9 @@ public interface ReviewService {
     @GET("review/deleteReview")
     Call<WriteReviewResult> deleteReview(@Query("review_no") int review_no);
 
+    @GET("review/checkReview")
+    Call<WriteReviewResult> checkReview(@Query("order_no") int order_no, @Query("product_no") int product_no);
+
     static void loadThumbnailImage(int board_no, ImageView imageView) {
         String url = NetworkInfo.BASE_URL + "list/getThumbnailImage?board_no=" + board_no;
         Glide.with(imageView.getContext()).load(url).into(imageView);
