@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -68,6 +69,9 @@ public class OrderFragment extends Fragment {
     private Button payButtonAccount;
     private Button payButtonNoBank;
     private Button payButtonPhone;
+
+    private RadioGroup radioGroup;
+    private RadioButton radioButton1, radioButton2;
     private boolean isCardToggled;
     private boolean isAccountToggled;
     private boolean isPhoneToggled;
@@ -76,8 +80,10 @@ public class OrderFragment extends Fragment {
     ArrayList<String> arrayList;
     ArrayAdapter<String> arrayAdapter;
 
-    int addressNo;
-    int shopperNo;
+    private int addressNo;
+    private int shopperNo;
+
+    private String selectedOption;
 
 
     private static final String TAG = "OrderFragment";
@@ -118,6 +124,25 @@ public class OrderFragment extends Fragment {
         isAccountToggled = false;
         isPhoneToggled = false;
         isNoBankToggled = false;
+        radioGroup = binding.receiptRadio;
+        radioButton1 =  binding.deduction;
+        radioButton2 = binding.expenditure;
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // 선택된 라디오 버튼의 ID를 확인하여 해당 값을 가져옴
+                if (checkedId == R.id.deduction) {
+                    // Option 1이 선택됨
+                    selectedOption = radioButton1.getText().toString();
+                    // 선택된 값을 사용하거나 처리
+                } else if (checkedId == R.id.expenditure) {
+                    // Option 2가 선택됨
+                    selectedOption = radioButton2.getText().toString();
+                    // 선택된 값을 사용하거나 처리
+                }
+            }
+        });
 
         initBtnPhone();
         initBtnNoBank();
@@ -445,10 +470,20 @@ public class OrderFragment extends Fragment {
                 order.setPayment_PRICE(parseInt(orderPrice.replaceAll("[^0-9]", "")));
                 order.setShopper_NO(shopperNo);
                 order.setAddress_NO(addressNo);
-                order.setPayment_TYPE("계좌이체");
+                if(isCardToggled) {
+                    order.setPayment_TYPE("카드");
+                } else if(isAccountToggled) {
+                    order.setPayment_TYPE("계좌이체");
+
+                } else if (isPhoneToggled) {
+                    order.setPayment_TYPE("휴대폰");
+
+                } else if (isNoBankToggled) {
+                    order.setPayment_TYPE("무통장 입금");
+                }
                 order.setCash_RECEIPT_NO("010-1234-6789");
                 order.setCash_RECEIPT_TYPE("휴대폰번호");
-                order.setCash_RECEIPT_PURPOSE("소득공제");
+                order.setCash_RECEIPT_PURPOSE(selectedOption);
 
                 ArrayList<ReceiptHistory> receiptHistoryArrayList = new ArrayList<ReceiptHistory>();
                 for (ProductBoard productBoard : productList) {
@@ -510,10 +545,21 @@ public class OrderFragment extends Fragment {
                 order.setPayment_PRICE(parseInt(orderPrice.replaceAll("[^0-9]", "")));
                 order.setShopper_NO(shopperNo);
                 order.setAddress_NO(addressNo);
-                order.setPayment_TYPE("계좌이체");
+                if(isCardToggled) {
+                    order.setPayment_TYPE("카드");
+                } else if(isAccountToggled) {
+                    order.setPayment_TYPE("계좌이체");
+
+                } else if (isPhoneToggled) {
+                    order.setPayment_TYPE("휴대폰");
+
+                } else if (isNoBankToggled) {
+                    order.setPayment_TYPE("무통장 입금");
+                }
                 order.setCash_RECEIPT_NO("010-1234-6789");
                 order.setCash_RECEIPT_TYPE("휴대폰번호");
-                order.setCash_RECEIPT_PURPOSE("소득공제");
+                order.setCash_RECEIPT_PURPOSE(selectedOption);
+                Log.i(TAG,selectedOption+"라디오선택된값은?");
 
                 ArrayList<ReceiptHistory> receiptHistoryArrayList = new ArrayList<ReceiptHistory>();
                 ArrayList<Cart> cartArrayList = new ArrayList<Cart>();

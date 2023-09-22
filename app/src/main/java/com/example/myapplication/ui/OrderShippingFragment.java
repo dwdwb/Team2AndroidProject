@@ -128,7 +128,6 @@ public class OrderShippingFragment extends Fragment {
                bundle.getString("totalShippingPrice");
                bundle.getString("orderPrice");
 
-
                bundle.putSerializable("selectedAddress", selectedAddress);
                Log.i(TAG, "나 배송지목록"+selectedAddress.toString());
                // Bundle을 이용해 이전 Fragment로 데이터 전달
