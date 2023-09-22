@@ -139,4 +139,16 @@ public class DetailFragment extends Fragment {
         //하단바 보이기
         hideBottomNavigation(false);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i(TAG, "이게 실행되는건가여??");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.i(TAG, "그럼 이건가??");
+    }
 }

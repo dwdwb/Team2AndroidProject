@@ -276,4 +276,16 @@ public class DetailExplainFragment extends Fragment {
         //액션글씨 색상 변경
         snackbar.setActionTextColor(Color.GREEN);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i(TAG, "아니 그럼 이게 실행되는건가여??");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.i(TAG, "서얼마 이건가??");
+    }
 }

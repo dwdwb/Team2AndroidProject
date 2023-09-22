@@ -590,6 +590,6 @@ public class CartFragment extends Fragment {
         super.onDestroy();
 
         //하단바 보이기
-        hideBottomNavigation(false);
+        //hideBottomNavigation(false);
     }
 }

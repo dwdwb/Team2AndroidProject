@@ -31,6 +31,7 @@ import com.example.myapplication.dto.MobileProductForList;
 import com.example.myapplication.service.ListService;
 import com.example.myapplication.service.ServiceProvider;
 import com.example.myapplication.viewHolder.SpecialPriceViewHolder;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -60,8 +61,18 @@ public class MainFragment extends Fragment {
         initScrollToTopBtn();
         initAd();
 
+        //하단바 초기화
+        hideBottomNavigation(false);
 
         return binding.getRoot();
+    }
+
+    private void hideBottomNavigation(boolean bool) {
+        BottomNavigationView bottomNavigation = getActivity().findViewById(R.id.bottomNavigationView);
+        if (bool == true)
+            bottomNavigation.setVisibility(View.GONE);
+        else
+            bottomNavigation.setVisibility(View.VISIBLE);
     }
 
 
