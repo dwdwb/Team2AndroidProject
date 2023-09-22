@@ -133,7 +133,7 @@ public class OrderFragment extends Fragment {
         cashLayout = binding.cashLayout;
         cashLayout.setVisibility(View.GONE);
 
-        isCardToggled = false;
+        isCardToggled = true;
         isAccountToggled = false;
         isPhoneToggled = false;
         isNoBankToggled = false;
@@ -504,9 +504,15 @@ public class OrderFragment extends Fragment {
                 } else if (isNoBankToggled) {
                     order.setPayment_TYPE("무통장 입금");
                 }
-                order.setCash_RECEIPT_NO(orderCashNo);
+                if(orderCashNo.isEmpty()) {
+                    order.setCash_RECEIPT_NO("없음");
+                } else {
+                    order.setCash_RECEIPT_NO(orderCashNo);
+                }
                 order.setCash_RECEIPT_TYPE(receiptType);
                 order.setCash_RECEIPT_PURPOSE(selectedOption);
+
+                Log.i(TAG,order.toString()+"ORDER잘들어갔니");
 
                 ArrayList<ReceiptHistory> receiptHistoryArrayList = new ArrayList<ReceiptHistory>();
                 for (ProductBoard productBoard : productList) {
@@ -580,10 +586,15 @@ public class OrderFragment extends Fragment {
                 } else if (isNoBankToggled) {
                     order.setPayment_TYPE("무통장 입금");
                 }
-                order.setCash_RECEIPT_NO(orderCashNo);
+                if(orderCashNo.isEmpty()) {
+                    order.setCash_RECEIPT_NO("없음");
+                } else {
+                    order.setCash_RECEIPT_NO(orderCashNo);
+                }
                 order.setCash_RECEIPT_TYPE(receiptType);
                 order.setCash_RECEIPT_PURPOSE(selectedOption);
                 Log.i(TAG,selectedOption+"라디오선택된값은?");
+                Log.i(TAG,order.toString()+"ORDER잘들어갔니");
 
                 ArrayList<ReceiptHistory> receiptHistoryArrayList = new ArrayList<ReceiptHistory>();
                 ArrayList<Cart> cartArrayList = new ArrayList<Cart>();
